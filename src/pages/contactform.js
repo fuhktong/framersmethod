@@ -31,6 +31,15 @@ const ContactForm = () => {
       const result = await response.json();
       setResponseStatus(result.status);
       setResponseMessage(result.message);
+
+      if (result.status === 'success') {
+        setFormData({
+          name: '',
+          email: '',
+          message: '',
+        });
+      }
+
     } catch (error) {
       console.error('Error submitting the form:', error);
       setResponseStatus('error');

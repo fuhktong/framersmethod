@@ -3,9 +3,13 @@ import { DividerWhite, LogoOnly } from '../sections.js';
 import { Link } from 'react-router-dom';
 import '../sections.js';
 import { Helmet } from 'react-helmet-async';
+import { HelmetProvider } from 'react-helmet-async';
+
+const helmetContext = {};
 
 const Archive = () => {
   return (
+    <HelmetProvider context={helmetContext}>
     <section>
       <Helmet>
         <title>The Framers' Method - Archives</title>
@@ -45,6 +49,7 @@ const Archive = () => {
       </div>
       <DividerWhite />
     </section>
+    </HelmetProvider>
   );
 };
 

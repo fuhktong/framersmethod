@@ -5,7 +5,7 @@ import './Footer.css';
 const Footer = () => {
     return (
         <footer>
-            <h2>The Framers' Method</h2>
+            <a href="/"><h2>The Framers' Method</h2></a>
             <div className="footer-container">
                 <div>
                     <ul className="footer-links">
@@ -39,6 +39,9 @@ const Footer = () => {
                     </a>
                     <a href="https://www.tiktok.com/@framersmethod" target="_blank" rel="noreferrer">
                         <img src="/white logo tiktok.png" alt="The Framers' Method on TikTok" />
+                    </a>
+                    <a href="https://a.co/d/0dimzJAr" target="_blank" rel="noreferrer">
+                        <img src="white logo amazon.png" alt="On The Framers' Method Book - Amazon"/>
                     </a>
                 </div>
             </div>
