@@ -23,6 +23,21 @@ export const News = () => (
       <meta name="twitter:image" content="https://www.framersmethod.com/framers%20method%20tshirt.png" />
       <meta name="twitter:card" content="summary_large_image" />
     </Helmet>
+
+    <section className="news8">
+      <section className="sectiontemplate" style={{paddingTop: "150px"}}>
+        <div className="sectiontemplate-text">
+          <div className="sectiontemplate-text-h1">If you want Joe Biden to step down, you need a party to do it </div>
+          <div className="sectiontemplate-text-p">11 July 2024</div>
+        </div>
+        <div className="sectiontemplate-img">
+          <Link to="/joe-biden-stepping-down">
+          <img src="/joe biden stepping down.jpeg" alt="Joe Biden stepping down - courtesy Gerald Herbert - AP" />
+          </Link>
+        </div>
+      </section>
+    </section>
+
     <section className="news7">
       <section className="sectiontemplate" style={{paddingTop: "150px"}}>
         <div className="sectiontemplate-text">

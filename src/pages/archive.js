@@ -36,17 +36,19 @@ const Archive = () => {
         <div className="archive">Archive</div>
       <DividerWhite />
         <div className="archive-dates">
-        <div className="archive-months">May 2024</div>
-        <Link className="archive-title" to="/video007">Video - The Framers' Method 7/9: The Hamilton Effect</Link>
-        <div className="archive-months">December 2023</div>
-        <Link className="archive-title" to="/video006">Video - The Framers’ Method 6/9: The Hamilton Method</Link>
-        <div className="archive-months">November 2023</div>
-        <Link className="archive-title" to="/video005">Video - The Framers’ Method 5/9: Tyranny of the Candidates</Link>
-        <Link className="archive-title" to="/video004">Video - The Framers’ Method 4/9: The Framers' Failure</Link>
-        <Link className="archive-title" to="/video003">Video - The Framers’ Method 3/9: Origin Story: The Second Great Compromise</Link>
-        <Link className="archive-title" to="/video002">Video - The Framers' Method 2/9: Origin Story: A Battle of Ideas</Link>
-        <Link className="archive-title" to="/video001">Video: The Framers’ Method 1/9: An Introduction to the Framers’ Method</Link>
-      </div>
+          <div className="archive-months">July 2024</div>
+          <Link className="archive-title" to="/joe-biden-stepping-down">If you want Joe Biden to step down, you need a party to do it</Link>
+          <div className="archive-months">May 2024</div>
+          <Link className="archive-title" to="/video007">Video - The Framers' Method 7/9: The Hamilton Effect</Link>
+          <div className="archive-months">December 2023</div>
+          <Link className="archive-title" to="/video006">Video - The Framers’ Method 6/9: The Hamilton Method</Link>
+          <div className="archive-months">November 2023</div>
+          <Link className="archive-title" to="/video005">Video - The Framers’ Method 5/9: Tyranny of the Candidates</Link>
+          <Link className="archive-title" to="/video004">Video - The Framers’ Method 4/9: The Framers' Failure</Link>
+          <Link className="archive-title" to="/video003">Video - The Framers’ Method 3/9: Origin Story: The Second Great Compromise</Link>
+          <Link className="archive-title" to="/video002">Video - The Framers' Method 2/9: Origin Story: A Battle of Ideas</Link>
+          <Link className="archive-title" to="/video001">Video - The Framers’ Method 1/9: An Introduction to the Framers’ Method</Link>
+        </div>
       <DividerWhite />
     </section>
     </HelmetProvider>

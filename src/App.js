@@ -20,6 +20,7 @@ import Video004 from './newssource/video004.js'
 import Video005 from './newssource/video005.js'
 import Video006 from './newssource/video006.js'
 import Video007 from './newssource/video007.js'
+import News001 from './newssource/joe-biden-stepping-down.js';
 
 const helmetContext = {};
 
@@ -46,6 +47,7 @@ const App = () => {
           <Route path="video005" element={<Video005 />} />
           <Route path="video006" element={<Video006 />} />
           <Route path="video007" element={<Video007 />} />
+          <Route path="joe-biden-stepping-down" element={<News001 />} />
         </Routes>
       <Footer />
     </div>
