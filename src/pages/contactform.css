@@ -66,6 +66,7 @@ button {
     margin-left: 0;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     border: none;
+    background-color: white;
 }
 
 .contactform-send-message {
