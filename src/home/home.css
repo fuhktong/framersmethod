@@ -1,0 +1,156 @@
+.home-logo {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+}
+
+.home-logo img {
+  max-height: 80%;
+  max-width: 80%;
+  height: auto;
+}
+
+.home-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-text h2 {
+  text-align: center;
+  margin: 0 15% 20px 15%;
+  font-size: 35px;
+  text-shadow: 1px 1px 1px black;
+}
+
+.home-text p {
+  text-align: center;
+  margin: 0 15%;
+  font-size: 18px;
+  text-shadow: 1px 1px 1px black;
+  font-weight: bold;
+}
+
+/* SECTION TEMPLATE */
+
+.home-template {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 90px 10px;
+  background-color: #f9f9f9;
+  margin: 0;
+}
+
+.home-template-text {
+  flex: 1;
+  padding: 0 20px;
+}
+
+.home-template-text h1 {
+  font-size: 2rem;
+  color: #000;
+  margin-bottom: 15px;
+}
+
+.home-template-text h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.home-template-text p {
+  font-size: 1rem;
+  color: #333;
+  font-weight: bold;
+  line-height: 1.6;
+}
+
+.home-template-text p a {
+  color: #45698c;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.home-template-img {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.home-template-img img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .home-template {
+    flex-direction: column;
+    padding-right: 50px;
+  }
+
+  .home-template-text,
+  .home-template-img {
+    flex: none;
+    width: 100%;
+  }
+
+  .home-template-img {
+    margin-top: 20px;
+  }
+
+  .homevideo-title h2 {
+    padding: 0;
+  }
+}
+
+/* HOME VIDEO */
+
+.homevideo {
+  text-align: center;
+  background-color: #f5f4f0;
+}
+
+.homevideo-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.homevideo-title h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  width: 80%;
+}
+
+.homevideo-wrapper {
+  padding: 40px;
+  background-color: white;
+}
+
+.homevideo-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  overflow: hidden;
+  display: flex;
+  width: 100%;
+  height: auto;
+}
+
+.homevideo-container iframe {
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}

@@ -1,0 +1,81 @@
+.national-logo {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+}
+
+.national-logo img {
+  max-height: 80%;
+  max-width: 80%;
+  height: auto;
+}
+
+.national-template {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 90px 10px;
+  background-color: #f9f9f9;
+  margin: 0;
+}
+
+.national-template-text {
+  flex: 1;
+  padding: 0 20px;
+}
+
+.national-template-text h1 {
+  font-size: 2rem;
+  color: #000;
+  margin-bottom: 15px;
+}
+
+.national-template-text h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.national-template-text p {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+  font-weight: bold;
+}
+
+.national-template-img {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.national-template-img img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .national-template {
+    flex-direction: column;
+    padding-right: 50px;
+  }
+
+  .national-template-text,
+  .national-template-img {
+    flex: none;
+    width: 100%;
+  }
+
+  .national-template-img {
+    margin-top: 20px;
+  }
+}

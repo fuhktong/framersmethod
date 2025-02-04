@@ -1,0 +1,20 @@
+.socialmediabar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+  border: 2px solid transparent;
+}
+
+.socialmediabar img {
+  width: 30px;
+  height: auto;
+  padding: 15px;
+  border: 2px solid transparent;
+}
+
+.socialmediabar img:hover {
+  background-color: #45698c;
+  border: 2px solid white;
+  border-radius: 5px;
+}

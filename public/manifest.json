@@ -1,0 +1,25 @@
+{
+  "short_name": "The Framers' Method",
+  "name": "The Framers' Method: Defeating Populism and Tyranny",
+  "icons": [
+    {
+      "src": "framersmethodlogo.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "framersmethodlogo.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "framersmethodlogo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

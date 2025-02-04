@@ -1,0 +1,14 @@
+.home-logo {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+}
+
+.home-logo img {
+  max-height: 80%;
+  max-width: 80%;
+  height: auto;
+}

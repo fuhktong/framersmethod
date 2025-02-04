@@ -1,0 +1,127 @@
+.contribute-logo {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+}
+
+.contribute-logo img {
+  max-height: 80%;
+  max-width: 80%;
+  height: auto;
+}
+
+.contribute-logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.contribute-logo-text h2 {
+  text-align: center;
+  margin: 0 15% 20px 15%;
+  font-size: 35px;
+  text-shadow: 1px 1px 1px black;
+}
+
+.contribute-logo-text p {
+  text-align: center;
+  margin: 0 15%;
+  font-size: 18px;
+  text-shadow: 1px 1px 1px black;
+  font-weight: bold;
+}
+
+.contribute {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 90px 10px;
+  background-color: #f9f9f9;
+  margin: 0;
+}
+
+.contribute-text {
+  flex: 1;
+  padding: 20px;
+}
+
+.contribute-text h1 {
+  font-size: 2rem;
+  color: #000;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.contribute-text h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.contribute-text p {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.contribute-text a {
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.contribute-img {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.contribute-img img {
+  max-width: 100%;
+  height: auto;
+}
+
+.btn-tshirt {
+  background-color: #45698c;
+  border: none;
+  color: white;
+  padding: 15px 5px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  width: 180px;
+}
+
+.btn-tshirt:hover {
+  background-color: #3a5977;
+}
+
+.btn-tshirt:active {
+  background-color: #45698c;
+  transform: translateY(2px);
+}
+
+.contribute-merch {
+  color: black;
+  background-color: #f5f4f0;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 50px 0;
+  text-align: center;
+}

@@ -1,0 +1,40 @@
+.main {
+  overflow-x: hidden;
+  margin: 0;
+  overflow: hidden;
+  padding: 30px 30px 40px 30px;
+}
+
+.dividerwhite {
+  display: flex;
+  width: 70%;
+  height: 3px;
+  margin: 20px auto;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.faq-h1 {
+  text-align: center;
+}
+
+.faq-h2 {
+  padding-top: 30px;
+}
+
+.faq-h1,
+.faq-h2,
+.faq-h3,
+.faq-h4,
+.faq-p {
+  text-shadow: var(--text-dropshadow);
+}
+
+.faq-a {
+  color: white;
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: none;
+}
