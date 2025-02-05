@@ -24,15 +24,12 @@ const ContactForm = () => {
         body: JSON.stringify(formData)
       });
       
-      // First check if response is ok
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
-      // Get the response text first for debugging
       const responseText = await response.text();
       
-      // Try to parse the response as JSON
       let data;
       try {
         data = JSON.parse(responseText);
@@ -41,7 +38,6 @@ const ContactForm = () => {
         throw new Error('Invalid JSON response from server');
       }
       
-      // Handle the parsed response
       if (data.success) {
         setStatus('Message sent successfully!');
         setFormData({ name: '', email: '', message: '' });
