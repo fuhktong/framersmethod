@@ -11,13 +11,13 @@ const Team = () => {
         <Helmet>
           {/* Essential/Basic Meta Tags */}
           <title>
-            The Framers' Method: Electoral College & Hamilton Method Explained -
-            Home
+            The Framers&#39; Method: Electoral College & Hamilton Method
+            Explained - Home
           </title>
           <meta charset="utf-8" />
           <meta
             name="description"
-            content="The Framers' Method can defeat populism and tyranny by using the Electoral College and the Hamilton Method."
+            content="The Framers&#39; Method can defeat populism and tyranny by using the Electoral College and the Hamilton Method."
           />
           <meta
             name="keywords"
@@ -30,11 +30,11 @@ const Team = () => {
           {/* Open Graph Tags */}
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://www.framersmethod.com/" />
-          <meta property="og:site_name" content="The Framers' Method" />
-          <meta property="og:title" content="The Framers' Method - Home" />
+          <meta property="og:site_name" content="The Framers&#39; Method" />
+          <meta property="og:title" content="The Framers&#39; Method - Home" />
           <meta
             property="og:description"
-            content="The Framers' Method can defeat populism and tyranny by using the Electoral College and the Hamilton Method."
+            content="The Framers&#39; Method can defeat populism and tyranny by using the Electoral College and the Hamilton Method."
           />
           <meta
             property="og:image"
@@ -45,10 +45,10 @@ const Team = () => {
           {/* Twitter Tags */}
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:site" content="@framersmethod" />
-          <meta name="twitter:title" content="The Framers' Method - Home" />
+          <meta name="twitter:title" content="The Framers&#39; Method - Home" />
           <meta
             name="twitter:description"
-            content="The Framers' Method can defeat populism and tyranny by using the Electoral College and the Hamilton Method."
+            content="The Framers&#39; Method can defeat populism and tyranny by using the Electoral College and the Hamilton Method."
           />
           <meta
             name="twitter:image"

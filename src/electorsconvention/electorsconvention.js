@@ -11,8 +11,8 @@ const ElectorsConvention = () => {
         <Helmet>
           {/* Essential/Basic Meta Tags */}
           <title>
-            The Framers' Method: Electoral College & Hamilton Method Explained -
-            Electors' Convention
+            The Framers&#39; Method: Electoral College & Hamilton Method
+            Explained - Electors' Convention
           </title>
           <meta charset="utf-8" />
           <meta
@@ -30,10 +30,10 @@ const ElectorsConvention = () => {
           {/* Open Graph Tags */}
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://www.framersmethod.com/" />
-          <meta property="og:site_name" content="The Framers' Method" />
+          <meta property="og:site_name" content="The Framers&#39; Method" />
           <meta
             property="og:title"
-            content="The Framers' Method - Electors' Convention"
+            content="The Framers&#39; Method - Electors' Convention"
           />
           <meta
             property="og:description"
@@ -50,7 +50,7 @@ const ElectorsConvention = () => {
           <meta name="twitter:site" content="@framersmethod" />
           <meta
             name="twitter:title"
-            content="The Framers' Method - Electors' Convention"
+            content="The Framers&#39; Method - Electors' Convention"
           />
           <meta
             name="twitter:description"

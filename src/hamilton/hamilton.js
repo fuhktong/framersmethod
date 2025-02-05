@@ -11,8 +11,8 @@ const Hamilton = () => {
         <Helmet>
           {/* Essential/Basic Meta Tags */}
           <title>
-            The Framers' Method: Electoral College & Hamilton Method Explained -
-            The Hamilton Method
+            The Framers&#39; Method: Electoral College & Hamilton Method
+            Explained - The Hamilton Method
           </title>
           <meta charset="utf-8" />
           <meta
@@ -30,10 +30,10 @@ const Hamilton = () => {
           {/* Open Graph Tags */}
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://www.framersmethod.com/" />
-          <meta property="og:site_name" content="The Framers' Method" />
+          <meta property="og:site_name" content="The Framers&#39; Method" />
           <meta
             property="og:title"
-            content="The Framers' Method - The Hamilton Method"
+            content="The Framers&#39; Method - The Hamilton Method"
           />
           <meta
             property="og:description"
@@ -50,7 +50,7 @@ const Hamilton = () => {
           <meta name="twitter:site" content="@framersmethod" />
           <meta
             name="twitter:title"
-            content="The Framers' Method - The Hamilton Method"
+            content="The Framers&#39; Method - The Hamilton Method"
           />
           <meta
             name="twitter:description"

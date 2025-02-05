@@ -11,12 +11,12 @@ const Contact = () => {
       <section>
         <Helmet>
           <title>
-            The Framers' Method: Electoral College & Hamilton Method Explained -
-            Contact
+            The Framers&#39; Method: Electoral College & Hamilton Method
+            Explained - Contact
           </title>
           <meta
             name="description"
-            content="Send a message to the Framers' Method. The American republic is under threat from populism and tyrannical-minded politicians. The Framers' Method can restore political stability to government and the American people."
+            content="Send a message to the Framers&#39; Method. The American republic is under threat from populism and tyrannical-minded politicians. The Framers&#39; Method can restore political stability to government and the American people."
           />
           <meta
             name="keywords"
@@ -32,11 +32,14 @@ const Contact = () => {
             property="og:url"
             content="https://www.framersmethod.com/contact"
           />
-          <meta property="og:site_name" content="The Framers' Method" />
-          <meta property="og:title" content="The Framers' Method - Contact" />
+          <meta property="og:site_name" content="The Framers&#39; Method" />
+          <meta
+            property="og:title"
+            content="The Framers&#39; Method - Contact"
+          />
           <meta
             property="og:description"
-            content="Send a message to the Framers' Method. The American republic is under threat from populism and tyrannical-minded politicians. The Framers' Method can restore political stability to government and the American people."
+            content="Send a message to the Framers&#39; Method. The American republic is under threat from populism and tyrannical-minded politicians. The Framers&#39; Method can restore political stability to government and the American people."
           />
           <meta
             property="og:image"
@@ -46,10 +49,13 @@ const Contact = () => {
           <meta property="og:image:height" content="630" />
 
           <meta name="twitter:site" content="@framersmethod" />
-          <meta name="twitter:title" content="The Framers' Method - Contact" />
+          <meta
+            name="twitter:title"
+            content="The Framers&#39; Method - Contact"
+          />
           <meta
             name="twitter:description"
-            content="Send a message to the Framers' Method. The American republic is under threat from populism and tyrannical-minded politicians. The Framers' Method can restore political stability to government and the American people."
+            content="Send a message to the Framers&#39; Method. The American republic is under threat from populism and tyrannical-minded politicians. The Framers&#39; Method can restore political stability to government and the American people."
           />
           <meta
             name="twitter:image"

@@ -11,12 +11,12 @@ const DemVsRep = () => {
         <Helmet>
           {/* Essential/Basic Meta Tags */}
           <title>
-            The Framers' Method: Electoral College & Hamilton Method Explained -
-            Democracy vs Republic
+            The Framers&#39; Method: Electoral College & Hamilton Method
+            Explained - Democracy vs Republic
           </title>
           <meta
             name="description"
-            content="What is the difference between a democracy and a republic? Find out at the Framers' Method."
+            content="What is the difference between a democracy and a republic? Find out at the Framers&#39; Method."
           />
           <meta
             name="keywords"
@@ -35,14 +35,14 @@ const DemVsRep = () => {
             property="og:url"
             content="https://www.framersmethod.com/demvsrep"
           />
-          <meta property="og:site_name" content="The Framers' Method" />
+          <meta property="og:site_name" content="The Framers&#39; Method" />
           <meta
             property="og:title"
-            content="The Framers' Method - A Democracy vs a Republic"
+            content="The Framers&#39; Method - A Democracy vs a Republic"
           />
           <meta
             property="og:description"
-            content="What is the difference between a democracy and a republic? Find out at the Framers' Method."
+            content="What is the difference between a democracy and a republic? Find out at the Framers&#39; Method."
           />
           <meta
             property="og:image"
@@ -54,11 +54,11 @@ const DemVsRep = () => {
           <meta name="twitter:site" content="@framersmethod" />
           <meta
             name="twitter:title"
-            content="The Framers' Method - A Democracy vs a Republic"
+            content="The Framers&#39; Method - A Democracy vs a Republic"
           />
           <meta
             name="twitter:description"
-            content="What is the difference between a democracy and a republic? Find out at the Framers' Method."
+            content="What is the difference between a democracy and a republic? Find out at the Framers&#39; Method."
           />
           <meta
             name="twitter:image"

@@ -15,8 +15,8 @@ const Book = () => (
       <Helmet>
         {/* Essential/Basic Meta Tags */}
         <title>
-          The Framers' Method: Electoral College & Hamilton Method Explained -
-          Book
+          The Framers&#39; Method: Electoral College & Hamilton Method Explained
+          - Book
         </title>
         <meta charset="utf-8" />
         <meta
@@ -35,8 +35,8 @@ const Book = () => (
         {/* Open Graph Tags */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.framersmethod.com/book" />
-        <meta property="og:site_name" content="The Framers' Method" />
-        <meta property="og:title" content="The Framers' Method - Book" />
+        <meta property="og:site_name" content="The Framers&#39; Method" />
+        <meta property="og:title" content="The Framers&#39; Method - Book" />
         <meta
           property="og:description"
           content="Buy the book! The American republic is under threat from populism and tyrannical-minded politicians. The Framers’ Method can restore political stability to government and the American people."
@@ -51,7 +51,7 @@ const Book = () => (
         {/* Twitter Tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@framersmethod" />
-        <meta name="twitter:title" content="The Framers' Method - Book" />
+        <meta name="twitter:title" content="The Framers&#39; Method - Book" />
         <meta
           name="twitter:description"
           content="Buy the book! The American republic is under threat from populism and tyrannical-minded politicians. The Framers’ Method can restore political stability to government and the American people."
