@@ -33,7 +33,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-$to = 'info@framersmethod.com';  
+$to = "info@framersmethod.com";  
 $subject = 'New Contact Form Submission';
 $headers = "From: $email\r\n";
 $headers .= "Reply-To: $email\r\n";
