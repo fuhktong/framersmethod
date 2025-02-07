@@ -61,26 +61,22 @@ const Hamilton = () => {
             content="https://www.framersmethod.com/framersmethodlogo-withbackground.png"
           />
         </Helmet>
-        <div class="hamilton-logo">
+        <div className="hamilton-logo">
           <img src="../hamiltonmethodlogo2.png" alt="The Hamilton Method" />
         </div>
         <SocialMediaBar />
         <section className="hamilton-template">
           <div className="hamilton-template-text">
             <h2>How it works</h2>
-            <h1>
-              A decentralized election system will prevent national populist
-              rhetoric.
-            </h1>
+            <h1>Proportional Representation with a Touch of Competition</h1>
             <p>
-              With thousands of possible electors, political influence is
-              dispersed throughout the country. No elector candidate will wield
-              concentrated power on the national stage. Money in politics, media
-              influence, and foreign intelligence services will have little
-              influence on the electoral process.
+              The Hamilton Method splits up electors by first giving each party
+              the whole number of reps they should get based on the votes they
+              received. Then, any leftover seats go to the party or parties with
+              the largest remainder.
             </p>
           </div>
-          <div class="hamilton-template-img">
+          <div className="hamilton-template-img">
             <img
               src="./hamiltonmethodequation.png"
               alt="The Hamilton Method Equation"
@@ -105,7 +101,7 @@ const Hamilton = () => {
               influence on the electoral process.
             </p>
           </div>
-          <div class="hamilton-template-img">
+          <div className="hamilton-template-img">
             <img
               src="../hamiltonmethodnobackground.png"
               alt="The Hamilton Method"

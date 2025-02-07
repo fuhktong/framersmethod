@@ -17,7 +17,7 @@ const GeneralCaucus = () => {
           <meta charset="utf-8" />
           <meta
             name="description"
-            content="The General Caucus is a series of tiered meetings for selecting politicians to specific offices and will prevent the oligarchs and tyrannically minded candidates from controling American politics."
+            content="The General Caucus is a series of tiered meetings for selecting politicians to specific offices and will prevent the oligarchs and tyrannically minded candidates from controlling American politics."
           />
           <meta
             name="keywords"
@@ -37,7 +37,7 @@ const GeneralCaucus = () => {
           />
           <meta
             property="og:description"
-            content="The General Caucus is a series of tiered meetings for selecting politicians to specific offices and will prevent the oligarchs and tyrannically minded candidates from controling American politics."
+            content="The General Caucus is a series of tiered meetings for selecting politicians to specific offices and will prevent the oligarchs and tyrannically minded candidates from controlling American politics."
           />
           <meta
             property="og:image"
@@ -54,7 +54,7 @@ const GeneralCaucus = () => {
           />
           <meta
             name="twitter:description"
-            content="The General Caucus is a series of tiered meetings for selecting politicians to specific offices and will prevent the oligarchs and tyrannically minded candidates from controling American politics."
+            content="The General Caucus is a series of tiered meetings for selecting politicians to specific offices and will prevent the oligarchs and tyrannically minded candidates from controlling American politics."
           />
           <meta
             name="twitter:image"
@@ -83,23 +83,23 @@ const GeneralCaucus = () => {
               following caucus. At each precinct caucus, attendees debate
               relevant issues and group themselves with a potential delegate
               until one group achieves a simple majority. All office holders
-              selected must come from the caucuses. State legislature districts
-              are used because they are designed based on roughly equal
-              population size.
+              must come from the caucuses. State legislature districts are used
+              because they are designed based on roughly equal population size.
             </p>
             <p>
               Precinct caucuses will select all delegates for governor, senator,
-              etc. but the following caucuses will be separated depending on the
-              office. There may be a final state-wide caucus, i.e. governor or
-              senator, but can also have regional caucuses, i.e. representative
-              or elector. Ideally discussions will focus on issues relevant to
-              the specific office being filled such as local matters for mayoral
-              selections, federal issues for senatorial choices, and so forth.
+              etc., but the following caucuses will be separated depending on
+              the office. There may be a final state-wide caucus, i.e. governor
+              or senator, but they can also have regional caucuses, i.e.
+              representative or elector. Ideally, discussions will focus on
+              issues relevant to the specific office being filled such as local
+              matters for mayoral selections, federal issues for senatorial
+              choices, and so forth.
             </p>
             <p>
               Ultimately, the general caucus is a system that defends the people
-              from perverse interests of the oligarchs and the populist rhetoric
-              of tyrannically-minded candidates.{" "}
+              from the perverse interests of the oligarchs and the populist
+              rhetoric of tyrannically-minded candidates.{" "}
             </p>
           </div>
           <div class="caucus-template-img">
@@ -118,7 +118,7 @@ const GeneralCaucus = () => {
             <p>
               The General Caucus is a series of meetings by caucus-goers and
               delegates which does not need money to operate. There are no
-              individual camapigns that need vast sums of money to sway voters
+              individual campaigns that need vast sums of money to sway voters
               with campaign commercials. It's not an election, it's a caucus!
               It's free! What a great idea!{" "}
             </p>
@@ -140,7 +140,7 @@ const GeneralCaucus = () => {
               from the General Caucus.{" "}
             </h2>
             <p>
-              The influence of the parties is severaly reduced. Any potential
+              The influence of the parties is severely reduced. Any potential
               office holder is required to pass through the precinct caucus,
               state legislature district caucus, and the final state-wide
               caucus. Even if parties nominate a candidate, that nominee must
@@ -159,8 +159,8 @@ const GeneralCaucus = () => {
             <p>
               With the General Caucus, there are millions of people involved at
               the precinct level with thousands of potential delegates to the
-              state legislature district caucus. Both the legacy and social
-              media are not able to concentrate their power on any particular
+              state legislature district caucus. Both legacy and social media
+              are not able to concentrate their power on any particular
               candidates with so many people involved in the process.
             </p>
             <p>
@@ -183,10 +183,10 @@ const GeneralCaucus = () => {
             <h1>Additional Benefits of the General Caucus:</h1>
             <p>• No Ballots to Steal or Manipulate</p>
             <p>• Populism Defeated</p>
-            <p>• Tyrannically-minded Candidates Become Irrelvant</p>
+            <p>• Tyrannically-minded Candidates Become Irrelevant</p>
             <p>• Foreign Intelligence Influence Eliminated</p>
             <p>• No tribalism</p>
-            <p>• Horce Race Removed, Issues Become Priority</p>
+            <p>• Horse Race Removed, Issues Become Priority</p>
           </div>
         </section>
       </section>
