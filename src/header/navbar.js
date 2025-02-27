@@ -7,10 +7,14 @@ const NavBar = () => {
     <nav className="desktop-nav">
       <ul>
         <li>
-          <Link to="/general-caucus">
+          <div id="navbar-electoral-college">
             <span className="first-word">GENERAL </span>
             <span className="second-word">CAUCUS</span>
-          </Link>
+          </div>
+          <div className="dropdown-content">
+            <Link to="/general-caucus">GENERAL CAUCUS</Link>
+            <Link to="/how-it-works">HOW IT WORKS</Link>
+          </div>
         </li>
         <li>
           <div id="navbar-electoral-college">

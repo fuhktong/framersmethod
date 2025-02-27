@@ -5,6 +5,7 @@ import Header from "./header/header.js";
 import Footer from "./footer/Footer.js";
 import Home from "./home/home.js";
 import GeneralCaucus from "./generalcaucus/generalcaucus.js";
+import HowItWorks from "./howitworks/howitworks.js";
 import NationalElections from "./nationalelections/nationalelections.js";
 import DemVsRep from "./demvsrep/demvsrep.js";
 import Hamilton from "./hamilton/hamilton.js";
@@ -27,6 +28,7 @@ function App() {
         <Routes location={location}>
           <Route path="/" element={<Home />} />
           <Route path="general-caucus" element={<GeneralCaucus />} />
+          <Route path="how-it-works" element={<HowItWorks />} />
           <Route path="national-elections" element={<NationalElections />} />
           <Route path="democracy-vs-republic" element={<DemVsRep />} />
           <Route path="hamilton-method" element={<Hamilton />} />

@@ -22,6 +22,11 @@ const Toggle = ({ isOpen, toggleMenu }) => {
             </Link>
           </li>
           <li>
+            <Link to="/how-it-works" onClick={toggleMenu}>
+              HOW IT WORKS
+            </Link>
+          </li>
+          <li>
             <Link to="/democracy-vs-republic" onClick={toggleMenu}>
               DEMOCRACY vs REPUBLIC
             </Link>
