@@ -23,7 +23,7 @@ const Toggle = ({ isOpen, toggleMenu }) => {
           </li>
           <li>
             <Link to="/how-it-works" onClick={toggleMenu}>
-              HOW IT WORKS
+              HOW THE GENERAL CAUCUS WORKS
             </Link>
           </li>
           <li>
