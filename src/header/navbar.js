@@ -7,7 +7,7 @@ const NavBar = () => {
     <nav className="desktop-nav">
       <ul>
         <li>
-          <div id="navbar-electoral-college">
+          <div className="dropdown-title">
             <span className="first-word">GENERAL </span>
             <span className="second-word">CAUCUS</span>
           </div>
@@ -17,7 +17,7 @@ const NavBar = () => {
           </div>
         </li>
         <li>
-          <div id="navbar-electoral-college">
+          <div className="dropdown-title">
             <span className="first-word">ELECTORAL </span>
             <span className="second-word">COLLEGE</span>
           </div>
@@ -38,7 +38,7 @@ const NavBar = () => {
           <Link to="/contribute">CONTRIBUTE</Link>
         </li>
         <li>
-          <div id="navbar-electoral-college">CONTACT</div>
+          <div className="dropdown-title">CONTACT</div>
           <div className="dropdown-content">
             <Link to="/team">TEAM</Link>
             <Link to="/contact">CONTACT</Link>

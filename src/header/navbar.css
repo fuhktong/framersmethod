@@ -40,7 +40,7 @@
   }
 }
 
-#navbar-electoral-college {
+.dropdown-title {
   color: white;
   text-decoration: none;
   font-size: 14px;
@@ -99,12 +99,12 @@
   border-radius: 5px;
 }
 
-#navbar-electoral-college:hover + .dropdown-content,
+.dropdown-title:hover + .dropdown-content,
 .dropdown-content:hover {
   display: block;
 }
 
-#navbar-electoral-college {
+.dropdown-title {
   cursor: pointer;
 }
 
