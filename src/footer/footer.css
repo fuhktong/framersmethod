@@ -67,14 +67,19 @@ footer {
 
 .footer-social-media {
   display: flex;
+  flex-direction: column;
   margin-right: 60px;
+}
+
+.social-row {
   display: flex;
+  justify-content: center;
 }
 
 .footer-social-media img {
   width: 30px;
   height: auto;
-  padding: 15px;
+  padding: 10px;
   border: 2px solid transparent;
 }
 
@@ -124,7 +129,6 @@ footer {
 @media screen and (max-width: 768px) {
   .footer-links li {
     display: flex;
-
     margin-right: 0;
     padding: none;
   }

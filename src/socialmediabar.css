@@ -4,6 +4,7 @@
   justify-content: center;
   padding: 20px 0;
   border: 2px solid transparent;
+  flex-wrap: wrap;
 }
 
 .socialmediabar img {
@@ -17,4 +18,22 @@
   background-color: #45698c;
   border: 2px solid white;
   border-radius: 5px;
+}
+
+.socialmediabar-row {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 650px) {
+  .socialmediabar {
+    flex-direction: column;
+  }
+
+  .socialmediabar-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 }
