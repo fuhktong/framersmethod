@@ -1,3 +1,17 @@
+<?php
+// Load environment variables for reCAPTCHA
+require_once __DIR__ . '/env_loader.php';
+loadEnv(__DIR__ . '/../.env');
+
+// Debug: Check if site key is loaded
+$sitekey = $_ENV['RECAPTCHA_SITE_KEY'] ?? getenv('RECAPTCHA_SITE_KEY') ?? '';
+if (empty($sitekey)) {
+    error_log("reCAPTCHA site key not found in environment variables");
+    // Fallback to hardcoded key for testing
+    $sitekey = '6LfdfGIrAAAAAIgqPTUPLeyDlzTE_NADYQ-vmy4M';
+}
+?>
+
 <section>
     <div class="home-logo">
         <img src="/images/framersmethod.png" alt="The Framers' Method" />
@@ -25,6 +39,10 @@
                     <textarea id="message" name="message" required></textarea>
                 </li>
                 
+                <li>
+                    <div class="g-recaptcha" data-sitekey="<?php echo $sitekey; ?>"></div>
+                </li>
+                
                 <li class="button">
                     <button type="submit" id="submitBtn">Send</button>
                 </li>
@@ -35,6 +53,9 @@
     </div>
 </section>
 
+<!-- reCAPTCHA Script -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 <script>
 // Contact Form Handler
 async function handleSubmit(event) {
@@ -44,11 +65,22 @@ async function handleSubmit(event) {
     const statusDiv = document.getElementById('status');
     const form = document.getElementById('contactForm');
     
+    // Get reCAPTCHA response
+    const recaptchaResponse = grecaptcha.getResponse();
+    
+    if (!recaptchaResponse) {
+        statusDiv.style.display = 'block';
+        statusDiv.textContent = 'Please complete the reCAPTCHA verification';
+        statusDiv.className = 'status-message error';
+        return;
+    }
+    
     // Get form data
     const formData = {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
-        message: document.getElementById('message').value
+        message: document.getElementById('message').value,
+        'g-recaptcha-response': recaptchaResponse
     };
     
     // Update UI
@@ -85,9 +117,11 @@ async function handleSubmit(event) {
             statusDiv.textContent = 'Message sent successfully!';
             statusDiv.className = 'status-message success';
             form.reset();
+            grecaptcha.reset(); // Reset reCAPTCHA
         } else {
             statusDiv.textContent = data.message || 'Failed to send message';
             statusDiv.className = 'status-message error';
+            grecaptcha.reset(); // Reset reCAPTCHA on error too
         }
     } catch (error) {
         console.error('Error:', error);

@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 $json = file_get_contents('php://input');
 $data = json_decode($json, true);
 
-if (!isset($data['name']) || !isset($data['email']) || !isset($data['message'])) {
+if (!isset($data['name']) || !isset($data['email']) || !isset($data['message']) || !isset($data['g-recaptcha-response'])) {
     echo json_encode(['success' => false, 'message' => 'Missing required fields']);
     exit;
 }
@@ -32,9 +32,36 @@ if (!isset($data['name']) || !isset($data['email']) || !isset($data['message']))
 $name = htmlspecialchars(trim($data['name']), ENT_QUOTES, 'UTF-8');
 $email = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
 $message = htmlspecialchars(trim($data['message']), ENT_QUOTES, 'UTF-8');
+$recaptcha_response = $data['g-recaptcha-response'];
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     echo json_encode(['success' => false, 'message' => 'Invalid email address']);
+    exit;
+}
+
+// Verify reCAPTCHA
+$recaptcha_secret = env('RECAPTCHA_SECRET_KEY');
+$recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+$recaptcha_data = [
+    'secret' => $recaptcha_secret,
+    'response' => $recaptcha_response,
+    'remoteip' => $_SERVER['REMOTE_ADDR']
+];
+
+$recaptcha_options = [
+    'http' => [
+        'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+        'method' => 'POST',
+        'content' => http_build_query($recaptcha_data)
+    ]
+];
+
+$recaptcha_context = stream_context_create($recaptcha_options);
+$recaptcha_result = file_get_contents($recaptcha_url, false, $recaptcha_context);
+$recaptcha_json = json_decode($recaptcha_result, true);
+
+if (!$recaptcha_json['success']) {
+    echo json_encode(['success' => false, 'message' => 'reCAPTCHA verification failed. Please try again.']);
     exit;
 }
 

@@ -12,7 +12,6 @@
 form {
   display: inline-block;
   padding: 20px;
-  border: 2px solid #45698c;
   border-radius: 10px;
   background-image: url("/images/fmbackground.png");
   background-position: center;
@@ -69,8 +68,30 @@ button {
   margin-left: 0;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   border: none;
-  color: black;
-  background-color: white;
+  color: white;
+  background-color: #45698c;
+  width: 100%;
+  padding: 12px;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #3a5a7a;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Center reCAPTCHA */
+.g-recaptcha {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .contactform-send-message {
@@ -79,7 +100,6 @@ button {
   padding: 20px;
   background-image: url("/images/fmbackground.png");
   background-position: center;
-  border: 2px solid #45698c;
   border-radius: 10px;
   color: white;
   text-decoration: none;
