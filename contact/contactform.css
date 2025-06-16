@@ -1,12 +1,14 @@
 .contact {
   background-color: white;
-  margin: 0;
+  margin: 30px auto;
+  max-width: 1200px;
   height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   justify-content: space-evenly;
+  border-radius: 10px;
 }
 
 form {

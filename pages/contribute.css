@@ -38,14 +38,16 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: 90px 10px;
+  padding: 90px 0;
   background-color: #f9f9f9;
-  margin: 0;
+  margin: 30px auto;
+  max-width: 1200px;
+  border-radius: 10px;
 }
 
 .contribute-text {
   flex: 1;
-  padding: 20px;
+  padding: 0 50px;
 }
 
 .contribute-text h1 {
@@ -124,4 +126,7 @@
   font-weight: bold;
   padding: 50px 0;
   text-align: center;
+  margin: 30px auto;
+  max-width: 1200px;
+  border-radius: 10px;
 }

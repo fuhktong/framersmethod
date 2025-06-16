@@ -3,14 +3,17 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: 90px 10px;
+  padding: 90px 0;
   background-color: #f9f9f9;
-  margin: 0;
+  margin: 0 auto;
+  max-width: 1200px;
+  border-radius: 10px;
+  margin-bottom: 30px;
 }
 
 .demvsrep-template-text {
   flex: 1;
-  padding: 20px;
+  padding: 0 50px;
 }
 
 .demvsrep-template-text h1 {

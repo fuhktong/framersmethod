@@ -31,10 +31,7 @@
                 delegates for the senator will have their own separate caucuses.
             </p>
         </div>
-    </section>
-
-    <section class="howitworks-template">
-        <div class="howitworks-img">
+        <div class="howitworks-img" style="margin-bottom: 30px;">
             <img src="/images/generalcaucusdiagram.png" alt="The General Caucus" />
         </div>
     </section>
@@ -49,16 +46,10 @@
                 those physically present at their caucus meeting.
             </p>
         </div>
-    </section>
-
-    <section class="howitworks-template">
         <div class="howitworks-img">
             <img src="/images/iowacaucus.png" alt="2024 Iowa Caucus" />
         </div>
-    </section>
-
-    <section class="howitworks-template" style="background-color: white;">
-        <div class="howitworks-template-text">
+        <div class="howitworks-template-text" style="background-color: white;">
             <h1>Caucusing</h1>
             <p>
                 At the time of the precinct caucus, with all caucus-goers checked

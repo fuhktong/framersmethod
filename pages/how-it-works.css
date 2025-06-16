@@ -18,14 +18,16 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: 90px 10px;
   background-color: #f9f9f9;
-  margin: 0;
+  margin: 0 auto;
+  max-width: 1200px;
+  border-radius: 10px;
+  margin-bottom: 30px;
 }
 
 .howitworks-template-text {
   flex: 1;
-  padding: 0 20px;
+  padding: 50px;
 }
 
 .howitworks-template-text h1 {
@@ -64,9 +66,9 @@
 }
 
 .howitworks-img {
-  width: 80%;
+  width: 100%;
   height: auto;
-  max-width: 80%;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -76,7 +78,8 @@
 .howitworks-img img {
   width: 100%;
   height: auto;
-  max-width: 100%;
+  max-width: 1100px;
+  border-radius: 10px;
 }
 
 @media screen and (max-width: 768px) {

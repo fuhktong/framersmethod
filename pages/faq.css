@@ -1,8 +1,10 @@
 .main {
   overflow-x: hidden;
-  margin: 0;
+  margin: 30px auto;
   overflow: hidden;
   padding: 30px 30px 40px 30px;
+  max-width: 1200px;
+  border-radius: 10px;
 }
 
 .dividerwhite {
