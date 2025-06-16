@@ -6,10 +6,10 @@ header {
   width: 100%;
   max-width: 1200px;
   height: 80px;
-  background-image: url("/images/fmbackground.png");
+  /* background-image: url("/images/fmbackground.png");
   background-size: cover;
-  background-position: center;
-  border-bottom: 3px solid white;
+  background-position: center; */
+  /* border-bottom: 5px solid white; */
   margin: 0 auto;
 }
 
