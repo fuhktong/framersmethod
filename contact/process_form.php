@@ -9,6 +9,13 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
+// Include SMTP mailer and environment loader
+require_once 'smtp_mailer.php';
+require_once 'env_loader.php';
+
+// Load environment variables
+loadEnv(__DIR__ . '/../.env');
+
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();
@@ -16,8 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 $json = file_get_contents('php://input');
 $data = json_decode($json, true);
-
-error_log("Received form submission: " . print_r($data, true));
 
 if (!isset($data['name']) || !isset($data['email']) || !isset($data['message'])) {
     echo json_encode(['success' => false, 'message' => 'Missing required fields']);
@@ -33,23 +38,47 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-$to = "contact@framersmethod.com";  
-$subject = 'New Contact Form Submission';
-$headers = "From: contact@framersmethod.com\r\n";
-$headers .= "Reply-To: $email\r\n";
-$headers .= "X-Mailer: PHP/" . phpversion();
+// SMTP Configuration - Load from environment variables
+$smtp_config = [
+    'host' => env('SMTP_HOST', 'smtp.hostinger.com'),
+    'port' => (int)env('SMTP_PORT', 587),
+    'username' => env('SMTP_USERNAME'),
+    'password' => env('SMTP_PASSWORD'),
+    'use_tls' => env('SMTP_USE_TLS', 'true') === 'true'
+];
 
+$to = "contact@framersmethod.com";
+$subject = 'New Contact Form Submission';
 $email_message = "Name: $name\n";
 $email_message .= "Email: $email\n\n";
 $email_message .= "Message:\n$message";
 
-$mail_sent = mail($to, $subject, $email_message, $headers);
+// Create SMTP mailer instance
+$mailer = new SimpleSmtpMailer(
+    $smtp_config['host'],
+    $smtp_config['port'],
+    $smtp_config['username'],
+    $smtp_config['password'],
+    $smtp_config['use_tls']
+);
+
+// Send email
+$mail_result = $mailer->sendMail(
+    $to,                           // To
+    $subject,                      // Subject
+    $email_message,               // Message
+    $smtp_config['username'],     // From email
+    'Website Contact Form',       // From name
+    $email                        // Reply-to
+);
+
+$mail_sent = ($mail_result === true);
 
 if (ob_get_length()) ob_clean();
 
 echo json_encode([
     'success' => $mail_sent,
-    'message' => $mail_sent ? 'Message sent successfully' : 'Failed to send message'
+    'message' => $mail_sent ? 'Message sent successfully' : 'Failed to send message: ' . $mail_result
 ]);
 exit;
 ?>
