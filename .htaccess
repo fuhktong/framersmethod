@@ -1,5 +1,10 @@
-Options -MultiViews
 RewriteEngine On
+
+# Handle static files
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule \.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|html)$ - [L]
+
+# Route all other requests to index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.php [QSA,L]
+RewriteRule ^(.*)$ index.php [L,QSA]

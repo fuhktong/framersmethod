@@ -1,0 +1,150 @@
+footer {
+  background-image: url("/images/fmbackground.png");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 20px 0 20px 20px;
+  width: 100%;
+  border-top: 3px solid white;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-title {
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: white;
+  padding: 0 0 10px 0;
+}
+
+.footer-title img {
+  height: 40px;
+  width: auto;
+}
+
+.footer-container {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-links {
+  list-style: none;
+  margin: 0;
+}
+
+.footer-links li {
+  display: flex;
+  margin-right: 20px;
+  text-shadow: 1px 1px 1px black;
+}
+
+.footer-links li:last-child {
+  margin-right: 0;
+}
+
+.footer-links a {
+  display: flex;
+  color: white;
+  text-shadow: var(--text-dropshadow);
+  text-decoration: none;
+  font-size: small;
+  font-weight: bold;
+}
+
+.link2 {
+  padding: 0 2px;
+  border: 2px solid transparent;
+}
+
+.link2:hover {
+  background-color: #45698c;
+  border: 2px solid white;
+  border-radius: 5px;
+}
+
+.footer-social-media {
+  display: flex;
+  flex-direction: column;
+  margin-right: 60px;
+}
+
+.social-row {
+  display: flex;
+  justify-content: center;
+}
+
+.footer-social-media img {
+  width: 30px;
+  height: auto;
+  padding: 10px;
+  border: 2px solid transparent;
+}
+
+.footer-social-media img:hover {
+  background-color: #45698c;
+  border: 2px solid white;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 768px) {
+  footer {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer-title {
+    padding: 30px 0 15px 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  h2 {
+    padding-top: 25px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer-links li {
+    display: flex;
+    margin-right: 0;
+    padding: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .link2 {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer-social-media {
+    padding-top: 10px;
+    margin: 20px;
+    justify-content: center;
+  }
+}
