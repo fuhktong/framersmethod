@@ -3,11 +3,6 @@
 $request_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $request_uri = rtrim($request_uri, '/');
 
-// Handle static files
-if (preg_match('/\.(css|js|jpg|jpeg|png|gif|ico|svg|woff|woff2|ttf)$/', $request_uri)) {
-    return false;
-}
-
 // Define routes
 $routes = [
     '' => 'home',
