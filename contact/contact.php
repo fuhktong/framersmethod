@@ -1,7 +1,7 @@
 <?php
 // Load environment variables for reCAPTCHA
 require_once __DIR__ . '/env_loader.php';
-loadEnv(__DIR__ . '/../.env');
+loadEnv(__DIR__ . '/../../.env');
 
 // Debug: Check if site key is loaded
 $sitekey = $_ENV['RECAPTCHA_SITE_KEY'] ?? getenv('RECAPTCHA_SITE_KEY') ?? '';

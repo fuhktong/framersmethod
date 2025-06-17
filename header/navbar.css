@@ -57,7 +57,7 @@
   display: none !important;
   position: absolute;
   top: 100%;
-  left: 0;
+  right: -21px;
   margin-top: 5px;
   background-image: url("/images/fmbackground.png");
   background-size: cover;

@@ -14,7 +14,7 @@ require_once 'smtp_mailer.php';
 require_once 'env_loader.php';
 
 // Load environment variables
-loadEnv(__DIR__ . '/../.env');
+loadEnv(__DIR__ . '/../../.env');
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
