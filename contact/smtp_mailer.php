@@ -18,7 +18,7 @@ class SimpleSmtpMailer {
         $this->use_tls = $use_tls;
     }
     
-    public function sendMail($to, $subject, $message, $from_email, $from_name = '', $reply_to = '') {
+    public function sendMail($to, $subject, $message, $from_email, $from_name = '', $reply_to = '', $is_html = false) {
         // Use SSL connection for port 465, TLS for 587
         $context = stream_context_create([
             'ssl' => [
@@ -37,7 +37,7 @@ class SimpleSmtpMailer {
         }
         
         if (!$socket) {
-            return "Connection failed: $errstr ($errno)";
+            return "Connection failed: $errstr ($errno) - Host: {$this->smtp_host}:{$this->smtp_port}";
         }
         
         // Read initial response
@@ -48,7 +48,8 @@ class SimpleSmtpMailer {
         }
         
         // EHLO
-        fputs($socket, "EHLO " . $_SERVER['HTTP_HOST'] . "\r\n");
+        $hostname = $_SERVER['HTTP_HOST'] ?? 'localhost';
+        fputs($socket, "EHLO " . $hostname . "\r\n");
         
         // Read all EHLO responses (multi-line)
         do {
@@ -72,7 +73,7 @@ class SimpleSmtpMailer {
             }
             
             // EHLO again after TLS
-            fputs($socket, "EHLO " . $_SERVER['HTTP_HOST'] . "\r\n");
+            fputs($socket, "EHLO " . $hostname . "\r\n");
             
             // Read all EHLO responses again (multi-line)
             do {
@@ -114,7 +115,19 @@ class SimpleSmtpMailer {
             $email_data .= "Reply-To: $reply_to\r\n";
         }
         $email_data .= "Subject: $subject\r\n";
-        $email_data .= "Content-Type: text/plain; charset=UTF-8\r\n";
+        $email_data .= "MIME-Version: 1.0\r\n";
+        
+        if ($is_html) {
+            $email_data .= "Content-Type: text/html; charset=UTF-8\r\n";
+        } else {
+            $email_data .= "Content-Type: text/plain; charset=UTF-8\r\n";
+        }
+        
+        // Add additional headers for better deliverability
+        $email_data .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+        $email_data .= "X-Priority: 3\r\n";
+        $email_data .= "Date: " . date('r') . "\r\n";
+        
         $email_data .= "\r\n";
         $email_data .= $message . "\r\n";
         $email_data .= ".\r\n";
