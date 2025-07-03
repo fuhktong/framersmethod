@@ -11,3 +11,5 @@
         <?php include 'toggle.php'; ?>
     </div>
 </header>
+
+<div class="header-divider"></div>

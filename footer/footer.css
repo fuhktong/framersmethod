@@ -16,7 +16,7 @@ footer {
   gap: 10px;
   text-decoration: none;
   color: white;
-  padding: 0 0 10px 0;
+  padding-left: 30px;
 }
 
 .footer-title img {
@@ -34,6 +34,7 @@ footer {
 .footer-links {
   list-style: none;
   margin: 0;
+  padding-left: 30px;
 }
 
 .footer-links li {
