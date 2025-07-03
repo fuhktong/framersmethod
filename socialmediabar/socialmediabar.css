@@ -5,6 +5,8 @@
   padding: 20px 0;
   border: 2px solid transparent;
   flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .socialmediabar img {
