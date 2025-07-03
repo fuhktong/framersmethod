@@ -21,9 +21,6 @@
     <a href="https://www.tiktok.com/@framersmethod" target="_blank" rel="noreferrer">
         <img src="/images/whitelogotiktok.png" alt="The Framers' Method on TikTok" />
     </a>
-    <a href="https://www.patreon.com/framersmethod" target="_blank" rel="noreferrer">
-        <img src="/images/whitelogopatreon.png" alt="The Framers' Method on Patreon" />
-    </a>
     <a href="https://a.co/d/0dimzJAr" target="_blank" rel="noreferrer">
         <img src="/images/whitelogoamazon.png" alt="On The Framers' Method Book - Amazon" />
     </a>
@@ -61,9 +58,6 @@ function updateSocialMediaBar() {
                 <a href="https://www.tiktok.com/@framersmethod" target="_blank" rel="noreferrer">
                     <img src="/images/whitelogotiktok.png" alt="The Framers' Method on TikTok" />
                 </a>
-                <a href="https://www.patreon.com/framersmethod" target="_blank" rel="noreferrer">
-                    <img src="/images/whitelogopatreon.png" alt="The Framers' Method on Patreon" />
-                </a>
                 <a href="https://a.co/d/0dimzJAr" target="_blank" rel="noreferrer">
                     <img src="/images/whitelogoamazon.png" alt="On The Framers' Method Book - Amazon" />
                 </a>
@@ -91,9 +85,6 @@ function updateSocialMediaBar() {
             </a>
             <a href="https://www.tiktok.com/@framersmethod" target="_blank" rel="noreferrer">
                 <img src="/images/whitelogotiktok.png" alt="The Framers' Method on TikTok" />
-            </a>
-            <a href="https://www.patreon.com/framersmethod" target="_blank" rel="noreferrer">
-                <img src="/images/whitelogopatreon.png" alt="The Framers' Method on Patreon" />
             </a>
             <a href="https://a.co/d/0dimzJAr" target="_blank" rel="noreferrer">
                 <img src="/images/whitelogoamazon.png" alt="On The Framers' Method Book - Amazon" />

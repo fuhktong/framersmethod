@@ -10,26 +10,6 @@
         </p>
     </div>
     <?php include __DIR__ . '/../socialmediabar/socialmediabar.php'; ?>
-    <section class="contribute">
-        <div class="contribute-text">
-            <h1>Support us on Patreon</h1>
-            <p>
-                The best way to support the Framers' Method <br />
-                is through a subscription on Patreon.
-            </p>
-            <a
-                class="contribute-button"
-                href="https://www.patreon.com/framersmethod"
-                target="_blank"
-                rel="noreferrer"
-            >
-                <button class="btn-tshirt">Support Here</button>
-            </a>
-        </div>
-        <div class="contribute-img">
-            <img src="/images/patreon.png" alt="The Framers' Method on Patreon" />
-        </div>
-    </section>
     <div class="contribute-merch">The Framers' Method - Merch</div>
     <section class="contribute">
         <div class="contribute-text">
