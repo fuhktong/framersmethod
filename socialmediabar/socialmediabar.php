@@ -6,9 +6,6 @@
     <a href="https://bsky.app/profile/framersmethod.bsky.social" target="_blank" rel="noreferrer">
         <img src="/images/whitelogobluesky.png" alt="The Framers' Method on Bluesky" />
     </a>
-    <a href="https://twitter.com/framersmethod" target="_blank" rel="noreferrer">
-        <img src="/images/whitelogox.png" alt="The Framers' Method on Twitter" />
-    </a>
     <a href="https://medium.com/@framersmethod" target="_blank" rel="noreferrer">
         <img src="/images/whitelogomedium.png" alt="The Framers' Method - Medium" />
     </a>
@@ -41,9 +38,6 @@ function updateSocialMediaBar() {
                 <a href="https://bsky.app/profile/framersmethod.bsky.social" target="_blank" rel="noreferrer">
                     <img src="/images/whitelogobluesky.png" alt="The Framers' Method on Bluesky" />
                 </a>
-                <a href="https://twitter.com/framersmethod" target="_blank" rel="noreferrer">
-                    <img src="/images/whitelogox.png" alt="The Framers' Method on Twitter" />
-                </a>
                 <a href="https://medium.com/@framersmethod" target="_blank" rel="noreferrer">
                     <img src="/images/whitelogomedium.png" alt="The Framers' Method - Medium" />
                 </a>
@@ -70,9 +64,6 @@ function updateSocialMediaBar() {
             </a>
             <a href="https://bsky.app/profile/framersmethod.bsky.social" target="_blank" rel="noreferrer">
                 <img src="/images/whitelogobluesky.png" alt="The Framers' Method on Bluesky" />
-            </a>
-            <a href="https://twitter.com/framersmethod" target="_blank" rel="noreferrer">
-                <img src="/images/whitelogox.png" alt="The Framers' Method on Twitter" />
             </a>
             <a href="https://medium.com/@framersmethod" target="_blank" rel="noreferrer">
                 <img src="/images/whitelogomedium.png" alt="The Framers' Method - Medium" />
