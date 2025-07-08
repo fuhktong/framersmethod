@@ -128,5 +128,10 @@ $page_description = $page_data[$current_page]['description'] ?? 'A new approach 
     
     <!-- JavaScript -->
     <script src="/scrolltotop/scrolltotop.js"></script>
+    
+    <?php if ($current_page === 'team'): ?>
+    <!-- Team Modal Enhancement -->
+    <script src="/login/team-modal.js"></script>
+    <?php endif; ?>
 </body>
 </html>

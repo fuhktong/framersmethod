@@ -34,7 +34,7 @@
                     <a class="link2" href="/contribute">CONTRIBUTE</a>
                 </li>
                 <li>
-                    <a class="link2" href="/contact">CONTACT</a>
+                    <a class="link2" href="/contact-us">CONTACT</a>
                 </li>
             </ul>
         </div>
