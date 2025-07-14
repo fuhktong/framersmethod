@@ -3,24 +3,27 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Commands
-- Run system: `./llm.sh` or `./llm.sh quiet` 
-- Test model loading: `python scripts/minimal_inference_quiet.py [model_path]`
-- Test interface: `python scripts/quiet_interface.py`
-- Activate environment: `source LLM-MODELS/tools/scripts/activate_mac.sh`
-- Install dependencies: `pip install -r config/requirements.txt`
+- Test email functionality: `php test_email.php`
+- Run web server: Start Apache/Nginx with PHP support
+- Database setup: Import SQL files from emailservice/ directory
+- SMTP configuration: Set environment variables in .env file
 
 ## Code Style
-- Follow PEP 8 with descriptive snake_case names
-- Use Path objects for cross-platform path handling
-- Class names: CamelCase, functions/variables: snake_case
-- Import order: standard library → third-party → local modules
-- Error handling: Use try/except with specific exceptions
-- Provide descriptive error messages with traceback when appropriate
-- Document functions with docstrings and comment complex sections
+- Follow PSR standards for PHP with descriptive naming
+- Class names: PascalCase, functions/variables: camelCase or snake_case
+- Use prepared statements for all database queries
+- Separate HTML templates from PHP logic
+- CSS: Use external stylesheets, follow BEM methodology
+- HTML: Semantic markup, proper accessibility attributes
+- Error handling: Use try/catch with specific exceptions
+- Provide descriptive error messages with proper logging
+- Document functions with PHPDoc comments
 
 ## Dependencies
-- Core: Python 3.9+, llama-cpp-python, torch, transformers, flask
-- Document new dependencies in config/requirements.txt
+- Core: PHP 8.0+, MySQL/MariaDB, Apache/Nginx
+- Required PHP extensions: PDO, mysqli, mail, openssl
+- Frontend: HTML5, CSS3, vanilla JavaScript
+- Optional: Composer for package management
 
 ## Core Principles
 
