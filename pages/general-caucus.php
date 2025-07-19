@@ -23,7 +23,7 @@
             <p>
                 Precinct caucuses will select all delegates for governor, senator,
                 etc., but the following caucuses will be separated depending on
-                the office. There may be a final state-wide caucus, i.e. governor
+                the office. There may be a final statewide caucus, i.e. governor
                 or senator, but they can also have regional caucuses, i.e.
                 representative or elector. Ideally, discussions will focus on
                 issues relevant to the specific office being filled such as local
@@ -71,7 +71,7 @@
             <p>
                 The influence of the parties is severely reduced. Any potential
                 office holder is required to pass through the precinct caucus,
-                state legislature district caucus, and the final state-wide
+                state legislature district caucus, and the final statewide
                 caucus. Even if parties nominate a candidate, that nominee must
                 attend and be chosen at all three caucuses.
             </p>

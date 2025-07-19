@@ -318,9 +318,9 @@
         </h4>
         <p class="faq-p">
             The states choose the members of the Electoral College through
-            state-wide popular votes. Nebraska and Maine choose electors through
+            statewide popular votes. Nebraska and Maine choose electors through
             popular votes in congressional districts and the remaining two
-            electors through state-wide popular votes.
+            electors through statewide popular votes.
         </p>
         <a class="faq-a" href="#header2">
             Return to Top

@@ -11,9 +11,9 @@
                 The General Caucus is a series of tiered meetings to select a
                 public official to a specific political office. The starting point
                 of the General Caucus is the precinct caucus, followed by a state
-                house-district caucus, and a state-wide caucus. The state
+                house-district caucus, and a statewide caucus. The state
                 house-district caucus is recommend because their districts are
-                drawn to be of roughly equal size. The final state-wide caucus
+                drawn to be of roughly equal size. The final statewide caucus
                 will select the public official.
             </p>
             <p>
@@ -25,7 +25,7 @@
                 a precinct caucus may choose a delegate for governor, and that
                 delegate will meet at the state house-district caucuses. Along
                 with all of the other delegates chosen for governor they will
-                choose a delegate from that caucus. At the final state-wide
+                choose a delegate from that caucus. At the final statewide
                 caucus, those delegates will meet and choose the state's governor
                 only. If the state is choosing a senator in the same year,
                 delegates for the senator will have their own separate caucuses.
@@ -85,7 +85,7 @@
                 the city council district. The General Caucus may be used for a
                 political office as large as governor or senator. This would begin
                 with precinct caucuses, a middles series of caucuses, and ending
-                in a state-wide caucus. The middle series of caucuses could be
+                in a statewide caucus. The middle series of caucuses could be
                 conducted in counties, just as the Iowa Caucus currently
                 practices. However, it is recommended to hold caucuses based on
                 state legislature districts as these districts are based on
@@ -106,13 +106,13 @@
                 five to fifty precincts, with larger districts sending one
                 delegate per precinct to a final district caucus, while smaller
                 districts might send two or three delegates per precinct.
-                State-wide offices, such as governor or senator, require three
-                tiers: precinct, state house-district caucus, and state-wide
+                statewide offices, such as governor or senator, require three
+                tiers: precinct, state house-district caucus, and statewide
                 caucus. Iowa demonstrates this structure with its 1,681 precincts
                 and 100 state house-districts. Each precinct sends one delegate to
                 their state house-district caucus, creating groups of roughly 168
                 delegates who then each select one representative for the final
-                state-wide caucus of 100 people.
+                statewide caucus of 100 people.
             </p>
             <p>
                 This system scales effectively even for larger states like
@@ -120,7 +120,7 @@
                 house-districts. With one delegate per precinct, state
                 house-district caucuses would average 275 participants. Each state
                 house-district caucus could send one or two delegates to the
-                state-wide caucus, creating a final assembly of 80 to 160 people.
+                statewide caucus, creating a final assembly of 80 to 160 people.
             </p>
         </div>
     </section>
@@ -164,7 +164,7 @@
                 congressional district caucus or an elector district caucus to
                 determine the politician for their respective office. This method
                 would follow the same process previously discussed. Another option
-                is to use a single state-wide caucus to determine all
+                is to use a single statewide caucus to determine all
                 representatives or electors for the state. This would require a
                 proportional voting method such as the Hamilton Method in the
                 final caucus to divide the representatives or electors among
@@ -182,7 +182,7 @@
                 and county clerks to refine the structure of the caucuses. With
                 proper attention, the General Caucus system provides a structured,
                 scalable approach to selecting public officials through
-                deliberative meetings from the precinct level to state-wide
+                deliberative meetings from the precinct level to statewide
                 assemblies. The system's flexibility accommodates elections at all
                 levels while maintaining manageable group sizes for effective
                 deliberation. With its requirement that delegates must be present
