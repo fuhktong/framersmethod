@@ -10,6 +10,44 @@ $currentUser = getCurrentUser();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subscribers - Email Service</title>
     <link rel="stylesheet" href="emailservice.css">
+    <style>
+        .list-tabs {
+            margin: 20px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .tab {
+            padding: 10px 15px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+        .tab:hover {
+            background: #e9e9e9;
+        }
+        .tab.active {
+            background: white;
+            border-bottom: 1px solid white;
+            margin-bottom: -1px;
+        }
+        .delete-tab {
+            margin-left: 8px;
+            color: #999;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .delete-tab:hover {
+            color: #d9534f;
+        }
+    </style>
 </head>
 <body>
     <header class="email-header">
@@ -37,15 +75,13 @@ $currentUser = getCurrentUser();
 
         <div class="subscribers-filters">
             <input type="text" id="search" placeholder="Search subscribers..." class="search-input">
-            <select id="status-filter" class="filter-select">
-                <option value="all">All Status</option>
-                <option value="active">Active</option>
-                <option value="unsubscribed">Unsubscribed</option>
-            </select>
-            <select id="list-filter" class="filter-select">
-                <option value="all">All Lists</option>
-            </select>
             <button class="btn btn-secondary" onclick="showListModal()">Manage Lists</button>
+        </div>
+
+        <div class="list-tabs">
+            <div class="tab-container" id="list-tabs">
+                <!-- Tabs will be loaded here -->
+            </div>
         </div>
 
         <div class="subscribers-table-container">
@@ -150,30 +186,17 @@ $currentUser = getCurrentUser();
 
     <!-- List Management Modal -->
     <div id="list-modal" class="modal" style="display: none;">
-        <div class="modal-content modal-large">
+        <div class="modal-content">
             <span class="close" onclick="hideListModal()">&times;</span>
-            <h3>Manage Subscriber Lists</h3>
+            <h3>Create New List</h3>
             
-            <div class="list-management">
-                <div class="create-list-section">
-                    <h4>Create New List</h4>
-                    <div class="form-group">
-                        <label for="new-list-name">List Name</label>
-                        <input type="text" id="new-list-name" placeholder="Enter list name...">
-                    </div>
-                    <div class="form-group">
-                        <label for="new-list-description">Description (optional)</label>
-                        <input type="text" id="new-list-description" placeholder="Describe this list...">
-                    </div>
-                    <button class="btn btn-primary" onclick="createList()">Create List</button>
-                </div>
-                
-                <div class="existing-lists-section">
-                    <h4>Existing Lists</h4>
-                    <div id="lists-container">
-                        <!-- Lists will be loaded here -->
-                    </div>
-                </div>
+            <div class="form-group">
+                <label for="new-list-name">List Name</label>
+                <input type="text" id="new-list-name" placeholder="Enter list name...">
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="hideListModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="createList()">Create List</button>
             </div>
         </div>
     </div>
@@ -511,9 +534,14 @@ $currentUser = getCurrentUser();
         async function loadSubscribers() {
             try {
                 const search = document.getElementById('search').value;
-                const status = document.getElementById('status-filter').value;
                 
-                const response = await fetch(`data-service.php?action=subscribers&page=${currentPage}&search=${encodeURIComponent(search)}&status=${status}`);
+                // Build URL with list filter
+                let url = `data-service.php?action=subscribers&page=${currentPage}&search=${encodeURIComponent(search)}`;
+                if (currentListId !== 'all') {
+                    url += `&list_id=${currentListId}`;
+                }
+                
+                const response = await fetch(url);
                 const result = await response.json();
                 
                 if (result.success) {
@@ -721,14 +749,15 @@ $currentUser = getCurrentUser();
         // List management functions
         let currentSubscriberId = null;
         let allLists = [];
+        let currentListId = 'all'; // Track active tab
 
         function showListModal() {
             document.getElementById('list-modal').style.display = 'block';
-            loadLists();
         }
 
         function hideListModal() {
             document.getElementById('list-modal').style.display = 'none';
+            document.getElementById('new-list-name').value = '';
         }
 
         function showAddToListModal(subscriberId) {
@@ -748,35 +777,38 @@ $currentUser = getCurrentUser();
                 
                 if (result.success) {
                     allLists = result.data;
-                    updateListsContainer(result.data);
-                    updateListFilter(result.data);
+                    updateListTabs(result.data);
                 }
             } catch (error) {
                 console.error('Error loading lists:', error);
             }
         }
 
-        function updateListsContainer(lists) {
-            const container = document.getElementById('lists-container');
-            container.innerHTML = lists.map(list => `
-                <div class="list-item">
-                    <h5>${list.name}</h5>
-                    <p>${list.description || 'No description'}</p>
-                    <p><small>Created: ${new Date(list.created_at).toLocaleDateString()}</small></p>
-                    ${list.name !== 'All Subscribers' ? `<button class="btn btn-small btn-danger" onclick="deleteList(${list.id})">Delete</button>` : ''}
+        function updateListTabs(lists) {
+            const container = document.getElementById('list-tabs');
+            
+            // Create tabs
+            container.innerHTML = `
+                <div class="tab ${currentListId === 'all' ? 'active' : ''}" onclick="switchToList('all')">
+                    All Subscribers (${lists.find(l => l.name === 'All Subscribers')?.subscriber_count || 0})
                 </div>
-            `).join('');
+                ${lists.filter(list => list.name !== 'All Subscribers').map(list => `
+                    <div class="tab ${currentListId == list.id ? 'active' : ''}" onclick="switchToList(${list.id})">
+                        ${list.name} (${list.subscriber_count})
+                        <span class="delete-tab" onclick="event.stopPropagation(); deleteList(${list.id})">&times;</span>
+                    </div>
+                `).join('')}
+            `;
         }
 
-        function updateListFilter(lists) {
-            const filter = document.getElementById('list-filter');
-            filter.innerHTML = '<option value="all">All Lists</option>' + 
-                lists.map(list => `<option value="${list.id}">${list.name}</option>`).join('');
+        function switchToList(listId) {
+            currentListId = listId;
+            updateListTabs(allLists);
+            loadSubscribers();
         }
 
         async function createList() {
             const name = document.getElementById('new-list-name').value.trim();
-            const description = document.getElementById('new-list-description').value.trim();
             
             if (!name) {
                 alert('Please enter a list name.');
@@ -787,15 +819,14 @@ $currentUser = getCurrentUser();
                 const response = await fetch('data-service.php?action=create_list', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, description })
+                    body: JSON.stringify({ name, description: '' })
                 });
                 
                 const result = await response.json();
                 
                 if (result.success) {
                     alert('List created successfully!');
-                    document.getElementById('new-list-name').value = '';
-                    document.getElementById('new-list-description').value = '';
+                    hideListModal();
                     loadLists();
                 } else {
                     alert('Error: ' + result.message);

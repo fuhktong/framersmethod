@@ -23,7 +23,8 @@ try {
             $limit = (int)($_GET['limit'] ?? 50);
             $search = $_GET['search'] ?? '';
             $status = $_GET['status'] ?? 'all';
-            $response['data'] = getSubscribers($pdo, $page, $limit, $search, $status);
+            $list_id = (int)($_GET['list_id'] ?? 0);
+            $response['data'] = getSubscribers($pdo, $page, $limit, $search, $status, $list_id);
             break;
             
         case 'campaigns':
@@ -130,38 +131,46 @@ function getDashboardStats($pdo) {
 }
 
 // Get subscribers with pagination and filtering
-function getSubscribers($pdo, $page = 1, $limit = 50, $search = '', $status = 'all') {
+function getSubscribers($pdo, $page = 1, $limit = 50, $search = '', $status = 'all', $list_id = 0) {
     $offset = ($page - 1) * $limit;
     
-    // Build WHERE clause
+    // Build base query with optional list filtering
+    $fromClause = "subscribers s";
     $where = [];
     $params = [];
     
+    // Add list filtering if specified
+    if ($list_id > 0) {
+        $fromClause = "subscribers s JOIN subscriber_list_memberships m ON s.id = m.subscriber_id";
+        $where[] = "m.list_id = ?";
+        $params[] = $list_id;
+    }
+    
     if (!empty($search)) {
-        $where[] = "(email LIKE ? OR name LIKE ?)";
+        $where[] = "(s.email LIKE ? OR s.name LIKE ?)";
         $params[] = "%$search%";
         $params[] = "%$search%";
     }
     
     if ($status !== 'all') {
-        $where[] = "status = ?";
+        $where[] = "s.status = ?";
         $params[] = $status;
     }
     
     $whereClause = !empty($where) ? 'WHERE ' . implode(' AND ', $where) : '';
     
     // Get total count
-    $countSql = "SELECT COUNT(*) as total FROM subscribers $whereClause";
+    $countSql = "SELECT COUNT(DISTINCT s.id) as total FROM $fromClause $whereClause";
     $stmt = $pdo->prepare($countSql);
     $stmt->execute($params);
     $totalCount = $stmt->fetch()['total'];
     
     // Get subscribers
     $sql = "
-        SELECT id, email, name, status, subscribed_at, updated_at
-        FROM subscribers 
+        SELECT DISTINCT s.id, s.email, s.name, s.status, s.subscribed_at, s.updated_at
+        FROM $fromClause 
         $whereClause
-        ORDER BY subscribed_at DESC 
+        ORDER BY s.subscribed_at DESC 
         LIMIT ? OFFSET ?
     ";
     
