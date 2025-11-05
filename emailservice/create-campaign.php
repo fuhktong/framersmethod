@@ -60,6 +60,7 @@ You can use these placeholders:
                     <select id="send_to" name="send_to">
                         <option value="all">All Subscribers</option>
                     </select>
+                    <small>Select which subscriber list to send this campaign to</small>
                 </div>
 
                 <div class="form-group">
@@ -256,8 +257,28 @@ You can use these placeholders:
             };
         }
 
-        // Initialize preview
-        updatePreview();
+        // Load subscriber lists
+        async function loadSubscriberLists() {
+            try {
+                const response = await fetch('data-service.php?action=lists');
+                const result = await response.json();
+                
+                if (result.success) {
+                    const sendToSelect = document.getElementById('send_to');
+                    sendToSelect.innerHTML = result.data.map(list => 
+                        `<option value="${list.id}">${list.name} (${list.subscriber_count} subscribers)</option>`
+                    ).join('');
+                }
+            } catch (error) {
+                console.error('Error loading lists:', error);
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            updatePreview();
+            loadSubscriberLists();
+        });
     </script>
 </body>
 </html>

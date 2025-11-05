@@ -42,6 +42,10 @@ $currentUser = getCurrentUser();
                 <option value="active">Active</option>
                 <option value="unsubscribed">Unsubscribed</option>
             </select>
+            <select id="list-filter" class="filter-select">
+                <option value="all">All Lists</option>
+            </select>
+            <button class="btn btn-secondary" onclick="showListModal()">Manage Lists</button>
         </div>
 
         <div class="subscribers-table-container">
@@ -52,13 +56,14 @@ $currentUser = getCurrentUser();
                         <th>Email</th>
                         <th>Name</th>
                         <th>Status</th>
+                        <th>Lists</th>
                         <th>Subscribed Date</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="subscribers-tbody">
                     <tr>
-                        <td colspan="6" class="no-data">No subscribers found. <a href="#" onclick="showUploadModal()">Upload your first subscribers</a></td>
+                        <td colspan="7" class="no-data">No subscribers found. <a href="#" onclick="showUploadModal()">Upload your first subscribers</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -139,6 +144,51 @@ $currentUser = getCurrentUser();
                     </div>
                     <button type="submit" class="btn btn-primary">Add Subscriber</button>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- List Management Modal -->
+    <div id="list-modal" class="modal" style="display: none;">
+        <div class="modal-content modal-large">
+            <span class="close" onclick="hideListModal()">&times;</span>
+            <h3>Manage Subscriber Lists</h3>
+            
+            <div class="list-management">
+                <div class="create-list-section">
+                    <h4>Create New List</h4>
+                    <div class="form-group">
+                        <label for="new-list-name">List Name</label>
+                        <input type="text" id="new-list-name" placeholder="Enter list name...">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-list-description">Description (optional)</label>
+                        <input type="text" id="new-list-description" placeholder="Describe this list...">
+                    </div>
+                    <button class="btn btn-primary" onclick="createList()">Create List</button>
+                </div>
+                
+                <div class="existing-lists-section">
+                    <h4>Existing Lists</h4>
+                    <div id="lists-container">
+                        <!-- Lists will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add to List Modal -->
+    <div id="add-to-list-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="hideAddToListModal()">&times;</span>
+            <h3>Add to Lists</h3>
+            <div id="list-checkboxes">
+                <!-- List checkboxes will be loaded here -->
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="hideAddToListModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveListMemberships()">Save</button>
             </div>
         </div>
     </div>
@@ -500,7 +550,7 @@ $currentUser = getCurrentUser();
             updateBulkActions();
             
             if (subscribersData.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" class="no-data">No subscribers found. <a href="#" onclick="showUploadModal()">Upload your first subscribers</a></td></tr>';
+                tbody.innerHTML = '<tr><td colspan="7" class="no-data">No subscribers found. <a href="#" onclick="showUploadModal()">Upload your first subscribers</a></td></tr>';
                 document.getElementById('select-all').checked = false;
                 document.getElementById('select-all').indeterminate = false;
                 return;
@@ -512,9 +562,11 @@ $currentUser = getCurrentUser();
                     <td><strong>${subscriber.email}</strong></td>
                     <td>${subscriber.name || '-'}</td>
                     <td><span class="status ${subscriber.status}">${subscriber.status}</span></td>
+                    <td><small>${(subscriber.lists || []).join(', ') || 'None'}</small></td>
                     <td>${new Date(subscriber.subscribed_at).toLocaleDateString()}</td>
                     <td>
                         <button onclick="editSubscriber(${subscriber.id})" class="btn-small">Edit</button>
+                        <button onclick="showAddToListModal(${subscriber.id})" class="btn-small">Lists</button>
                         <button onclick="deleteSubscriber(${subscriber.id})" class="btn-small btn-danger">Delete</button>
                     </td>
                 </tr>
@@ -666,7 +718,171 @@ $currentUser = getCurrentUser();
         });
 
         // Load data when page loads
-        document.addEventListener('DOMContentLoaded', loadSubscribers);
+        // List management functions
+        let currentSubscriberId = null;
+        let allLists = [];
+
+        function showListModal() {
+            document.getElementById('list-modal').style.display = 'block';
+            loadLists();
+        }
+
+        function hideListModal() {
+            document.getElementById('list-modal').style.display = 'none';
+        }
+
+        function showAddToListModal(subscriberId) {
+            currentSubscriberId = subscriberId;
+            document.getElementById('add-to-list-modal').style.display = 'block';
+            loadListCheckboxes(subscriberId);
+        }
+
+        function hideAddToListModal() {
+            document.getElementById('add-to-list-modal').style.display = 'none';
+        }
+
+        async function loadLists() {
+            try {
+                const response = await fetch('data-service.php?action=lists');
+                const result = await response.json();
+                
+                if (result.success) {
+                    allLists = result.data;
+                    updateListsContainer(result.data);
+                    updateListFilter(result.data);
+                }
+            } catch (error) {
+                console.error('Error loading lists:', error);
+            }
+        }
+
+        function updateListsContainer(lists) {
+            const container = document.getElementById('lists-container');
+            container.innerHTML = lists.map(list => `
+                <div class="list-item">
+                    <h5>${list.name}</h5>
+                    <p>${list.description || 'No description'}</p>
+                    <p><small>Created: ${new Date(list.created_at).toLocaleDateString()}</small></p>
+                    ${list.name !== 'All Subscribers' ? `<button class="btn btn-small btn-danger" onclick="deleteList(${list.id})">Delete</button>` : ''}
+                </div>
+            `).join('');
+        }
+
+        function updateListFilter(lists) {
+            const filter = document.getElementById('list-filter');
+            filter.innerHTML = '<option value="all">All Lists</option>' + 
+                lists.map(list => `<option value="${list.id}">${list.name}</option>`).join('');
+        }
+
+        async function createList() {
+            const name = document.getElementById('new-list-name').value.trim();
+            const description = document.getElementById('new-list-description').value.trim();
+            
+            if (!name) {
+                alert('Please enter a list name.');
+                return;
+            }
+            
+            try {
+                const response = await fetch('data-service.php?action=create_list', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, description })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('List created successfully!');
+                    document.getElementById('new-list-name').value = '';
+                    document.getElementById('new-list-description').value = '';
+                    loadLists();
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            } catch (error) {
+                alert('Error creating list: ' + error.message);
+            }
+        }
+
+        async function deleteList(listId) {
+            if (!confirm('Delete this list? Subscribers will not be deleted, only removed from this list.')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`data-service.php?action=delete_list&id=${listId}`, {
+                    method: 'DELETE'
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('List deleted successfully!');
+                    loadLists();
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            } catch (error) {
+                alert('Error deleting list: ' + error.message);
+            }
+        }
+
+        async function loadListCheckboxes(subscriberId) {
+            try {
+                const response = await fetch(`data-service.php?action=subscriber_lists&subscriber_id=${subscriberId}`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    const container = document.getElementById('list-checkboxes');
+                    container.innerHTML = allLists.map(list => `
+                        <div class="checkbox-item">
+                            <label>
+                                <input type="checkbox" value="${list.id}" ${result.data.includes(list.id) ? 'checked' : ''}>
+                                ${list.name}
+                            </label>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('Error loading list memberships:', error);
+            }
+        }
+
+        async function saveListMemberships() {
+            const checkboxes = document.querySelectorAll('#list-checkboxes input[type="checkbox"]');
+            const selectedLists = Array.from(checkboxes)
+                .filter(cb => cb.checked)
+                .map(cb => parseInt(cb.value));
+            
+            try {
+                const response = await fetch('data-service.php?action=update_subscriber_lists', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        subscriber_id: currentSubscriberId,
+                        list_ids: selectedLists
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('List memberships updated!');
+                    hideAddToListModal();
+                    loadSubscribers();
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            } catch (error) {
+                alert('Error updating lists: ' + error.message);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSubscribers();
+            loadLists();
+        });
     </script>
 </body>
 </html>

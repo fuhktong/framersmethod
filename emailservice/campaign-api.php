@@ -138,19 +138,27 @@ function saveCampaign($pdo, $data) {
         $scheduledAt = null;
     }
     
-    // Calculate recipient count
+    // Calculate recipient count based on selected list
+    $listId = (int)$recipientType; // recipient_type now contains the list ID
     $totalRecipients = 0;
-    if ($recipientType === 'all') {
-        $stmt = $pdo->query("SELECT COUNT(*) as count FROM subscribers WHERE status = 'active'");
+    
+    if ($listId > 0) {
+        $stmt = $pdo->prepare("
+            SELECT COUNT(DISTINCT s.id) as count 
+            FROM subscribers s
+            JOIN subscriber_list_memberships m ON s.id = m.subscriber_id
+            WHERE s.status = 'active' AND m.list_id = ?
+        ");
+        $stmt->execute([$listId]);
         $totalRecipients = $stmt->fetch()['count'];
     }
     
     // Insert new campaign
     $stmt = $pdo->prepare("
-        INSERT INTO campaigns (subject, content, content_type, from_name, status, total_recipients, scheduled_at, timezone, created_at) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())
+        INSERT INTO campaigns (subject, content, content_type, from_name, status, total_recipients, list_id, scheduled_at, timezone, created_at) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
     ");
-    $stmt->execute([$subject, $content, $contentType, $fromName, $status, $totalRecipients, $scheduledAt, $timezone]);
+    $stmt->execute([$subject, $content, $contentType, $fromName, $status, $totalRecipients, $listId, $scheduledAt, $timezone]);
     
     $id = $pdo->lastInsertId();
     
@@ -377,14 +385,27 @@ function sendCampaign($pdo, $data) {
             throw new Exception('Campaign not found or already sent');
         }
         
-        // Get all active subscribers
-        $stmt = $pdo->prepare("
-            SELECT * FROM subscribers 
-            WHERE status = 'active'
-            AND (bounce_status IS NULL OR bounce_status NOT IN ('hard_bounce', 'complaint'))
-            ORDER BY id
-        ");
-        $stmt->execute();
+        // Get subscribers from the campaign's target list
+        if ($campaign['list_id']) {
+            $stmt = $pdo->prepare("
+                SELECT s.* FROM subscribers s
+                JOIN subscriber_list_memberships m ON s.id = m.subscriber_id
+                WHERE s.status = 'active'
+                AND (s.bounce_status IS NULL OR s.bounce_status NOT IN ('hard_bounce', 'complaint'))
+                AND m.list_id = ?
+                ORDER BY s.id
+            ");
+            $stmt->execute([$campaign['list_id']]);
+        } else {
+            // Fallback to all subscribers if no list specified
+            $stmt = $pdo->prepare("
+                SELECT * FROM subscribers 
+                WHERE status = 'active'
+                AND (bounce_status IS NULL OR bounce_status NOT IN ('hard_bounce', 'complaint'))
+                ORDER BY id
+            ");
+            $stmt->execute();
+        }
         $subscribers = $stmt->fetchAll();
         
         if (empty($subscribers)) {

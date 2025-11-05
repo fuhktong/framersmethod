@@ -43,6 +43,38 @@ try {
             }
             break;
             
+        case 'lists':
+            $response['data'] = getSubscriberLists($pdo);
+            break;
+            
+        case 'create_list':
+            $input = json_decode(file_get_contents('php://input'), true);
+            $response['data'] = createSubscriberList($pdo, $input);
+            break;
+            
+        case 'delete_list':
+            $id = (int)($_GET['id'] ?? 0);
+            if ($id > 0) {
+                $response['data'] = deleteSubscriberList($pdo, $id);
+            } else {
+                throw new Exception('List ID required');
+            }
+            break;
+            
+        case 'subscriber_lists':
+            $subscriber_id = (int)($_GET['subscriber_id'] ?? 0);
+            if ($subscriber_id > 0) {
+                $response['data'] = getSubscriberListMemberships($pdo, $subscriber_id);
+            } else {
+                throw new Exception('Subscriber ID required');
+            }
+            break;
+            
+        case 'update_subscriber_lists':
+            $input = json_decode(file_get_contents('php://input'), true);
+            $response['data'] = updateSubscriberListMemberships($pdo, $input);
+            break;
+            
         default:
             throw new Exception('Invalid action');
     }
@@ -140,6 +172,35 @@ function getSubscribers($pdo, $page = 1, $limit = 50, $search = '', $status = 'a
     $stmt->execute($params);
     $subscribers = $stmt->fetchAll();
     
+    // Get list memberships for each subscriber
+    if (!empty($subscribers)) {
+        $subscriberIds = array_column($subscribers, 'id');
+        $placeholders = str_repeat('?,', count($subscriberIds) - 1) . '?';
+        
+        $listSql = "
+            SELECT m.subscriber_id, l.name
+            FROM subscriber_list_memberships m
+            JOIN subscriber_lists l ON m.list_id = l.id
+            WHERE m.subscriber_id IN ($placeholders)
+            ORDER BY l.name
+        ";
+        
+        $stmt = $pdo->prepare($listSql);
+        $stmt->execute($subscriberIds);
+        $memberships = $stmt->fetchAll();
+        
+        // Group lists by subscriber
+        $listsBySubscriber = [];
+        foreach ($memberships as $membership) {
+            $listsBySubscriber[$membership['subscriber_id']][] = $membership['name'];
+        }
+        
+        // Add lists to subscriber data
+        foreach ($subscribers as &$subscriber) {
+            $subscriber['lists'] = $listsBySubscriber[$subscriber['id']] ?? [];
+        }
+    }
+    
     return [
         'subscribers' => $subscribers,
         'total' => $totalCount,
@@ -228,5 +289,140 @@ function getCampaignDetails($pdo, $id) {
     $campaign['sends'] = $sends;
     
     return $campaign;
+}
+
+/**
+ * Get all subscriber lists
+ */
+function getSubscriberLists($pdo) {
+    $stmt = $pdo->prepare("
+        SELECT l.*, 
+               COUNT(m.subscriber_id) as subscriber_count
+        FROM subscriber_lists l
+        LEFT JOIN subscriber_list_memberships m ON l.id = m.list_id
+        GROUP BY l.id
+        ORDER BY l.name
+    ");
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+/**
+ * Create a new subscriber list
+ */
+function createSubscriberList($pdo, $data) {
+    $name = trim($data['name'] ?? '');
+    $description = trim($data['description'] ?? '');
+    
+    if (empty($name)) {
+        throw new Exception('List name is required');
+    }
+    
+    // Check if list name already exists
+    $stmt = $pdo->prepare("SELECT id FROM subscriber_lists WHERE name = ?");
+    $stmt->execute([$name]);
+    if ($stmt->rowCount() > 0) {
+        throw new Exception('A list with this name already exists');
+    }
+    
+    $stmt = $pdo->prepare("
+        INSERT INTO subscriber_lists (name, description) 
+        VALUES (?, ?)
+    ");
+    $stmt->execute([$name, $description]);
+    
+    $id = $pdo->lastInsertId();
+    
+    // Return the new list
+    $stmt = $pdo->prepare("SELECT * FROM subscriber_lists WHERE id = ?");
+    $stmt->execute([$id]);
+    return $stmt->fetch();
+}
+
+/**
+ * Delete a subscriber list
+ */
+function deleteSubscriberList($pdo, $id) {
+    // Prevent deletion of "All Subscribers" list
+    $stmt = $pdo->prepare("SELECT name FROM subscriber_lists WHERE id = ?");
+    $stmt->execute([$id]);
+    $list = $stmt->fetch();
+    
+    if (!$list) {
+        throw new Exception('List not found');
+    }
+    
+    if ($list['name'] === 'All Subscribers') {
+        throw new Exception('Cannot delete the "All Subscribers" list');
+    }
+    
+    // Delete the list (memberships will be deleted by foreign key cascade)
+    $stmt = $pdo->prepare("DELETE FROM subscriber_lists WHERE id = ?");
+    $stmt->execute([$id]);
+    
+    return ['message' => 'List deleted successfully'];
+}
+
+/**
+ * Get list memberships for a subscriber
+ */
+function getSubscriberListMemberships($pdo, $subscriber_id) {
+    $stmt = $pdo->prepare("
+        SELECT list_id 
+        FROM subscriber_list_memberships 
+        WHERE subscriber_id = ?
+    ");
+    $stmt->execute([$subscriber_id]);
+    
+    return array_map('intval', $stmt->fetchAll(PDO::FETCH_COLUMN));
+}
+
+/**
+ * Update subscriber list memberships
+ */
+function updateSubscriberListMemberships($pdo, $data) {
+    $subscriber_id = (int)($data['subscriber_id'] ?? 0);
+    $list_ids = $data['list_ids'] ?? [];
+    
+    if ($subscriber_id <= 0) {
+        throw new Exception('Invalid subscriber ID');
+    }
+    
+    // Ensure "All Subscribers" list is always included
+    $stmt = $pdo->prepare("SELECT id FROM subscriber_lists WHERE name = 'All Subscribers'");
+    $stmt->execute();
+    $all_subscribers_id = $stmt->fetchColumn();
+    
+    if ($all_subscribers_id && !in_array($all_subscribers_id, $list_ids)) {
+        $list_ids[] = $all_subscribers_id;
+    }
+    
+    // Begin transaction
+    $pdo->beginTransaction();
+    
+    try {
+        // Remove all current memberships
+        $stmt = $pdo->prepare("DELETE FROM subscriber_list_memberships WHERE subscriber_id = ?");
+        $stmt->execute([$subscriber_id]);
+        
+        // Add new memberships
+        if (!empty($list_ids)) {
+            $stmt = $pdo->prepare("
+                INSERT INTO subscriber_list_memberships (subscriber_id, list_id) 
+                VALUES (?, ?)
+            ");
+            
+            foreach ($list_ids as $list_id) {
+                $stmt->execute([$subscriber_id, (int)$list_id]);
+            }
+        }
+        
+        $pdo->commit();
+        return ['message' => 'List memberships updated successfully'];
+        
+    } catch (Exception $e) {
+        $pdo->rollback();
+        throw $e;
+    }
 }
 ?>
