@@ -18,6 +18,7 @@ $currentUser = getCurrentUser();
             <a href="index.php" class="nav-link">Dashboard</a>
             <a href="campaigns.php" class="nav-link active">Campaigns</a>
             <a href="subscribers.php" class="nav-link">Subscribers</a>
+            <a href="create-campaign.php" class="nav-link">Create Campaign</a>
             <div class="nav-user">
                 <span>Welcome, <?php echo htmlspecialchars($currentUser['username']); ?></span>
                 <a href="../login/logout.php" class="nav-link logout">Logout</a>
@@ -28,6 +29,9 @@ $currentUser = getCurrentUser();
     <main class="email-main">
         <div class="campaigns-header">
             <h2 id="campaigns-count">All Campaigns (Loading...)</h2>
+            <div class="campaign-actions">
+                <a href="create-campaign.php" class="btn btn-primary">Create New Campaign</a>
+            </div>
         </div>
 
         <div class="campaigns-filters">
@@ -65,7 +69,7 @@ $currentUser = getCurrentUser();
                 </thead>
                 <tbody id="campaigns-tbody">
                     <tr>
-                        <td colspan="8" class="no-data">No campaigns found.</td>
+                        <td colspan="8" class="no-data">No campaigns found. <a href="create-campaign.php">Create your first campaign</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -159,11 +163,13 @@ $currentUser = getCurrentUser();
         }
 
         function editCampaign(campaignId) {
-            alert('Campaign editing has been disabled.');
+            window.location.href = `create-campaign.php?edit=${campaignId}`;
         }
 
         function duplicateCampaign(campaignId) {
-            alert('Campaign duplication has been disabled.');
+            if (confirm('Duplicate this campaign?')) {
+                window.location.href = `create-campaign.php?duplicate=${campaignId}`;
+            }
         }
 
         async function deleteCampaign(campaignId) {
@@ -346,7 +352,7 @@ $currentUser = getCurrentUser();
         function updateCampaignsTable(campaignData) {
             const tbody = document.getElementById('campaigns-tbody');
             if (campaignData.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="8" class="no-data">No campaigns found.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="8" class="no-data">No campaigns found. <a href="create-campaign.php">Create your first campaign</a></td></tr>';
                 return;
             }
 

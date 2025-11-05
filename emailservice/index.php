@@ -18,6 +18,7 @@ $currentUser = getCurrentUser();
             <a href="index.php" class="nav-link active">Dashboard</a>
             <a href="campaigns.php" class="nav-link">Campaigns</a>
             <a href="subscribers.php" class="nav-link">Subscribers</a>
+            <a href="create-campaign.php" class="nav-link">Create Campaign</a>
             <div class="nav-user">
                 <span>Welcome, <?php echo htmlspecialchars($currentUser['username']); ?></span>
                 <a href="../login/logout.php" class="nav-link logout">Logout</a>
