@@ -395,11 +395,98 @@ function sendCampaign($pdo, $data) {
         $stmt = $pdo->prepare("UPDATE campaigns SET status = 'sending', sent_at = NOW() WHERE id = ?");
         $stmt->execute([$campaign_id]);
         
+        // Initialize SMTP mailer
+        $from_email = $_ENV['SMTP_FROM_EMAIL'] ?? '';
+        if (empty($from_email)) {
+            throw new Exception('SMTP configuration missing');
+        }
+        
+        $mailer = new SimpleSmtpMailer(
+            $_ENV['SMTP_HOST'],
+            (int)$_ENV['SMTP_PORT'],
+            $_ENV['SMTP_USERNAME'],
+            $_ENV['SMTP_PASSWORD'],
+            $_ENV['SMTP_USE_TLS'] === 'true'
+        );
+        
+        // Send emails to all subscribers
+        $sent_count = 0;
+        $failed_count = 0;
+        $errors = [];
+        
+        foreach ($subscribers as $subscriber) {
+            try {
+                // Check if already sent to this subscriber
+                $stmt = $pdo->prepare("SELECT id FROM campaign_sends WHERE campaign_id = ? AND subscriber_id = ?");
+                $stmt->execute([$campaign_id, $subscriber['id']]);
+                
+                if ($stmt->rowCount() > 0) {
+                    continue; // Skip if already processed
+                }
+                
+                // Prepare email content
+                $email_content = $campaign['content'];
+                $email_subject = $campaign['subject'];
+                
+                // Replace placeholders
+                $email_content = str_replace('{subscriber_name}', $subscriber['name'] ?: 'Valued Subscriber', $email_content);
+                $email_content = str_replace('{subscriber_email}', $subscriber['email'], $email_content);
+                
+                // Send email
+                $result = $mailer->sendMail(
+                    $subscriber['email'],
+                    $email_subject,
+                    $email_content,
+                    $from_email,
+                    $campaign['from_name'],
+                    $from_email,
+                    $campaign['content_type'] === 'html'
+                );
+                
+                // Record send attempt
+                if ($result === true) {
+                    $stmt = $pdo->prepare("
+                        INSERT INTO campaign_sends (campaign_id, subscriber_id, status, sent_at) 
+                        VALUES (?, ?, 'sent', NOW())
+                    ");
+                    $stmt->execute([$campaign_id, $subscriber['id']]);
+                    $sent_count++;
+                } else {
+                    $error_message = is_string($result) ? $result : 'Unknown error';
+                    $stmt = $pdo->prepare("
+                        INSERT INTO campaign_sends (campaign_id, subscriber_id, status, error_message, sent_at) 
+                        VALUES (?, ?, 'failed', ?, NOW())
+                    ");
+                    $stmt->execute([$campaign_id, $subscriber['id'], $error_message]);
+                    $failed_count++;
+                    $errors[] = "Failed to send to {$subscriber['email']}: $error_message";
+                }
+                
+            } catch (Exception $e) {
+                $error_message = $e->getMessage();
+                $stmt = $pdo->prepare("
+                    INSERT INTO campaign_sends (campaign_id, subscriber_id, status, error_message, sent_at) 
+                    VALUES (?, ?, 'failed', ?, NOW())
+                ");
+                $stmt->execute([$campaign_id, $subscriber['id'], $error_message]);
+                $failed_count++;
+                $errors[] = "Failed to send to {$subscriber['email']}: $error_message";
+            }
+        }
+        
+        // Update campaign status
+        $final_status = ($failed_count === 0) ? 'sent' : 'partial';
+        $stmt = $pdo->prepare("UPDATE campaigns SET status = ?, total_sent = ? WHERE id = ?");
+        $stmt->execute([$final_status, $sent_count, $campaign_id]);
+        
         return [
             'campaign_id' => $campaign_id,
             'total_subscribers' => count($subscribers),
-            'message' => 'Campaign sending started! Found ' . count($subscribers) . ' subscribers to send to.',
-            'status' => 'sending'
+            'sent_count' => $sent_count,
+            'failed_count' => $failed_count,
+            'status' => $final_status,
+            'errors' => array_slice($errors, 0, 5),
+            'message' => "Campaign completed! Sent: $sent_count, Failed: $failed_count"
         ];
         
     } catch (Exception $e) {
