@@ -15,7 +15,6 @@ $currentUser = getCurrentUser();
     <header class="email-header">
         <h1>Subscriber Management</h1>
         <nav>
-            <a href="index.php" class="nav-link">Dashboard</a>
             <a href="campaigns.php" class="nav-link">Campaigns</a>
             <a href="subscribers.php" class="nav-link active">Subscribers</a>
             <a href="create-campaign.php" class="nav-link">Create Campaign</a>

@@ -13,9 +13,8 @@ $currentUser = getCurrentUser();
 </head>
 <body>
     <header class="email-header">
-        <h1>Campaign History</h1>
+        <h1>Framers' Method Campaign Email History</h1>
         <nav>
-            <a href="index.php" class="nav-link">Dashboard</a>
             <a href="campaigns.php" class="nav-link active">Campaigns</a>
             <a href="subscribers.php" class="nav-link">Subscribers</a>
             <a href="create-campaign.php" class="nav-link">Create Campaign</a>
@@ -233,42 +232,6 @@ $currentUser = getCurrentUser();
             }
         }
 
-        async function viewSendingProgress(campaignId) {
-            try {
-                const response = await fetch('bulk-sender.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        campaign_id: campaignId,
-                        action: 'status'
-                    })
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    const data = result.data;
-                    const progressText = `Campaign Progress:\n\nTotal Subscribers: ${data.total_subscribers}\nProcessed: ${data.processed_count}\nSent: ${data.sent_count}\nFailed: ${data.failed_count}\nProgress: ${data.progress_percentage}%\n\nStatus: ${data.is_complete ? 'Complete' : 'In Progress'}`;
-                    
-                    alert(progressText);
-                    
-                    // Refresh table if sending is complete
-                    if (data.is_complete) {
-                        loadCampaigns();
-                    }
-                } else {
-                    alert('Error getting progress: ' + result.message);
-                }
-            } catch (error) {
-                alert('Error getting progress: ' + error.message);
-            }
-        }
-
-        function viewReport(campaignId) {
-            window.location.href = `campaign-report.php?id=${campaignId}`;
-        }
 
         async function cancelScheduledCampaign(campaignId) {
             if (confirm('Are you sure you want to cancel this scheduled campaign? It will be changed back to draft status.')) {
@@ -367,12 +330,10 @@ $currentUser = getCurrentUser();
                     <td>${new Date(campaign.created_at).toLocaleDateString()}</td>
                     <td>
                         <button onclick="showCampaignModal(${campaign.id})" class="btn-small">View</button>
-                        ${campaign.status === 'sent' ? `<button onclick="viewReport(${campaign.id})" class="btn-small btn-success">Report</button>` : ''}
                         ${campaign.status === 'draft' ? `<button onclick="editCampaign(${campaign.id})" class="btn-small">Edit</button>` : ''}
                         ${campaign.status === 'draft' ? `<button onclick="sendCampaign(${campaign.id})" class="btn-small btn-primary">Send</button>` : ''}
                         ${campaign.status === 'scheduled' ? `<button onclick="sendCampaign(${campaign.id})" class="btn-small btn-primary">Send Now</button>` : ''}
                         ${campaign.status === 'scheduled' ? `<button onclick="cancelScheduledCampaign(${campaign.id})" class="btn-small btn-warning">Cancel Schedule</button>` : ''}
-                        ${campaign.status === 'sending' ? `<button onclick="viewSendingProgress(${campaign.id})" class="btn-small btn-warning">Progress</button>` : ''}
                         <button onclick="duplicateCampaign(${campaign.id})" class="btn-small">Duplicate</button>
                         ${campaign.status !== 'sent' && campaign.status !== 'sending' ? `<button onclick="deleteCampaign(${campaign.id})" class="btn-small btn-danger">Delete</button>` : ''}
                     </td>

@@ -83,7 +83,7 @@ try {
         echo json_encode([
             'success' => true,
             'message' => 'Login successful',
-            'redirect' => '../emailservice/index.php'
+            'redirect' => '../emailservice/campaigns.php'
         ]);
         
     } else {
