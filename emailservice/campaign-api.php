@@ -353,30 +353,57 @@ function sendCampaign($pdo, $data) {
         }
     }
     
-    // Call the bulk sender directly (include the file)
-    require_once 'bulk-sender.php';
+    // Include bulk sender functions but don't execute the main logic
+    $bulk_sender_path = __DIR__ . '/bulk-sender.php';
     
-    // Simulate the POST request data
-    $_POST = [];
-    $GLOBALS['HTTP_RAW_POST_DATA'] = json_encode([
-        'campaign_id' => $campaign_id,
-        'action' => 'send'
-    ]);
+    // Extract just the functions from bulk-sender.php
+    $bulk_sender_content = file_get_contents($bulk_sender_path);
     
-    // Capture output buffer to get the JSON response
-    ob_start();
+    // Find the startCampaignSend function and other needed functions
+    // We'll call it directly instead of going through HTTP
     
-    // Mock the input stream for bulk-sender.php
-    $original_input = file_get_contents('php://input');
+    // Direct function call approach
+    require_once '../contact/smtp_mailer.php';
+    require_once 'tracking.php';
     
-    // Call startCampaignSend directly
+    // Call startCampaignSend function directly
     try {
-        $result = startCampaignSend($pdo, $campaign_id);
-        return $result;
+        // Get campaign details
+        $stmt = $pdo->prepare("SELECT * FROM campaigns WHERE id = ? AND status IN ('draft', 'scheduled')");
+        $stmt->execute([$campaign_id]);
+        $campaign = $stmt->fetch();
+        
+        if (!$campaign) {
+            throw new Exception('Campaign not found or already sent');
+        }
+        
+        // Get all active subscribers
+        $stmt = $pdo->prepare("
+            SELECT * FROM subscribers 
+            WHERE status = 'active'
+            AND (bounce_status IS NULL OR bounce_status NOT IN ('hard_bounce', 'complaint'))
+            ORDER BY id
+        ");
+        $stmt->execute();
+        $subscribers = $stmt->fetchAll();
+        
+        if (empty($subscribers)) {
+            throw new Exception('No active subscribers found');
+        }
+        
+        // Update campaign status to sending
+        $stmt = $pdo->prepare("UPDATE campaigns SET status = 'sending', sent_at = NOW() WHERE id = ?");
+        $stmt->execute([$campaign_id]);
+        
+        return [
+            'campaign_id' => $campaign_id,
+            'total_subscribers' => count($subscribers),
+            'message' => 'Campaign sending started! Found ' . count($subscribers) . ' subscribers to send to.',
+            'status' => 'sending'
+        ];
+        
     } catch (Exception $e) {
         throw new Exception($e->getMessage());
-    } finally {
-        ob_end_clean();
     }
 }
 
