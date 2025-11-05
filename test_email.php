@@ -21,7 +21,7 @@ echo "SMTP Port: " . $smtp_config['port'] . "<br>";
 echo "SMTP Username: " . $smtp_config['username'] . "<br>";
 echo "SMTP Use TLS: " . ($smtp_config['use_tls'] ? 'true' : 'false') . "<br><br>";
 
-$to = "test-9d2664@test.mailgenius.com";
+$to = "test-rykyygrbj@srv1.mail-tester.com";
 $subject = "Email Deliverability Test - Framers Method";
 $message = "This is a test email to verify SMTP email delivery and spam score.\n\n";
 $message .= "Test Details:\n";

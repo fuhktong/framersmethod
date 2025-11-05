@@ -353,39 +353,31 @@ function sendCampaign($pdo, $data) {
         }
     }
     
-    // Call the bulk sender
-    $bulk_sender_url = 'bulk-sender.php';
-    $post_data = json_encode([
+    // Call the bulk sender directly (include the file)
+    require_once 'bulk-sender.php';
+    
+    // Simulate the POST request data
+    $_POST = [];
+    $GLOBALS['HTTP_RAW_POST_DATA'] = json_encode([
         'campaign_id' => $campaign_id,
         'action' => 'send'
     ]);
     
-    // Use cURL to call the bulk sender
-    $ch = curl_init($bulk_sender_url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'Content-Type: application/json',
-        'Content-Length: ' . strlen($post_data)
-    ]);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 300); // 5 minute timeout
+    // Capture output buffer to get the JSON response
+    ob_start();
     
-    $response = curl_exec($ch);
-    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
+    // Mock the input stream for bulk-sender.php
+    $original_input = file_get_contents('php://input');
     
-    if ($http_code !== 200) {
-        throw new Exception('Failed to start campaign sending');
+    // Call startCampaignSend directly
+    try {
+        $result = startCampaignSend($pdo, $campaign_id);
+        return $result;
+    } catch (Exception $e) {
+        throw new Exception($e->getMessage());
+    } finally {
+        ob_end_clean();
     }
-    
-    $result = json_decode($response, true);
-    
-    if (!$result || !$result['success']) {
-        throw new Exception($result['message'] ?? 'Failed to send campaign');
-    }
-    
-    return $result['data'];
 }
 
 /**
