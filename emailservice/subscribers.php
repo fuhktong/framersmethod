@@ -360,7 +360,6 @@ $currentUser = getCurrentUser();
         function exportSubscribers() {
             // Get current filter values
             const search = document.getElementById('search').value;
-            const status = document.getElementById('status-filter').value;
             
             // Build export URL with current filters
             let exportUrl = 'export-subscribers.php?format=csv';
@@ -369,8 +368,8 @@ $currentUser = getCurrentUser();
                 exportUrl += '&search=' + encodeURIComponent(search);
             }
             
-            if (status && status !== 'all') {
-                exportUrl += '&status=' + encodeURIComponent(status);
+            if (currentListId && currentListId !== 'all') {
+                exportUrl += '&list_id=' + encodeURIComponent(currentListId);
             }
             
             // Trigger download
@@ -704,11 +703,6 @@ $currentUser = getCurrentUser();
             loadSubscribers();
         });
 
-        // Status filter
-        document.getElementById('status-filter').addEventListener('change', function() {
-            currentPage = 1; // Reset to first page
-            loadSubscribers();
-        });
 
         // Edit form submission
         document.getElementById('edit-form').addEventListener('submit', async function(e) {
@@ -775,9 +769,13 @@ $currentUser = getCurrentUser();
                 const response = await fetch('data-service.php?action=lists');
                 const result = await response.json();
                 
+                console.log('Lists response:', result); // Debug
+                
                 if (result.success) {
                     allLists = result.data;
                     updateListTabs(result.data);
+                } else {
+                    console.error('Failed to load lists:', result.message);
                 }
             } catch (error) {
                 console.error('Error loading lists:', error);
@@ -786,6 +784,14 @@ $currentUser = getCurrentUser();
 
         function updateListTabs(lists) {
             const container = document.getElementById('list-tabs');
+            
+            console.log('Updating tabs with lists:', lists); // Debug
+            console.log('Container found:', container); // Debug
+            
+            if (!container) {
+                console.error('Tab container not found!');
+                return;
+            }
             
             // Create tabs
             container.innerHTML = `
