@@ -306,13 +306,20 @@ function sendTestEmail($pdo, $data) {
         $testContent = "🧪 This is a test email\nThis email was sent as a test from the Email Service dashboard.\n\n" . $content;
     }
     
-    // Create SMTP mailer instance
+    // Create SMTP mailer instance with DKIM
+    $dkim_key_path = $_ENV['DKIM_PRIVATE_KEY_PATH'] ?? getenv('DKIM_PRIVATE_KEY_PATH') ?? __DIR__ . '/../keys/dkim_private.key';
+    $dkim_selector = $_ENV['DKIM_SELECTOR'] ?? getenv('DKIM_SELECTOR') ?? 'mail';
+    $dkim_domain = $_ENV['DKIM_DOMAIN'] ?? getenv('DKIM_DOMAIN') ?? 'framersmethod.com';
+    
     $mailer = new SimpleSmtpMailer(
         $smtp_config['host'],
         $smtp_config['port'],
         $smtp_config['username'],
         $smtp_config['password'],
-        $smtp_config['use_tls']
+        $smtp_config['use_tls'],
+        $dkim_key_path,
+        $dkim_selector,
+        $dkim_domain
     );
     
     // Send test email
@@ -422,12 +429,20 @@ function sendCampaign($pdo, $data) {
             throw new Exception('SMTP configuration missing');
         }
         
+        // Initialize SMTP mailer with DKIM
+        $dkim_key_path = $_ENV['DKIM_PRIVATE_KEY_PATH'] ?? getenv('DKIM_PRIVATE_KEY_PATH') ?? __DIR__ . '/../keys/dkim_private.key';
+        $dkim_selector = $_ENV['DKIM_SELECTOR'] ?? getenv('DKIM_SELECTOR') ?? 'mail';
+        $dkim_domain = $_ENV['DKIM_DOMAIN'] ?? getenv('DKIM_DOMAIN') ?? 'framersmethod.com';
+        
         $mailer = new SimpleSmtpMailer(
             $_ENV['SMTP_HOST'],
             (int)$_ENV['SMTP_PORT'],
             $_ENV['SMTP_USERNAME'],
             $_ENV['SMTP_PASSWORD'],
-            $_ENV['SMTP_USE_TLS'] === 'true'
+            $_ENV['SMTP_USE_TLS'] === 'true',
+            $dkim_key_path,
+            $dkim_selector,
+            $dkim_domain
         );
         
         // Send emails to all subscribers
@@ -452,6 +467,10 @@ function sendCampaign($pdo, $data) {
                 // Replace placeholders
                 $email_content = str_replace('{subscriber_name}', $subscriber['name'] ?: 'Valued Subscriber', $email_content);
                 $email_content = str_replace('{subscriber_email}', $subscriber['email'], $email_content);
+                
+                // Add tracking pixel and wrap links for tracking
+                $email_content = addTrackingPixel($email_content, $campaign_id, $subscriber['id']);
+                $email_content = wrapLinksForTracking($email_content, $campaign_id, $subscriber['id'], $campaign['content_type'] === 'html');
                 
                 // Send email
                 $result = $mailer->sendMail(

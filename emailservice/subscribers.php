@@ -75,7 +75,7 @@ $currentUser = getCurrentUser();
 
         <div class="subscribers-filters">
             <input type="text" id="search" placeholder="Search subscribers..." class="search-input">
-            <button class="btn btn-secondary" onclick="showListModal()">Manage Lists</button>
+            <button class="btn btn-secondary" onclick="showListModal()">Create List</button>
         </div>
 
         <div class="list-tabs">

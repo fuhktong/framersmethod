@@ -3,19 +3,32 @@
  * Simple SMTP Mailer using PHP sockets
  * No external dependencies required
  */
+require_once 'dkim_signer.php';
+
 class SimpleSmtpMailer {
     private $smtp_host;
     private $smtp_port;
     private $smtp_username;
     private $smtp_password;
     private $use_tls;
+    private $dkim_signer;
     
-    public function __construct($host, $port, $username, $password, $use_tls = true) {
+    public function __construct($host, $port, $username, $password, $use_tls = true, $dkim_key_path = null, $dkim_selector = 'mail', $dkim_domain = null) {
         $this->smtp_host = $host;
         $this->smtp_port = $port;
         $this->smtp_username = $username;
         $this->smtp_password = $password;
         $this->use_tls = $use_tls;
+        
+        // Initialize DKIM signer if key is provided
+        if ($dkim_key_path && file_exists($dkim_key_path)) {
+            try {
+                $this->dkim_signer = new DKIMSigner($dkim_key_path, $dkim_selector, $dkim_domain);
+            } catch (Exception $e) {
+                error_log("DKIM initialization failed: " . $e->getMessage());
+                $this->dkim_signer = null;
+            }
+        }
     }
     
     public function sendMail($to, $subject, $message, $from_email, $from_name = '', $reply_to = '', $is_html = false) {
@@ -108,29 +121,38 @@ class SimpleSmtpMailer {
         fputs($socket, "DATA\r\n");
         $response = fgets($socket, 512);
         
-        // Email headers and body
-        $email_data = "From: " . ($from_name ? "$from_name <$from_email>" : $from_email) . "\r\n";
-        $email_data .= "To: $to\r\n";
+        // Build email headers
+        $headers = "From: " . ($from_name ? "$from_name <$from_email>" : $from_email) . "\r\n";
+        $headers .= "To: $to\r\n";
         if ($reply_to) {
-            $email_data .= "Reply-To: $reply_to\r\n";
+            $headers .= "Reply-To: $reply_to\r\n";
         }
-        $email_data .= "Subject: $subject\r\n";
-        $email_data .= "MIME-Version: 1.0\r\n";
+        $headers .= "Subject: $subject\r\n";
+        $headers .= "MIME-Version: 1.0\r\n";
         
         if ($is_html) {
-            $email_data .= "Content-Type: text/html; charset=UTF-8\r\n";
+            $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
         } else {
-            $email_data .= "Content-Type: text/plain; charset=UTF-8\r\n";
+            $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
         }
         
         // Add additional headers for better deliverability
-        $email_data .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-        $email_data .= "X-Priority: 3\r\n";
-        $email_data .= "Date: " . date('r') . "\r\n";
+        $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+        $headers .= "X-Priority: 3\r\n";
+        $headers .= "Date: " . date('r') . "\r\n";
         
-        $email_data .= "\r\n";
-        $email_data .= $message . "\r\n";
-        $email_data .= ".\r\n";
+        // Add DKIM signature if available
+        $dkim_header = '';
+        if ($this->dkim_signer) {
+            try {
+                $dkim_header = $this->dkim_signer->signEmail($headers, $message);
+            } catch (Exception $e) {
+                error_log("DKIM signing failed: " . $e->getMessage());
+            }
+        }
+        
+        // Combine all data for SMTP
+        $email_data = $dkim_header . $headers . "\r\n" . $message . "\r\n.\r\n";
         
         fputs($socket, $email_data);
         $response = fgets($socket, 512);
