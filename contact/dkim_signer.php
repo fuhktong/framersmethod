@@ -1,7 +1,7 @@
 <?php
 /**
- * DKIM Email Signer
- * Adds DKIM signatures to emails for better deliverability
+ * Simple DKIM Email Signer
+ * Reliable DKIM implementation for email authentication
  */
 class DKIMSigner {
     private $private_key;
@@ -15,68 +15,65 @@ class DKIMSigner {
         
         $this->private_key = file_get_contents($private_key_path);
         $this->selector = $selector;
-        $this->domain = $domain ?: ($_SERVER['HTTP_HOST'] ?? 'localhost');
+        $this->domain = $domain ?: 'framersmethod.com';
     }
     
     /**
-     * Sign email headers with DKIM
+     * Generate DKIM signature header
      */
-    public function signEmail($headers, $body) {
-        // Normalize headers
-        $normalized_headers = $this->normalizeHeaders($headers);
+    public function getDKIMHeader($from, $to, $subject, $body, $date) {
+        // Create body hash (simple canonicalization)
+        $body_canonical = $this->canonicalizeBody($body);
+        $body_hash = base64_encode(hash('sha256', $body_canonical, true));
         
-        // Create body hash
-        $body_hash = base64_encode(hash('sha256', $this->canonicalizeBody($body), true));
+        // Headers to sign
+        $headers_to_sign = [
+            'from' => $from,
+            'to' => $to, 
+            'subject' => $subject,
+            'date' => $date
+        ];
         
-        // Create DKIM signature header (without signature)
-        $dkim_header = "DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d={$this->domain}; s={$this->selector}; t=" . time() . "; bh=$body_hash; h=From:To:Subject:Date; b=";
+        // Build headers string for signing
+        $header_string = '';
+        foreach ($headers_to_sign as $name => $value) {
+            $header_string .= $name . ':' . $this->canonicalizeHeaderValue($value) . "\r\n";
+        }
         
-        // Canonicalize headers for signing
-        $header_string = $this->canonicalizeHeaders($normalized_headers . $dkim_header);
+        // DKIM signature header (without signature value)
+        $dkim_header = "dkim-signature:v=1; a=rsa-sha256; c=simple/simple; d={$this->domain}; s={$this->selector}; t=" . time() . "; h=from:to:subject:date; bh=$body_hash; b=";
         
-        // Sign the header string
+        // Add DKIM header to signing string
+        $signing_string = $header_string . $dkim_header;
+        
+        // Create signature
         $signature = '';
-        if (openssl_sign($header_string, $signature, $this->private_key, OPENSSL_ALGO_SHA256)) {
-            $signature_b64 = base64_encode($signature);
-            // Break long lines
-            $signature_b64 = chunk_split($signature_b64, 76, "\r\n\t");
-            $signature_b64 = rtrim($signature_b64);
-            
-            return "DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d={$this->domain}; s={$this->selector}; t=" . time() . "; bh=$body_hash; h=From:To:Subject:Date; b=$signature_b64\r\n";
-        } else {
+        if (!openssl_sign($signing_string, $signature, $this->private_key, OPENSSL_ALGO_SHA256)) {
             throw new Exception('Failed to create DKIM signature');
         }
-    }
-    
-    private function normalizeHeaders($headers) {
-        return preg_replace('/\r\n\s+/', ' ', $headers);
-    }
-    
-    private function canonicalizeHeaders($headers) {
-        // Simple relaxed canonicalization
-        $lines = explode("\r\n", $headers);
-        $canonical = '';
         
-        foreach ($lines as $line) {
-            if (trim($line) !== '') {
-                // Convert to lowercase header name, trim whitespace
-                $line = preg_replace('/^([^:]+):(.*)$/', function($matches) {
-                    return strtolower(trim($matches[1])) . ':' . trim($matches[2]);
-                }, $line);
-                $canonical .= $line . "\r\n";
-            }
-        }
+        $signature_b64 = base64_encode($signature);
         
-        return rtrim($canonical, "\r\n");
+        // Return complete DKIM-Signature header
+        return "DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d={$this->domain}; s={$this->selector}; t=" . time() . "; h=from:to:subject:date; bh=$body_hash; b=$signature_b64\r\n";
     }
     
     private function canonicalizeBody($body) {
-        // Simple relaxed canonicalization
-        $body = preg_replace('/[ \t]+/', ' ', $body);
-        $body = preg_replace('/[ \t]*\r\n/', "\r\n", $body);
-        $body = rtrim($body, "\r\n") . "\r\n";
+        // Simple canonicalization: normalize line endings
+        $body = str_replace("\r\n", "\n", $body);
+        $body = str_replace("\n", "\r\n", $body);
+        
+        // Ensure body ends with CRLF
+        if (!str_ends_with($body, "\r\n")) {
+            $body .= "\r\n";
+        }
         
         return $body;
+    }
+    
+    private function canonicalizeHeaderValue($value) {
+        // Simple canonicalization: trim whitespace
+        return trim($value);
     }
     
     /**

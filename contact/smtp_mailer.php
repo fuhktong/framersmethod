@@ -121,13 +121,29 @@ class SimpleSmtpMailer {
         fputs($socket, "DATA\r\n");
         $response = fgets($socket, 512);
         
-        // Build email headers
-        $headers = "From: " . ($from_name ? "$from_name <$from_email>" : $from_email) . "\r\n";
+        // Prepare email data
+        $date = date('r');
+        $from_header = $from_name ? "$from_name <$from_email>" : $from_email;
+        
+        // Generate DKIM signature if available
+        $dkim_header = '';
+        if ($this->dkim_signer) {
+            try {
+                $dkim_header = $this->dkim_signer->getDKIMHeader($from_header, $to, $subject, $message, $date);
+            } catch (Exception $e) {
+                error_log("DKIM signing failed: " . $e->getMessage());
+            }
+        }
+        
+        // Build complete email headers
+        $headers = $dkim_header;
+        $headers .= "From: $from_header\r\n";
         $headers .= "To: $to\r\n";
         if ($reply_to) {
             $headers .= "Reply-To: $reply_to\r\n";
         }
         $headers .= "Subject: $subject\r\n";
+        $headers .= "Date: $date\r\n";
         $headers .= "MIME-Version: 1.0\r\n";
         
         if ($is_html) {
@@ -139,20 +155,9 @@ class SimpleSmtpMailer {
         // Add additional headers for better deliverability
         $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
         $headers .= "X-Priority: 3\r\n";
-        $headers .= "Date: " . date('r') . "\r\n";
-        
-        // Add DKIM signature if available
-        $dkim_header = '';
-        if ($this->dkim_signer) {
-            try {
-                $dkim_header = $this->dkim_signer->signEmail($headers, $message);
-            } catch (Exception $e) {
-                error_log("DKIM signing failed: " . $e->getMessage());
-            }
-        }
         
         // Combine all data for SMTP
-        $email_data = $dkim_header . $headers . "\r\n" . $message . "\r\n.\r\n";
+        $email_data = $headers . "\r\n" . $message . "\r\n.\r\n";
         
         fputs($socket, $email_data);
         $response = fgets($socket, 512);
