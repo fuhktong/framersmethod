@@ -19,8 +19,7 @@
   flex: 1;
   min-height: 100%;
   gap: 15px;
-  border-bottom-left-radius: 10px;
-  border-top-left-radius: 10px;
+  border-radius: 10px;
 }
 
 .book-text {
