@@ -1,4 +1,4 @@
-<section class="book" style="background-color: white;">
+<section class="book">
     <div class="book-description">
         <div class="book-text">
             <h2>On the Framers' Electoral College</h2>
@@ -11,21 +11,9 @@
         </div>
         <div class="book-text">
             <p>
-                Whatever you think about the Electoral College, it is not of the
-                framers' design. Diving deep into the realm of political science,
-                the reader will discover what the framers actually created, how
-                truly different the framers' Electoral College is from our modern
-                incarnation, and reforms that will bring us back to the framers'
-                original concept of choosing a president.
+Whatever you think about the Electoral College, it's not what the framers designed. In these pages, you’ll discover what the framers actually created, how radically different the Electoral College is from our modern incarnation, and what reforms will bring us back to the framers' original vision of choosing a president.
                 <br />
-                Using original analysis and data, The Framers' Method describes how
-                the delegates to the constitutional convention built a system of
-                decentralization and deliberation to elect a president. By
-                dispersing power to electors throughout the several states to
-                nominate candidates, "designing men" would be unable to influence
-                and control the masses. By returning to the framers' method, we can
-                save the United States from the destructiveness of populism and
-                tyranny.
+Drawing on original analysis and data, On the Framers' Electoral College reveals how the delegates to the Constitutional Convention built a system of decentralization and deliberation to elect a president. By dispersing power to electors across the several states to nominate candidates, they ensured that no "designing men" could manipulate and control the masses. By returning to the framers' method, we can protect the United States from the destructiveness of populism and tyranny.
             </p>
         </div>
         <div class="book-text">
