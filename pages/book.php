@@ -21,7 +21,7 @@
         <div class="book-text">
             <a
                 class="amazonlink"
-                href="https://a.co/d/0huzt0bO"
+                href="https://www.amazon.com/dp/B0GPFH9GDG"
                 target="_blank"
                 rel="noreferrer"
             >
