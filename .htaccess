@@ -4,6 +4,11 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule \.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|html)$ - [L]
 
+# Route /data paths through index.php even though directory exists
+# But still serve static files (css, js, images) directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^data(/.*)?$ index.php [L,QSA]
+
 # Route all other requests to index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

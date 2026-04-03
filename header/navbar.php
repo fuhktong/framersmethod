@@ -27,6 +27,9 @@
             <a href="/book">BOOK</a>
         </li>
         <li>
+            <a href="/data">DATA</a>
+        </li>
+        <li>
             <a href="/faq">FAQ</a>
         </li>
         <li>

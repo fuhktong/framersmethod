@@ -14,6 +14,7 @@
             <li><a href="/hamilton-method" onclick="closeMobileMenu()">HAMILTON METHOD</a></li>
             <li><a href="/electors-convention" onclick="closeMobileMenu()">ELECTORS' CONVENTION</a></li>
             <li><a href="/book" onclick="closeMobileMenu()">BOOK</a></li>
+            <li><a href="/data" onclick="closeMobileMenu()">DATA</a></li>
             <li><a href="/faq" onclick="closeMobileMenu()">FAQ</a></li>
             <li><a href="/contribute" onclick="closeMobileMenu()">CONTRIBUTE</a></li>
             <li><a href="/team" onclick="closeMobileMenu()">TEAM</a></li>

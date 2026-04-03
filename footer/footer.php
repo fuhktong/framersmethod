@@ -28,6 +28,9 @@
                     <a class="link2" href="/book">BOOK</a>
                 </li>
                 <li>
+                    <a class="link2" href="/data">DATA</a>
+                </li>
+                <li>
                     <a class="link2" href="/faq">FAQ</a>
                 </li>
                 <li>

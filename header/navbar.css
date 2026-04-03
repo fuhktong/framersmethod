@@ -129,7 +129,8 @@
 .desktop-nav li:nth-child(1) a:hover,
 .desktop-nav li:nth-child(3) a:hover,
 .desktop-nav li:nth-child(4) a:hover,
-.desktop-nav li:nth-child(5) a:hover {
+.desktop-nav li:nth-child(5) a:hover,
+.desktop-nav li:nth-child(6) a:hover {
   background-color: #45698c;
   border: 2px solid white;
   border-radius: 5px;
@@ -138,7 +139,8 @@
 .desktop-nav li:nth-child(1) a,
 .desktop-nav li:nth-child(3) a,
 .desktop-nav li:nth-child(4) a,
-.desktop-nav li:nth-child(5) a {
+.desktop-nav li:nth-child(5) a,
+.desktop-nav li:nth-child(6) a {
   padding: 2px 5px;
   display: block;
   border: 2px solid transparent;

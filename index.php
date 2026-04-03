@@ -17,7 +17,24 @@ $routes = [
     '/faq' => 'faq',
     '/contribute' => 'contribute',
     '/team' => 'team',
-    '/contact-us' => 'contact'
+    '/contact-us' => 'contact',
+    '/data' => 'data',
+    '/data/appendix-a' => 'data-appendix-a',
+    '/data/appendix-b' => 'data-appendix-b',
+    '/data/appendix-c' => 'data-appendix-c',
+    '/data/appendix-d' => 'data-appendix-d',
+    '/data/appendix-e' => 'data-appendix-e',
+    '/data/appendix-f' => 'data-appendix-f',
+    '/data/appendix-g' => 'data-appendix-g',
+    '/data/appendix-h' => 'data-appendix-h',
+    '/data/appendix-i' => 'data-appendix-i',
+    '/data/appendix-j' => 'data-appendix-j',
+    '/data/appendix-k' => 'data-appendix-k',
+    '/data/appendix-l' => 'data-appendix-l',
+    '/data/appendix-m' => 'data-appendix-m',
+    '/data/appendix-n' => 'data-appendix-n',
+    '/data/appendix-o' => 'data-appendix-o',
+    '/data/appendix-p' => 'data-appendix-p'
 ];
 
 // Get current page
@@ -36,7 +53,24 @@ $page_data = [
     'faq' => ['title' => 'FAQ - The Framers Method', 'description' => 'Frequently asked questions'],
     'contribute' => ['title' => 'Contribute - The Framers Method', 'description' => 'How to contribute to the Framers Method'],
     'team' => ['title' => 'Team - The Framers Method', 'description' => 'Meet the Framers Method team'],
-    'contact' => ['title' => 'Contact - The Framers Method', 'description' => 'Contact the Framers Method team']
+    'contact' => ['title' => 'Contact - The Framers Method', 'description' => 'Contact the Framers Method team'],
+    'data' => ['title' => 'Book Data - The Framers Method', 'description' => 'Appendices and data from On the Framers\' Electoral College'],
+    'data-appendix-a' => ['title' => 'Appendix A - The Framers Method', 'description' => 'Collected Notes from Convention Debates Concerning Methods to Choose the President'],
+    'data-appendix-b' => ['title' => 'Appendix B - The Framers Method', 'description' => 'All Advocation and Opposition Debate Data Concerning the Various Methods to Choose the President'],
+    'data-appendix-c' => ['title' => 'Appendix C - The Framers Method', 'description' => 'All Votes Concerning the Various Methods to Choose the President'],
+    'data-appendix-d' => ['title' => 'Appendix D - The Framers Method', 'description' => 'All Voting Data Concerning the Various Methods to Choose the President: Large States versus Small States'],
+    'data-appendix-e' => ['title' => 'Appendix E - The Framers Method', 'description' => 'All Voting Data Concerning the Various Methods to Choose the President: Northern States versus Southern States'],
+    'data-appendix-f' => ['title' => 'Appendix F - The Framers Method', 'description' => 'Votes per Electoral Vote (VPEV) in Presidential Elections: 1992 - 2020'],
+    'data-appendix-g' => ['title' => 'Appendix G - The Framers Method', 'description' => 'Party State Wins by Size in Presidential Elections: 1992 - 2020'],
+    'data-appendix-h' => ['title' => 'Appendix H - The Framers Method', 'description' => 'Voter Turnout Performance in Presidential Elections: 2000 - 2020'],
+    'data-appendix-i' => ['title' => 'Appendix I - The Framers Method', 'description' => 'Voter Turnout Performance Charts in Elections: 2000 - 2020'],
+    'data-appendix-j' => ['title' => 'Appendix J - The Framers Method', 'description' => 'Potential Additional Votes in the 2000 and 2016 Elections'],
+    'data-appendix-k' => ['title' => 'Appendix K - The Framers Method', 'description' => 'Electoral College Total Wasted Votes in Presidential Elections: 1992 to 2020'],
+    'data-appendix-l' => ['title' => 'Appendix L - The Framers Method', 'description' => 'Hamilton Method Lost Votes in Presidential Elections: 1992 to 2020'],
+    'data-appendix-m' => ['title' => 'Appendix M - The Framers Method', 'description' => 'Hamilton Method Surplus Votes in Presidential Elections: 1992 to 2020'],
+    'data-appendix-n' => ['title' => 'Appendix N - The Framers Method', 'description' => 'Hamilton Method Total Wasted Votes in Presidential Elections: 1992 to 2020'],
+    'data-appendix-o' => ['title' => 'Appendix O - The Framers Method', 'description' => 'Popular Vote Total Wasted Votes in Presidential Elections: 1992 to 2020'],
+    'data-appendix-p' => ['title' => 'Appendix P - The Framers Method', 'description' => 'Percentage Comparison of the Electoral College, Popular Vote, and Hamilton Method in Presidential Elections: 1992 to 2020']
 ];
 
 $page_title = $page_data[$current_page]['title'] ?? 'The Framers Method';
@@ -94,7 +128,24 @@ $page_description = $page_data[$current_page]['description'] ?? 'A new approach 
         'faq' => ['/pages/faq.css'],
         'contribute' => ['/pages/contribute.css'],
         'team' => ['/pages/team.css'],
-        'contact' => ['/contact/contact.css', '/contact/contactform.css']
+        'contact' => ['/contact/contact.css', '/contact/contactform.css'],
+        'data' => ['/data/data.css'],
+        'data-appendix-a' => ['/data/data.css'],
+        'data-appendix-b' => ['/data/data.css'],
+        'data-appendix-c' => ['/data/data.css'],
+        'data-appendix-d' => ['/data/data.css'],
+        'data-appendix-e' => ['/data/data.css'],
+        'data-appendix-f' => ['/data/data.css'],
+        'data-appendix-g' => ['/data/data.css'],
+        'data-appendix-h' => ['/data/data.css'],
+        'data-appendix-i' => ['/data/data.css'],
+        'data-appendix-j' => ['/data/data.css'],
+        'data-appendix-k' => ['/data/data.css'],
+        'data-appendix-l' => ['/data/data.css'],
+        'data-appendix-m' => ['/data/data.css'],
+        'data-appendix-n' => ['/data/data.css'],
+        'data-appendix-o' => ['/data/data.css'],
+        'data-appendix-p' => ['/data/data.css']
     ];
     
     if (isset($css_files[$current_page])) {
@@ -112,6 +163,40 @@ $page_description = $page_data[$current_page]['description'] ?? 'A new approach 
             <?php
             if ($current_page === 'contact') {
                 include 'contact/contact.php';
+            } elseif ($current_page === 'data') {
+                include 'data/data.php';
+            } elseif ($current_page === 'data-appendix-a') {
+                include 'data/appendix-a.php';
+            } elseif ($current_page === 'data-appendix-b') {
+                include 'data/appendix-b.php';
+            } elseif ($current_page === 'data-appendix-c') {
+                include 'data/appendix-c.php';
+            } elseif ($current_page === 'data-appendix-d') {
+                include 'data/appendix-d.php';
+            } elseif ($current_page === 'data-appendix-e') {
+                include 'data/appendix-e.php';
+            } elseif ($current_page === 'data-appendix-f') {
+                include 'data/appendix-f.php';
+            } elseif ($current_page === 'data-appendix-g') {
+                include 'data/appendix-g.php';
+            } elseif ($current_page === 'data-appendix-h') {
+                include 'data/appendix-h.php';
+            } elseif ($current_page === 'data-appendix-i') {
+                include 'data/appendix-i.php';
+            } elseif ($current_page === 'data-appendix-j') {
+                include 'data/appendix-j.php';
+            } elseif ($current_page === 'data-appendix-k') {
+                include 'data/appendix-k.php';
+            } elseif ($current_page === 'data-appendix-l') {
+                include 'data/appendix-l.php';
+            } elseif ($current_page === 'data-appendix-m') {
+                include 'data/appendix-m.php';
+            } elseif ($current_page === 'data-appendix-n') {
+                include 'data/appendix-n.php';
+            } elseif ($current_page === 'data-appendix-o') {
+                include 'data/appendix-o.php';
+            } elseif ($current_page === 'data-appendix-p') {
+                include 'data/appendix-p.php';
             } else {
                 $page_file = "pages/{$current_page}.php";
                 if (file_exists($page_file)) {
