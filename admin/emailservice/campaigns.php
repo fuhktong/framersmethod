@@ -1,6 +1,6 @@
 <?php
 // Protect this page with authentication
-require_once '../login/auth_check.php';
+require_once __DIR__ . '/../auth.php';
 $currentUser = getCurrentUser();
 ?>
 <!DOCTYPE html>
@@ -9,21 +9,10 @@ $currentUser = getCurrentUser();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campaigns - Email Service</title>
-    <link rel="stylesheet" href="emailservice.css">
+    <link rel="stylesheet" href="/admin/admin.css">
 </head>
-<body>
-    <header class="email-header">
-        <h1>Framers' Method Campaign Email History</h1>
-        <nav>
-            <a href="campaigns.php" class="nav-link active">Campaigns</a>
-            <a href="subscribers.php" class="nav-link">Subscribers</a>
-            <a href="create-campaign.php" class="nav-link">Create Campaign</a>
-            <div class="nav-user">
-                <span>Welcome, <?php echo htmlspecialchars($currentUser['username']); ?></span>
-                <a href="../login/logout.php" class="nav-link logout">Logout</a>
-            </div>
-        </nav>
-    </header>
+<body class="admin-page">
+    <?php include __DIR__ . '/../partials/header.php'; ?>
 
     <main class="email-main">
         <div class="campaigns-header">
@@ -329,13 +318,15 @@ $currentUser = getCurrentUser();
                     <td>${campaign.total_clicked || 0} (${campaign.total_sent > 0 ? Math.round((campaign.total_clicked/campaign.total_sent)*100) : 0}%)</td>
                     <td>${new Date(campaign.created_at).toLocaleDateString()}</td>
                     <td>
-                        <button onclick="showCampaignModal(${campaign.id})" class="btn-small">View</button>
-                        ${campaign.status === 'draft' ? `<button onclick="editCampaign(${campaign.id})" class="btn-small">Edit</button>` : ''}
-                        ${campaign.status === 'draft' ? `<button onclick="sendCampaign(${campaign.id})" class="btn-small btn-primary">Send</button>` : ''}
-                        ${campaign.status === 'scheduled' ? `<button onclick="sendCampaign(${campaign.id})" class="btn-small btn-primary">Send Now</button>` : ''}
-                        ${campaign.status === 'scheduled' ? `<button onclick="cancelScheduledCampaign(${campaign.id})" class="btn-small btn-warning">Cancel Schedule</button>` : ''}
-                        <button onclick="duplicateCampaign(${campaign.id})" class="btn-small">Duplicate</button>
-                        ${campaign.status !== 'sent' && campaign.status !== 'sending' ? `<button onclick="deleteCampaign(${campaign.id})" class="btn-small btn-danger">Delete</button>` : ''}
+                        <div class="campaign-row-actions">
+                            <button onclick="showCampaignModal(${campaign.id})" class="btn btn-small">View</button>
+                            ${campaign.status === 'draft' ? `<button onclick="editCampaign(${campaign.id})" class="btn btn-small">Edit</button>` : ''}
+                            ${campaign.status === 'draft' ? `<button onclick="sendCampaign(${campaign.id})" class="btn btn-small btn-success">Send</button>` : ''}
+                            ${campaign.status === 'scheduled' ? `<button onclick="sendCampaign(${campaign.id})" class="btn btn-small btn-success">Send Now</button>` : ''}
+                            ${campaign.status === 'scheduled' ? `<button onclick="cancelScheduledCampaign(${campaign.id})" class="btn btn-small btn-warning">Cancel</button>` : ''}
+                            <button onclick="duplicateCampaign(${campaign.id})" class="btn btn-small btn-secondary">Duplicate</button>
+                            ${campaign.status !== 'sent' && campaign.status !== 'sending' ? `<button onclick="deleteCampaign(${campaign.id})" class="btn btn-small btn-danger">Delete</button>` : ''}
+                        </div>
                     </td>
                 </tr>
             `).join('');

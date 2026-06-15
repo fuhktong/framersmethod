@@ -17,6 +17,7 @@ $routes = [
     '/faq' => 'faq',
     '/contribute' => 'contribute',
     '/team' => 'team',
+    '/blog' => 'blog',
     '/contact-us' => 'contact',
     '/data' => 'data',
     '/data/appendix-a' => 'data-appendix-a',
@@ -37,8 +38,18 @@ $routes = [
     '/data/appendix-p' => 'data-appendix-p'
 ];
 
-// Get current page
-$current_page = $routes[$request_uri] ?? 'home';
+// Get current page (static routes first, then dynamic)
+$current_page = $routes[$request_uri] ?? null;
+$blog_slug = null;
+
+if ($current_page === null) {
+    if (preg_match('#^/blog/([a-z0-9-]+)$#', $request_uri, $blog_matches)) {
+        $current_page = 'blog-post';
+        $blog_slug = $blog_matches[1];
+    } else {
+        $current_page = 'home';
+    }
+}
 
 // Set page title and meta data
 $page_data = [
@@ -53,6 +64,8 @@ $page_data = [
     'faq' => ['title' => 'FAQ - The Framers Method', 'description' => 'Frequently asked questions'],
     'contribute' => ['title' => 'Contribute - The Framers Method', 'description' => 'How to contribute to the Framers Method'],
     'team' => ['title' => 'Team - The Framers Method', 'description' => 'Meet the Framers Method team'],
+    'blog' => ['title' => 'Blog — The Framers Method', 'description' => 'Articles and analysis on electoral reform'],
+    'blog-post' => ['title' => 'The Framers Method', 'description' => 'Articles on electoral reform'],
     'contact' => ['title' => 'Contact - The Framers Method', 'description' => 'Contact the Framers Method team'],
     'data' => ['title' => 'Book Data - The Framers Method', 'description' => 'Appendices and data from On the Framers\' Electoral College'],
     'data-appendix-a' => ['title' => 'Appendix A - The Framers Method', 'description' => 'Collected Notes from Convention Debates Concerning Methods to Choose the President'],
@@ -109,7 +122,6 @@ $page_description = $page_data[$current_page]['description'] ?? 'A new approach 
     <!-- CSS Files -->
     <link rel="stylesheet" href="/styles.css" />
     <link rel="stylesheet" href="/header/header.css" />
-    <link rel="stylesheet" href="/header/navbar.css" />
     <link rel="stylesheet" href="/header/toggle.css" />
     <link rel="stylesheet" href="/footer/footer.css" />
     <link rel="stylesheet" href="/socialmediabar/socialmediabar.css" />
@@ -128,6 +140,8 @@ $page_description = $page_data[$current_page]['description'] ?? 'A new approach 
         'faq' => ['/pages/faq.css'],
         'contribute' => ['/pages/contribute.css'],
         'team' => ['/pages/team.css'],
+        'blog' => ['/pages/blog.css'],
+        'blog-post' => ['/pages/blog.css'],
         'contact' => ['/contact/contact.css', '/contact/contactform.css'],
         'data' => ['/data/data.css'],
         'data-appendix-a' => ['/data/data.css'],
@@ -213,6 +227,7 @@ $page_description = $page_data[$current_page]['description'] ?? 'A new approach 
     
     <!-- JavaScript -->
     <script src="/scrolltotop/scrolltotop.js"></script>
+    <script src="/header/toggle.js"></script>
     
     <?php if ($current_page === 'team'): ?>
     <!-- Team Modal Enhancement -->

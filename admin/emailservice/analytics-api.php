@@ -3,6 +3,7 @@
  * Analytics API for Email Service
  * Provides campaign performance data and reports
  */
+require_once __DIR__ . '/../auth.php';
 require_once 'database.php';
 
 header('Content-Type: application/json');

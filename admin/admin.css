@@ -1,0 +1,1472 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Avenir Next, Futura, sans-serif;
+  background: #f5f4ef;
+  color: #1a1a1a;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════
+   LOGIN PAGE
+═══════════════════════════════════ */
+
+.admin-login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.login-card {
+  background: #fff;
+  border: 1px solid #e2e0d9;
+  border-radius: 6px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 360px;
+}
+
+.login-card h1 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  letter-spacing: 0.02em;
+}
+
+.login-subtitle {
+  font-size: 0.85rem;
+  color: #888;
+  margin: 0 0 1.75rem;
+}
+
+.login-error {
+  background: #fff0f0;
+  border: 1px solid #f5c0c0;
+  color: #c0392b;
+  font-size: 0.85rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1.25rem;
+}
+
+.login-card label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #555;
+  margin-bottom: 0.35rem;
+}
+
+.login-card input {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #d8d6cf;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: #faf9f7;
+  margin-bottom: 1.1rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.login-card input:focus {
+  border-color: #888;
+  background: #fff;
+}
+
+.login-card button {
+  width: 100%;
+  padding: 0.65rem;
+  background: #1a1a1a;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: background 0.15s;
+}
+
+.login-card button:hover {
+  background: #333;
+}
+
+/* ═══════════════════════════════════
+   SHARED HEADER
+═══════════════════════════════════ */
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 56px;
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.admin-header-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #fff;
+  text-decoration: none;
+}
+
+.admin-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.admin-nav a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.15s;
+}
+
+.admin-nav a:hover,
+.admin-nav a.active {
+  color: #fff;
+}
+
+/* ═══════════════════════════════════
+   SHARED BUTTONS
+═══════════════════════════════════ */
+
+.admin-btn {
+  display: inline-block;
+  padding: 0.55rem 1.25rem;
+  background: #1a1a1a;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.admin-btn:hover {
+  background: #333;
+}
+
+.admin-btn-secondary {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 1px solid #d8d6cf;
+  border-radius: 4px;
+  color: #555;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: border-color 0.15s;
+}
+
+.admin-btn-secondary:hover {
+  border-color: #999;
+  color: #1a1a1a;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85rem;
+}
+
+.btn-danger {
+  color: #c0392b;
+}
+
+.btn-danger:hover {
+  text-decoration: underline;
+}
+
+/* Email-style action buttons */
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.25rem;
+  background: #1a1a1a;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn:hover {
+  background: #333;
+}
+
+.btn.btn-primary  { background: #1a1a1a; }
+.btn.btn-secondary { background: #666; }
+.btn.btn-warning  { background: #b8860b; color: #fff; }
+.btn.btn-danger   { background: #c0392b; color: #fff; }
+.btn.btn-success  { background: #2d7a4f; color: #fff; }
+
+.btn.btn-primary:hover  { background: #333; }
+.btn.btn-secondary:hover { background: #444; }
+.btn.btn-warning:hover  { background: #9a720a; }
+.btn.btn-danger:hover   { background: #a93226; }
+.btn.btn-success:hover  { background: #236040; }
+
+.btn-small {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.8rem;
+}
+
+.campaign-row-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 90px;
+}
+
+.campaign-row-actions .btn {
+  width: 100%;
+  text-align: center;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.78rem;
+}
+
+/* ═══════════════════════════════════
+   SHARED FORMS
+═══════════════════════════════════ */
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #555;
+  margin-bottom: 0.4rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="datetime-local"],
+.form-group select,
+.form-group textarea {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #d8d6cf;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: #faf9f7;
+  outline: none;
+  transition: border-color 0.15s;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #888;
+  background: #fff;
+}
+
+.form-group textarea {
+  min-height: 200px;
+}
+
+.form-hint {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+  color: #888;
+}
+
+.form-group-inline {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.form-group-inline label {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.radio-group {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #1a1a1a;
+  cursor: pointer;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.form-container {
+  background: #fff;
+  padding: 2rem;
+  border: 1px solid #e2e0d9;
+  border-radius: 6px;
+  margin-bottom: 2rem;
+}
+
+/* ═══════════════════════════════════
+   BLOG ADMIN LAYOUT
+═══════════════════════════════════ */
+
+.admin-main {
+  max-width: 960px;
+  margin: 2.5rem auto;
+  padding: 0 2rem;
+}
+
+.admin-main h2 {
+  font-size: 1.4rem;
+  margin: 0 0 0.5rem;
+}
+
+.admin-main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.admin-main-header h2 {
+  margin: 0;
+}
+
+.admin-errors {
+  background: #fff0f0;
+  border: 1px solid #f5c0c0;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  color: #c0392b;
+}
+
+.admin-errors p {
+  margin: 0;
+}
+
+.admin-empty {
+  color: #888;
+  font-size: 0.95rem;
+}
+
+.admin-empty a {
+  color: #1a1a1a;
+}
+
+/* ═══════════════════════════════════
+   POSTS TABLE
+═══════════════════════════════════ */
+
+.admin-table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.admin-table th {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 2px solid #e2e0d9;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: #888;
+  font-weight: 600;
+}
+
+.admin-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #eeece6;
+  vertical-align: middle;
+}
+
+.admin-table tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-table-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  white-space: nowrap;
+}
+
+.admin-table-actions a {
+  color: #1a1a1a;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.admin-table-actions a:hover {
+  text-decoration: underline;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.status-draft     { background: #f0ede6; color: #888; }
+.status-published { background: #e6f4ec; color: #2d7a4f; }
+
+/* ═══════════════════════════════════
+   POST FORM
+═══════════════════════════════════ */
+
+.post-form {
+  max-width: 760px;
+}
+
+.form-actions.post-actions {
+  padding-top: 1.5rem;
+  border-top: 1px solid #eeece6;
+}
+
+/* ═══════════════════════════════════
+   DASHBOARD
+═══════════════════════════════════ */
+
+.admin-welcome {
+  color: #888;
+  font-size: 0.9rem;
+  margin: 0 0 2rem;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.dashboard-card {
+  background: #fff;
+  border: 1px solid #e2e0d9;
+  border-radius: 6px;
+  padding: 1.5rem;
+}
+
+.dashboard-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.dashboard-card p {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0 0 1.25rem;
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════
+   EMAIL SERVICE LAYOUT
+═══════════════════════════════════ */
+
+.email-main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.campaigns-header,
+.subscribers-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.subscriber-actions,
+.campaign-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+/* ═══════════════════════════════════
+   EMAIL TABLES
+═══════════════════════════════════ */
+
+.subscribers-table-container,
+.campaigns-table-container {
+  background: #fff;
+  border: 1px solid #e2e0d9;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.subscribers-table,
+.campaigns-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.subscribers-table th,
+.campaigns-table th {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 2px solid #e2e0d9;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: #888;
+  font-weight: 600;
+  background: transparent;
+}
+
+.subscribers-table td,
+.campaigns-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #eeece6;
+  vertical-align: middle;
+}
+
+.subscribers-table tr:last-child td,
+.campaigns-table tr:last-child td {
+  border-bottom: none;
+}
+
+.no-data {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  padding: 2rem !important;
+}
+
+/* ═══════════════════════════════════
+   EMAIL STATUS BADGES
+═══════════════════════════════════ */
+
+.status {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.status.sent        { background: #e6f4ec; color: #2d7a4f; }
+.status.draft       { background: #f0ede6; color: #888; }
+.status.sending     { background: #e8f0fe; color: #1a4a8a; }
+.status.failed      { background: #fff0f0; color: #c0392b; }
+.status.partial     { background: #fff8e6; color: #b8860b; }
+.status.cancelled   { background: #f0ede6; color: #666; }
+.status.active      { background: #e6f4ec; color: #2d7a4f; }
+.status.unsubscribed { background: #fff0f0; color: #c0392b; }
+.status.scheduled   { background: #e8f0fe; color: #1a4a8a; }
+
+/* ═══════════════════════════════════
+   EMAIL FILTERS
+═══════════════════════════════════ */
+
+.subscribers-filters,
+.campaigns-filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.search-input,
+.filter-select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d8d6cf;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  background: #faf9f7;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.search-input:focus,
+.filter-select:focus {
+  border-color: #888;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* ═══════════════════════════════════
+   BULK ACTIONS
+═══════════════════════════════════ */
+
+.bulk-actions {
+  background: #fff;
+  padding: 1rem;
+  border: 1px solid #e2e0d9;
+  border-radius: 6px;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ═══════════════════════════════════
+   STAT CARDS (email dashboard)
+═══════════════════════════════════ */
+
+.stat-card {
+  background: #fff;
+  padding: 1.5rem;
+  border: 1px solid #e2e0d9;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.stat-card h3 {
+  margin: 0 0 0.5rem;
+  color: #888;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.stat-text {
+  color: #888;
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+/* ═══════════════════════════════════
+   CAMPAIGN FORM & PREVIEW
+═══════════════════════════════════ */
+
+.campaign-form-container {
+  max-width: 760px;
+}
+
+.campaign-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.campaign-preview {
+  background: #fff;
+  padding: 2rem;
+  border: 1px solid #e2e0d9;
+  border-radius: 6px;
+  margin-top: 1.5rem;
+}
+
+.preview-box {
+  border: 1px solid #d8d6cf;
+  padding: 1rem;
+  border-radius: 4px;
+  min-height: 200px;
+  background: #faf9f7;
+}
+
+.preview-placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+/* ═══════════════════════════════════
+   CAMPAIGN DETAIL
+═══════════════════════════════════ */
+
+.campaign-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.campaign-meta,
+.campaign-sends {
+  background: #faf9f7;
+  padding: 1rem;
+  border: 1px solid #e2e0d9;
+  border-radius: 4px;
+}
+
+.campaign-meta p {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.content-preview {
+  background: #faf9f7;
+  padding: 1rem;
+  border: 1px solid #e2e0d9;
+  border-radius: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.content-preview pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.sends-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.send-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eeece6;
+  font-size: 0.9rem;
+}
+
+.send-item:last-child {
+  border-bottom: none;
+}
+
+/* ═══════════════════════════════════
+   RECENT CAMPAIGNS
+═══════════════════════════════════ */
+
+.recent-campaigns {
+  background: #fff;
+  padding: 2rem;
+  border: 1px solid #e2e0d9;
+  border-radius: 6px;
+}
+
+.campaigns-list {
+  margin-top: 1rem;
+}
+
+.campaign-item {
+  background: #faf9f7;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  border-left: 4px solid #1a1a1a;
+}
+
+.campaign-item h4 {
+  margin: 0 0 0.5rem;
+  color: #1a1a1a;
+  font-size: 0.95rem;
+}
+
+.campaign-item p {
+  margin: 0.25rem 0;
+  color: #666;
+  font-size: 0.85rem;
+}
+
+/* ═══════════════════════════════════
+   MODAL
+═══════════════════════════════════ */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  margin: 5% auto;
+  padding: 2rem;
+  border-radius: 6px;
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-large {
+  max-width: 800px;
+}
+
+.close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #888;
+  line-height: 1;
+}
+
+.close:hover {
+  color: #1a1a1a;
+}
+
+/* ═══════════════════════════════════
+   UPLOAD TABS
+═══════════════════════════════════ */
+
+.upload-tabs {
+  display: flex;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #e2e0d9;
+}
+
+.tab-btn {
+  padding: 0.6rem 1rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: #888;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.15s;
+}
+
+.tab-btn.active {
+  border-bottom-color: #1a1a1a;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.file-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px dashed #d8d6cf;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-family: inherit;
+}
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .email-main {
+    padding: 0 1rem;
+  }
+
+  .action-buttons,
+  .subscriber-actions,
+  .campaign-actions {
+    flex-direction: column;
+  }
+
+  .subscribers-filters,
+  .campaigns-filters {
+    flex-direction: column;
+  }
+
+  .campaigns-header,
+  .subscribers-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .modal-content {
+    width: 95%;
+    margin: 2% auto;
+    padding: 1rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 680px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ═══════════════════════════════════
+   SUBSCRIBER LIST TABS
+═══════════════════════════════════ */
+
+.list-tabs {
+  margin: 1.25rem 0;
+  border-bottom: 1px solid #e2e0d9;
+}
+
+.tab-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.tab {
+  padding: 0.55rem 0.9rem;
+  background: #f0ede6;
+  border: 1px solid #e2e0d9;
+  border-bottom: none;
+  cursor: pointer;
+  border-radius: 5px 5px 0 0;
+  font-size: 0.85rem;
+  transition: background 0.15s;
+}
+
+.tab:hover {
+  background: #e8e5dd;
+}
+
+.tab.active {
+  background: #fff;
+  border-bottom: 1px solid #fff;
+  margin-bottom: -1px;
+  font-weight: 600;
+}
+
+.delete-tab {
+  margin-left: 0.5rem;
+  color: #999;
+  font-weight: bold;
+}
+
+.delete-tab:hover {
+  color: #c0392b;
+}
+
+/* ═══════════════════════════════════
+   CAMPAIGN REPORT
+═══════════════════════════════════ */
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #1a1a1a;
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+}
+
+.report-header {
+  background: #fff;
+  padding: 1.5rem;
+  border: 1px solid #e2e0d9;
+  border-radius: 6px;
+  margin-bottom: 1.25rem;
+}
+
+.report-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.4rem;
+}
+
+.report-meta {
+  color: #888;
+  font-size: 0.85rem;
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.metric-card {
+  background: #fff;
+  padding: 1.5rem;
+  border: 1px solid #e2e0d9;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.metric-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0.5rem 0 0.25rem;
+}
+
+.metric-label {
+  color: #888;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.metric-change {
+  font-size: 0.75rem;
+  margin-top: 0.3rem;
+}
+
+.metric-change.positive { color: #2d7a4f; }
+.metric-change.negative { color: #c0392b; }
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.chart-card,
+.details-section {
+  background: #fff;
+  padding: 1.5rem;
+  border: 1px solid #e2e0d9;
+  border-radius: 6px;
+}
+
+.details-section {
+  margin-bottom: 1.25rem;
+}
+
+.chart-card h3,
+.details-section h3 {
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+}
+
+.chart-container {
+  position: relative;
+  height: 300px;
+}
+
+.engagement-breakdown {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.engagement-item {
+  text-align: center;
+  padding: 1rem;
+  background: #faf9f7;
+  border: 1px solid #eeece6;
+  border-radius: 6px;
+}
+
+.engagement-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.engagement-label {
+  font-size: 0.75rem;
+  color: #888;
+  margin-top: 0.3rem;
+}
+
+.links-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.links-table th,
+.links-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #eeece6;
+}
+
+.links-table th {
+  background: #faf9f7;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .report-meta {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+}
+
+/* ═══════════════════════════════════
+   PUBLIC SUBSCRIBER PAGES
+   (unsubscribe + preferences — recipient-facing.
+    Scoped to their containers so the generic class
+    names never collide with the admin styles above.)
+═══════════════════════════════════ */
+
+.unsubscribe-container,
+.preferences-container {
+  max-width: 600px;
+  margin: 2.5rem auto;
+  padding: 0 1.25rem;
+}
+
+.unsubscribe-card,
+.preferences-card {
+  background: #fff;
+  padding: 2.5rem;
+  border: 1px solid #e2e0d9;
+  border-radius: 8px;
+}
+
+.unsubscribe-card {
+  text-align: center;
+}
+
+.unsubscribe-container .logo,
+.preferences-container .logo {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #45698c;
+  margin-bottom: 1.25rem;
+}
+
+.unsubscribe-title,
+.preferences-title {
+  font-size: 1.75rem;
+  color: #333;
+  margin-bottom: 0.9rem;
+}
+
+.preferences-title {
+  text-align: center;
+}
+
+.unsubscribe-subtitle,
+.preferences-subtitle {
+  color: #666;
+  margin-bottom: 1.85rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.preferences-subtitle {
+  text-align: center;
+}
+
+.unsubscribe-container .subscriber-info,
+.preferences-container .subscriber-info {
+  background: #faf9f7;
+  padding: 1.25rem;
+  border: 1px solid #eeece6;
+  border-radius: 6px;
+  margin-bottom: 1.85rem;
+}
+
+.unsubscribe-container .subscriber-info {
+  text-align: left;
+}
+
+.unsubscribe-container .subscriber-info h3,
+.preferences-container .subscriber-info h3 {
+  margin: 0 0 0.6rem;
+  color: #333;
+  font-size: 1.05rem;
+}
+
+.unsubscribe-container .subscriber-info p,
+.preferences-container .subscriber-info p {
+  margin: 0.3rem 0;
+  color: #666;
+}
+
+.unsubscribe-container .option-title,
+.preferences-container .option-title {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.3rem;
+}
+
+.unsubscribe-container .option-description,
+.preferences-container .option-description {
+  color: #666;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.unsubscribe-container .success-message,
+.preferences-container .success-message {
+  display: none;
+  background: #d4edda;
+  color: #155724;
+  padding: 1.25rem;
+  border-radius: 6px;
+  border: 1px solid #c3e6cb;
+  margin-bottom: 1.25rem;
+}
+
+.unsubscribe-container .error-message,
+.preferences-container .error-message {
+  display: none;
+  background: #f8d7da;
+  color: #721c24;
+  padding: 1.25rem;
+  border-radius: 6px;
+  border: 1px solid #f5c6cb;
+  margin-bottom: 1.25rem;
+}
+
+.preferences-container .success-message,
+.preferences-container .error-message {
+  text-align: center;
+}
+
+.unsubscribe-container .back-link,
+.preferences-container .back-link {
+  display: inline-block;
+  margin-top: 1.25rem;
+  color: #45698c;
+  text-decoration: none;
+}
+
+.unsubscribe-container .back-link:hover,
+.preferences-container .back-link:hover {
+  text-decoration: underline;
+}
+
+/* Unsubscribe-only */
+.unsubscribe-options {
+  text-align: left;
+  margin-bottom: 1.85rem;
+}
+
+.option-group {
+  margin-bottom: 1.25rem;
+  padding: 0.9rem;
+  border: 2px solid #e9ecef;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.option-group:hover {
+  border-color: #45698c;
+  background: #faf9f7;
+}
+
+.option-group.selected {
+  border-color: #45698c;
+  background: #e3f2fd;
+}
+
+.option-group input[type="radio"] {
+  margin-right: 0.6rem;
+}
+
+.option-details {
+  display: none;
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid #ddd;
+}
+
+.option-details.show {
+  display: block;
+}
+
+.unsubscribe-container .frequency-options,
+.pause-options {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
+}
+
+.pause-option,
+.unsubscribe-container .frequency-option {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.pause-option:hover,
+.pause-option.selected,
+.unsubscribe-container .frequency-option:hover,
+.unsubscribe-container .frequency-option.selected {
+  border-color: #45698c;
+  background: #e3f2fd;
+}
+
+.reason-section {
+  display: none;
+  margin-top: 1.25rem;
+  text-align: left;
+}
+
+.reason-section.show {
+  display: block;
+}
+
+.reason-section h4 {
+  margin-bottom: 0.9rem;
+  color: #333;
+}
+
+.reason-options {
+  display: grid;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.reason-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.custom-reason {
+  margin-top: 0.9rem;
+}
+
+.custom-reason textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.unsubscribe-container .action-buttons {
+  display: flex;
+  gap: 0.9rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 0;
+}
+
+/* Preferences-only */
+.preference-section {
+  margin-bottom: 1.85rem;
+}
+
+.preference-section h4 {
+  margin-bottom: 0.9rem;
+  color: #333;
+  font-size: 1.05rem;
+}
+
+.preferences-container .frequency-options {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.preferences-container .frequency-option {
+  padding: 0.9rem;
+  border: 2px solid #e9ecef;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.preferences-container .frequency-option:hover {
+  border-color: #45698c;
+  background: #faf9f7;
+}
+
+.preferences-container .frequency-option.selected {
+  border-color: #45698c;
+  background: #e3f2fd;
+}
+
+.preferences-container .frequency-option input[type="radio"] {
+  margin-right: 0.6rem;
+}
+
+.preferences-container .action-buttons {
+  text-align: center;
+  margin-top: 1.85rem;
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .unsubscribe-card,
+  .preferences-card {
+    padding: 1.25rem;
+  }
+
+  .unsubscribe-container .action-buttons,
+  .pause-options,
+  .unsubscribe-container .frequency-options {
+    flex-direction: column;
+  }
+}

@@ -3,6 +3,7 @@
  * Email Templates API
  * Manages email templates for campaigns
  */
+require_once __DIR__ . '/../auth.php';
 require_once 'database.php';
 
 header('Content-Type: application/json');

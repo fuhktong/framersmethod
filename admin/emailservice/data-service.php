@@ -2,6 +2,7 @@
 /**
  * Data service for email service dashboard
  */
+require_once __DIR__ . '/../auth.php';
 require_once 'database.php';
 
 header('Content-Type: application/json');

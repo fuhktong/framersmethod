@@ -3,9 +3,10 @@
  * Bulk Email Sending Engine
  * Handles sending campaigns to all active subscribers
  */
+require_once __DIR__ . '/../auth.php';
 require_once 'database.php';
-require_once '../contact/smtp_mailer.php';
-require_once '../contact/env_loader.php';
+require_once __DIR__ . '/../../contact/smtp_mailer.php';
+require_once __DIR__ . '/../../contact/env_loader.php';
 require_once 'tracking.php';
 
 // Load environment variables

@@ -13,7 +13,8 @@ if (session_status() === PHP_SESSION_NONE) {
  * Check if user is authenticated
  */
 function isAuthenticated() {
-    return isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true;
+    return (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true)
+        || !empty($_SESSION['admin_id']);
 }
 
 /**
@@ -49,30 +50,46 @@ function isSessionValid() {
 }
 
 /**
- * Require authentication - redirect to login if not authenticated
+ * Require authentication - redirect to login if not authenticated.
+ * All admin pages live under /admin, so the login route is always /admin/login.
  */
-function requireAuth($redirectPath = '../login/login.php') {
+function requireAuth($redirectPath = '/admin/login') {
     if (!isSessionValid()) {
-        // Clear invalid session
+        // Clear invalid session, then send the user to the login page
         session_destroy();
-        
-        // Determine the correct login URL based on current location
-        $requestUri = $_SERVER['REQUEST_URI'] ?? '';
-        
-        if (strpos($requestUri, '/login/') !== false) {
-            // We're in the login directory
-            $loginUrl = 'login.php';
-        } elseif (strpos($requestUri, '/emailservice/') !== false) {
-            // We're in the emailservice directory
-            $loginUrl = '../login/login.php';
-        } else {
-            // We're in the root or other directory
-            $loginUrl = 'login/login.php';
-        }
-        
-        header("Location: $loginUrl");
+        header("Location: $redirectPath");
         exit();
     }
+}
+
+/**
+ * Authenticate a username/password against the users table and, on success,
+ * populate the session. Single source of truth for logging a user in, shared by
+ * the admin login form and the hidden team-page modal so both behave identically.
+ *
+ * @return bool true if the credentials were valid and the session was created.
+ */
+function loginUser($username, $password) {
+    require_once __DIR__ . '/../database/db.php';
+
+    $stmt = db()->prepare('SELECT id, password_hash FROM users WHERE username = ?');
+    $stmt->execute([$username]);
+    $user = $stmt->fetch();
+
+    if (!$user || !password_verify($password, $user['password_hash'])) {
+        return false;
+    }
+
+    session_regenerate_id(true); // prevent session fixation
+    $_SESSION['admin_id']       = $user['id'];
+    $_SESSION['admin_username'] = $username;
+    $_SESSION['authenticated']  = true;
+    $_SESSION['username']       = $username;
+    $_SESSION['login_time']     = time();
+    $_SESSION['last_activity']  = time();
+    $_SESSION['csrf_token']     = $_SESSION['csrf_token'] ?? bin2hex(random_bytes(32));
+
+    return true;
 }
 
 /**
@@ -130,12 +147,3 @@ function logout() {
     // Destroy session
     session_destroy();
 }
-
-// Auto-check authentication if this file is included (not called directly)
-if (basename($_SERVER['PHP_SELF']) !== 'auth_check.php') {
-    // Only auto-check if we're not in the login directory
-    if (strpos($_SERVER['REQUEST_URI'], '/login/') === false) {
-        requireAuth();
-    }
-}
-?>

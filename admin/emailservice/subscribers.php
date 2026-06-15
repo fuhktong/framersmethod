@@ -1,6 +1,6 @@
 <?php
 // Protect this page with authentication
-require_once '../login/auth_check.php';
+require_once __DIR__ . '/../auth.php';
 $currentUser = getCurrentUser();
 ?>
 <!DOCTYPE html>
@@ -9,59 +9,10 @@ $currentUser = getCurrentUser();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subscribers - Email Service</title>
-    <link rel="stylesheet" href="emailservice.css">
-    <style>
-        .list-tabs {
-            margin: 20px 0;
-            border-bottom: 1px solid #ddd;
-        }
-        .tab-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-        }
-        .tab {
-            padding: 10px 15px;
-            background: #f5f5f5;
-            border: 1px solid #ddd;
-            border-bottom: none;
-            cursor: pointer;
-            border-radius: 5px 5px 0 0;
-            position: relative;
-            transition: background-color 0.2s;
-        }
-        .tab:hover {
-            background: #e9e9e9;
-        }
-        .tab.active {
-            background: white;
-            border-bottom: 1px solid white;
-            margin-bottom: -1px;
-        }
-        .delete-tab {
-            margin-left: 8px;
-            color: #999;
-            font-weight: bold;
-            font-size: 16px;
-        }
-        .delete-tab:hover {
-            color: #d9534f;
-        }
-    </style>
+    <link rel="stylesheet" href="/admin/admin.css">
 </head>
-<body>
-    <header class="email-header">
-        <h1>Subscriber Management</h1>
-        <nav>
-            <a href="campaigns.php" class="nav-link">Campaigns</a>
-            <a href="subscribers.php" class="nav-link active">Subscribers</a>
-            <a href="create-campaign.php" class="nav-link">Create Campaign</a>
-            <div class="nav-user">
-                <span>Welcome, <?php echo htmlspecialchars($currentUser['username']); ?></span>
-                <a href="../login/logout.php" class="nav-link logout">Logout</a>
-            </div>
-        </nav>
-    </header>
+<body class="admin-page">
+    <?php include __DIR__ . '/../partials/header.php'; ?>
 
     <main class="email-main">
         <div class="subscribers-header">

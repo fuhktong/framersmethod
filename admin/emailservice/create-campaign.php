@@ -1,6 +1,6 @@
 <?php
 // Protect this page with authentication
-require_once '../login/auth_check.php';
+require_once __DIR__ . '/../auth.php';
 $currentUser = getCurrentUser();
 ?>
 <!DOCTYPE html>
@@ -9,21 +9,10 @@ $currentUser = getCurrentUser();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Campaign - Email Service</title>
-    <link rel="stylesheet" href="emailservice.css">
+    <link rel="stylesheet" href="/admin/admin.css">
 </head>
-<body>
-    <header class="email-header">
-        <h1>Create Email Campaign</h1>
-        <nav>
-            <a href="campaigns.php" class="nav-link">Campaigns</a>
-            <a href="subscribers.php" class="nav-link">Subscribers</a>
-            <a href="create-campaign.php" class="nav-link active">Create Campaign</a>
-            <div class="nav-user">
-                <span>Welcome, <?php echo htmlspecialchars($currentUser['username']); ?></span>
-                <a href="../login/logout.php" class="nav-link logout">Logout</a>
-            </div>
-        </nav>
-    </header>
+<body class="admin-page">
+    <?php include __DIR__ . '/../partials/header.php'; ?>
 
     <main class="email-main">
         <div class="campaign-form-container">

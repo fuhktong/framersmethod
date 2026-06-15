@@ -2,14 +2,19 @@
 /**
  * Campaign Management API
  */
+// Require an authenticated admin for direct web access. The CLI scheduler
+// includes this file for its functions and must bypass the web guard.
+if (PHP_SAPI !== 'cli' && realpath(__FILE__) === realpath($_SERVER['SCRIPT_FILENAME'] ?? '')) {
+    require_once __DIR__ . '/../auth.php';
+}
 require_once 'database.php';
-require_once '../contact/smtp_mailer.php';
-require_once '../contact/env_loader.php';
+require_once __DIR__ . '/../../contact/smtp_mailer.php';
+require_once __DIR__ . '/../../contact/env_loader.php';
 
 // Load environment variables
 $env_paths = [
-    __DIR__ . '/../.env',
     __DIR__ . '/../../.env',
+    __DIR__ . '/../../../.env',
 ];
 
 foreach ($env_paths as $env_path) {
@@ -378,7 +383,7 @@ function sendCampaign($pdo, $data) {
     // We'll call it directly instead of going through HTTP
     
     // Direct function call approach
-    require_once '../contact/smtp_mailer.php';
+    require_once __DIR__ . '/../../contact/smtp_mailer.php';
     require_once 'tracking.php';
     
     // Call startCampaignSend function directly

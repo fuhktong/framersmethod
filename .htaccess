@@ -4,8 +4,14 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule \.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|html)$ - [L]
 
+# Redirect old emailservice URLs to new location inside admin
+RewriteRule ^emailservice/(.*)$ /admin/emailservice/$1 [R=301,L]
+
+# Route all /admin requests to the admin mini-router (real files bypass this)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^admin(/.*)?$ admin/index.php [L,QSA]
+
 # Route /data paths through index.php even though directory exists
-# But still serve static files (css, js, images) directly
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^data(/.*)?$ index.php [L,QSA]
 

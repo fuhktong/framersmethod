@@ -1,9 +1,6 @@
 :root {
-  background-image: url("../images/fmbackground.png");
-  background-size: cover;
-  background-position: center;
-  color: white;
   font-family: Avenir Next, Futura;
+  color: #1a1a1a;
 }
 
 html,
@@ -12,6 +9,8 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  scrollbar-gutter: stable;
+  background-color: #f5f4ef;
 }
 
 main {

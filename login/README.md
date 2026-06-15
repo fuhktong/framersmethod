@@ -1,14 +1,17 @@
 # Login System Setup
 
-## 🔐 Simple ENV-based Authentication
+## 🔐 Database-backed Authentication
 
-This login system uses environment variables for credentials - no database required!
+Credentials live in the `users` table (bcrypt-hashed). The admin login form
+(`/admin/login`) and the hidden team-page modal (`/login/auth.php`) both go
+through the same `loginUser()` helper in `auth_check.php`, so they behave
+identically. The first admin user is seeded from your `.env` values.
 
 ## Setup Instructions
 
 ### 1. Add to your `.env` file:
 ```env
-# Admin Login Credentials
+# Admin Login Credentials (used by /admin/seed to create the first user)
 ADMIN_USERNAME=admin
 ADMIN_PASSWORD=your_secure_password_here
 ```
@@ -65,10 +68,10 @@ All email service pages now include:
 **⚠️ Important:** Change the default password in your `.env` file immediately!
 
 ## Access URLs
-- **Standard Login:** `/login/login.php`
+- **Admin Login:** `/admin/login` (`/login/login.php` redirects here)
 - **Hidden Login:** Double-click "New Mexico" on `/team` page
-- **Quick Admin:** `/admin.php` (redirects to email service)
-- **Email Service Dashboard:** `/emailservice/index.php` (redirects to login if not authenticated)
+- **Admin Dashboard:** `/admin` (redirects to login if not authenticated)
+- **Email Service:** `/admin/emailservice/campaigns.php`
 
 ## Session Management
 - **Session Duration:** 24 hours

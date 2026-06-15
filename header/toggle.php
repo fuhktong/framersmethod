@@ -1,6 +1,6 @@
 <!-- Mobile Navigation -->
 <div class="mobile-nav">
-    <button class="hamburger" onclick="toggleMobileMenu()">
+    <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
         <span></span>
         <span></span>
         <span></span>
@@ -17,26 +17,34 @@
             <li><a href="/data" onclick="closeMobileMenu()">DATA</a></li>
             <li><a href="/faq" onclick="closeMobileMenu()">FAQ</a></li>
             <li><a href="/contribute" onclick="closeMobileMenu()">CONTRIBUTE</a></li>
-            <li><a href="/team" onclick="closeMobileMenu()">TEAM</a></li>
-            <li><a href="/contact-us" onclick="closeMobileMenu()">CONTACT</a></li>
         </ul>
+        <div class="menu-social">
+            <a href="https://bsky.app/profile/framersmethod.bsky.social" target="_blank" rel="noreferrer">
+                <img src="/images/whitelogobluesky.png" alt="Bluesky" />
+            </a>
+            <a href="https://www.instagram.com/framersmethod/" target="_blank" rel="noreferrer">
+                <img src="/images/whitelogoinsta.png" alt="Instagram" />
+            </a>
+            <a href="https://www.tiktok.com/@framersmethod" target="_blank" rel="noreferrer">
+                <img src="/images/whitelogotiktok.png" alt="TikTok" />
+            </a>
+            <a href="https://www.youtube.com/@framersmethod/featured" target="_blank" rel="noreferrer">
+                <img src="/images/whitelogoyoutube.png" alt="YouTube" />
+            </a>
+            <a href="https://medium.com/@framersmethod" target="_blank" rel="noreferrer">
+                <img src="/images/whitelogomedium.png" alt="Medium" />
+            </a>
+            <a href="https://substack.com/@framersmethod" target="_blank" rel="noreferrer">
+                <img src="/images/whitelogosubstack.png" alt="Substack" />
+            </a>
+            <a href="https://a.co/d/0dimzJAr" target="_blank" rel="noreferrer">
+                <img src="/images/whitelogoamazon.png" alt="Amazon" />
+            </a>
+        </div>
+        <div class="menu-about">
+            <img src="/images/framersmethodnobackground.png" alt="The Framers' Method" class="menu-about-logo" />
+            <p class="menu-about-blurb">Restoring political stability to the United States through decentralization and deliberation — reforming elections with the General Caucus and the Electors' Convention.</p>
+            <a href="/contact-us" onclick="closeMobileMenu()" class="menu-about-contact">Contact us &rarr;</a>
+        </div>
     </div>
 </div>
-
-<script>
-function toggleMobileMenu() {
-    const hamburger = document.querySelector('.hamburger');
-    const mobileMenu = document.getElementById('mobile-menu');
-    
-    hamburger.classList.toggle('open');
-    mobileMenu.classList.toggle('open');
-}
-
-function closeMobileMenu() {
-    const hamburger = document.querySelector('.hamburger');
-    const mobileMenu = document.getElementById('mobile-menu');
-    
-    hamburger.classList.remove('open');
-    mobileMenu.classList.remove('open');
-}
-</script>

@@ -2,6 +2,7 @@
 /**
  * CSV Upload Handler for Subscribers
  */
+require_once __DIR__ . '/../auth.php';
 require_once 'database.php';
 
 header('Content-Type: application/json');

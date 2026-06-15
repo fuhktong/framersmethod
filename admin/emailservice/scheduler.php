@@ -4,6 +4,11 @@
  * Processes scheduled campaigns that are due to be sent
  * This script should be run via cron job every minute
  */
+// This is a cron entry point only; never expose it over the web.
+if (PHP_SAPI !== 'cli') {
+    http_response_code(403);
+    exit('This script can only be run from the command line.');
+}
 require_once 'database.php';
 require_once 'campaign-api.php';
 
