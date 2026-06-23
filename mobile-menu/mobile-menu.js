@@ -10,7 +10,7 @@
   // a fixed value below the 600px breakpoint (the links wrap), so it has to
   // be measured rather than hardcoded.
   function syncHeaderHeight() {
-    const header = document.querySelector('header');
+    const header = document.querySelector('.site-header');
     if (header) {
       document.documentElement.style.setProperty(
         '--header-height',

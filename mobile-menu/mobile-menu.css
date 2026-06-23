@@ -150,6 +150,8 @@ body.menu-open {
 .menu-social img {
   width: 26px;
   height: 26px;
+  /* See footer.css's .footer-social img for why this is explicit. */
+  box-sizing: content-box;
   object-fit: contain;
   padding: 6px;
   border: 2px solid transparent;

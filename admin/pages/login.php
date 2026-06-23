@@ -21,26 +21,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Admin Login — The Framers' Method</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/header/header.css" />
+    <link rel="stylesheet" href="/mobile-menu/mobile-menu.css" />
+    <link rel="stylesheet" href="/footer/footer.css" />
+    <link rel="stylesheet" href="/socialmediabar/socialmediabar.css" />
     <link rel="stylesheet" href="/admin/admin.css" />
 </head>
 <body class="admin-login-page">
-    <div class="login-card">
-        <h1>The Framers' Method</h1>
-        <p class="login-subtitle">Admin</p>
+    <div class="app">
+        <?php include __DIR__ . '/../../header/header.php'; ?>
 
-        <?php if ($error): ?>
-            <p class="login-error"><?php echo htmlspecialchars($error); ?></p>
-        <?php endif; ?>
+        <main>
+            <div class="login-card">
+                <h1>The Framers' Method</h1>
+                <p class="login-subtitle">Admin</p>
 
-        <form method="POST" action="/admin/login">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" autocomplete="username" required />
+                <?php if ($error): ?>
+                    <p class="login-error"><?php echo htmlspecialchars($error); ?></p>
+                <?php endif; ?>
 
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" autocomplete="current-password" required />
+                <form method="POST" action="/admin/login">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" autocomplete="username" required />
 
-            <button type="submit">Sign in</button>
-        </form>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" autocomplete="current-password" required />
+
+                    <button type="submit">Sign in</button>
+                </form>
+            </div>
+        </main>
+
+        <?php include __DIR__ . '/../../footer/footer.php'; ?>
     </div>
+
+    <script src="/mobile-menu/mobile-menu.js"></script>
 </body>
 </html>

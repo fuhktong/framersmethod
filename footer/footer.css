@@ -53,6 +53,11 @@ footer {
 .footer-social img {
   width: 22px;
   height: 22px;
+  /* Pinned explicitly so the 22px width always means the icon itself, with
+     padding added outside it — immune to any ancestor page (e.g. admin.css)
+     applying a global box-sizing: border-box reset, which would otherwise
+     eat into this width with the padding below and shrink the icon. */
+  box-sizing: content-box;
   object-fit: contain;
   padding: 8px;
   border: 2px solid transparent;

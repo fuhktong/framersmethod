@@ -14,11 +14,15 @@ body {
    LOGIN PAGE
 ═══════════════════════════════════ */
 
-.admin-login-page {
+/* .admin-login-page now wraps the full site layout (header/main/footer),
+   not just the card, since the login page picked up the shared header and
+   footer — so the centering lives on main's content instead of the body. */
+.admin-login-page main {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 60vh;
+  padding: 4rem 1.5rem;
 }
 
 .login-card {

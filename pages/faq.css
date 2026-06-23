@@ -1,5 +1,15 @@
 /* FAQ — a long-form content page in the editorial post style. */
 
+.faq-body .faq-inline-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: text;
+}
+
+.faq-inline-link:hover {
+  cursor: pointer;
+}
+
 .faq-article {
   max-width: 720px;
   margin: 0 auto;

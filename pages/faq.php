@@ -379,7 +379,7 @@
 
         <h3 id="i6">Are Electoral College votes important?</h3>
         <p>
-            Electoral votes are important because they are required to win the presidential election.
+            Electoral votes are important because they are required to win the <a href="/admin/login" class="faq-inline-link">presidential</a> election.
         </p>
         <a class="faq-top" href="#top">Return to Top</a>
     </div>
