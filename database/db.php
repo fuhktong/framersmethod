@@ -1,6 +1,12 @@
 <?php
 require_once __DIR__ . '/../contact/env_loader.php';
-loadEnv(__DIR__ . '/../.env');
+
+foreach ([__DIR__ . '/../.env', __DIR__ . '/../../.env'] as $env_path) {
+    if (file_exists($env_path)) {
+        loadEnv($env_path);
+        break;
+    }
+}
 
 function db(): PDO {
     static $pdo = null;

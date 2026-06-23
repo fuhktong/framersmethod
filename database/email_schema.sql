@@ -27,17 +27,13 @@ CREATE TABLE IF NOT EXISTS subscribers (
     INDEX idx_bounce_status (bounce_status)
 );
 
--- Auto-generate an unsubscribe token when one is not supplied
-DELIMITER //
+-- Auto-generate an unsubscribe token when one is not supplied.
+-- Written as a single statement (no DELIMITER switch) so phpMyAdmin's
+-- SQL tab can run it without splitting on the internal semicolon.
 CREATE TRIGGER before_insert_subscribers
 BEFORE INSERT ON subscribers
 FOR EACH ROW
-BEGIN
-    IF NEW.unsubscribe_token = '' OR NEW.unsubscribe_token IS NULL THEN
-        SET NEW.unsubscribe_token = SHA2(CONCAT(NEW.email, NOW(), RAND()), 256);
-    END IF;
-END//
-DELIMITER ;
+SET NEW.unsubscribe_token = COALESCE(NULLIF(NEW.unsubscribe_token, ''), SHA2(CONCAT(NEW.email, NOW(), RAND()), 256));
 
 -- Campaigns -----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS campaigns (
