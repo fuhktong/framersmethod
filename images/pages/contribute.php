@@ -14,8 +14,9 @@
     <section class="contribute">
         <div class="contribute-text">
             <h1>Short Sleeve Shirt</h1>
+            <p>A classic crewneck tee for everyday wear, repping decentralization and deliberation wherever you go.</p>
             <a
-                href="https://framersmethod.printify.me/product/3613867/the-framers-method-unisex-jersey-short-sleeve-tee"
+                href="https://framersmethod.printify.me/"
                 target="_blank"
                 rel="noreferrer"
             >
@@ -24,7 +25,7 @@
         </div>
         <div class="contribute-img">
             <a
-                href="https://framersmethod.printify.me/product/3613867/the-framers-method-unisex-jersey-short-sleeve-tee"
+                href="https://framersmethod.printify.me/"
                 target="_blank"
                 rel="noreferrer"
             >
@@ -38,8 +39,9 @@
     <section class="contribute" style="background-color: #f5f4f0;">
         <div class="contribute-text">
             <h1>V-Neck Shirt</h1>
+            <p>A more relaxed, lightweight cut for anyone who wants their support for the cause a little less buttoned-up.</p>
             <a
-                href="https://framersmethod.printify.me/product/7705494/the-framers-method-unisex-jersey-short-sleeve-v-neck-tee"
+                href="https://framersmethod.printify.me/"
                 target="_blank"
                 rel="noreferrer"
             >
@@ -48,7 +50,7 @@
         </div>
         <div class="contribute-img">
             <a
-                href="https://framersmethod.printify.me/product/7705494/the-framers-method-unisex-jersey-short-sleeve-v-neck-tee"
+                href="https://framersmethod.printify.me/"
                 target="_blank"
                 rel="noreferrer"
             >
