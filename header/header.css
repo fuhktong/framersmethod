@@ -1,6 +1,13 @@
 header {
   width: 100%;
   background: #f5f4ef;
+  /* Sticky (not just relative) so the header is always pinned to the top of
+     the viewport, regardless of scroll position. .mobile-menu (mobile-menu.css)
+     anchors itself below the header's height — that anchor only holds up if
+     the header can never scroll out of place. */
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .header-main {

@@ -1,14 +1,13 @@
-.mobile-nav {
-  display: block;
-}
-
 /* Freeze whichever element is the scroll container. overflow: hidden keeps the
    current scroll position and, unlike overflow: scroll, never rubber-bands on
    macOS trackpads. Applied to both because overflow-x: hidden on the globals
-   turns html AND body into scrollers. */
+   turns html AND body into scrollers. overscroll-behavior stops the browser's
+   native bounce gesture, which would otherwise drag the fixed drawer along
+   with it and briefly reveal whatever is behind it. */
 html.menu-open,
 body.menu-open {
   overflow: hidden;
+  overscroll-behavior: none;
 }
 
 .hamburger {
@@ -62,14 +61,26 @@ body.menu-open {
 
 .mobile-menu {
   position: fixed;
-  /* --header-height is measured and set in toggle.js so the drawer stays flush
-     with the bottom of the header at any viewport size. Fallback covers the
-     moment before JS runs (the drawer is off-screen then, so it's never seen). */
+  /* --header-height is measured in mobile-menu.js, re-synced every time the
+     drawer opens. Below the 600px breakpoint .header-links wraps onto
+     several lines with no fixed height, so this can't be a hardcoded CSS
+     value — it has to be measured. The header is sticky (header.css), so
+     the measurement stays valid even if the page was scrolled before the
+     drawer opened. */
   top: var(--header-height, 118px);
-  right: 0;
   bottom: 0;
-  width: 33vw;
-  min-width: 240px;
+  /* Pinned to the true screen edge, not the header's centered-container
+     margin. The closed state works by translateX(100%) — 100% of the
+     drawer's own width — which only clears the screen if the drawer starts
+     flush with the real edge. Insetting "right" to match the header's
+     margin (for alignment on wide/zoomed-out viewports) broke that once the
+     margin grew larger than the drawer's width: the "closed" drawer ended
+     up back inside the viewport instead of off-screen. Functioning hide/show
+     takes priority over pixel-perfect alignment with the header at extreme
+     zoom levels. */
+  right: 0;
+  width: 75vw;
+  max-width: 360px;
   background: #f5f4ef;
   padding: 50px 1.5rem 2rem;
   box-sizing: border-box;
@@ -77,20 +88,14 @@ body.menu-open {
   transition: transform 0.3s ease;
   border-left: 1px solid #1a1a1a;
   overflow-y: auto;
-  /* Stop the drawer's own scroll from chaining into the page when it hits its
-     top/bottom edge — this is what bounces the background behind the menu. */
   overscroll-behavior: contain;
+  /* Kept on the base rule (not just .open) so the stacking order doesn't
+     drop mid-transition when .open is removed to close it. */
+  z-index: 101;
 }
 
 .mobile-menu.open {
   transform: translateX(0);
-  z-index: 101;
-}
-
-@media (max-width: 600px) {
-  .mobile-menu {
-    width: 66vw;
-  }
 }
 
 .mobile-menu ul {

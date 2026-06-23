@@ -7,7 +7,7 @@ the admin **New Post** form; the body below is Markdown.
 
 - **Title:** The Case Against National Elections
 - **Slug:** the-case-against-national-elections  (shorten to `national-elections` if you prefer)
-- **Categories:** Electoral Reform, Presidential Elections
+- **Categories:** Electoral Reform, Presidential Elections, Campaign Finance, Federalism
 - **Excerpt (≤150 chars):** Parties, money, and the media have a stranglehold on presidential elections, concentrating power and undermining the public good.
 - **Featured image:** optional — upload `images/nationalelectionslogo.png` (or `nationalelectionsdiagram.png`); crops to 16:9.
 - **Status:** Published

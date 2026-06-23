@@ -7,7 +7,7 @@ the admin **New Post** form; the body below is Markdown.
 
 - **Title:** Democracy vs. Republic
 - **Slug:** democracy-vs-republic
-- **Categories:** Electoral Reform, Civics
+- **Categories:** Electoral Reform, Civics, Electoral College, Constitutional Design, Federalism, Political Theory
 - **Excerpt (≤150 chars):** Democracy and republic are not the same thing — and the difference explains why the Electoral College exists.
 - **Featured image:** optional — upload `images/demvsreplogo2.png`; crops to 16:9.
 - **Status:** Published

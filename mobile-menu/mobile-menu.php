@@ -1,6 +1,8 @@
-<!-- Mobile Navigation -->
+<!-- Mobile-only hamburger + slide-out drawer. Hidden entirely above the
+     breakpoint in mobile-menu.css; everything in the drawer is duplicated
+     in footer/footer.php for desktop users. -->
 <div class="mobile-nav">
-    <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
         <span></span>
         <span></span>
         <span></span>
@@ -8,12 +10,12 @@
 
     <div class="mobile-menu" id="mobile-menu">
         <ul>
-            <li><a href="/general-caucus" onclick="closeMobileMenu()">THE GENERAL CAUCUS</a></li>
-            <li><a href="/electors-convention" onclick="closeMobileMenu()">ELECTORS' CONVENTION</a></li>
-            <li><a href="/book" onclick="closeMobileMenu()">BOOK</a></li>
-            <li><a href="/data" onclick="closeMobileMenu()">DATA</a></li>
-            <li><a href="/faq" onclick="closeMobileMenu()">FAQ</a></li>
-            <li><a href="/contribute" onclick="closeMobileMenu()">CONTRIBUTE</a></li>
+            <li><a href="/general-caucus">THE GENERAL CAUCUS</a></li>
+            <li><a href="/electors-convention">ELECTORS' CONVENTION</a></li>
+            <li><a href="/book">BOOK</a></li>
+            <li><a href="/data">DATA</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/contribute">CONTRIBUTE</a></li>
         </ul>
         <div class="menu-social">
             <a href="https://bsky.app/profile/framersmethod.bsky.social" target="_blank" rel="noreferrer">
@@ -41,7 +43,7 @@
         <div class="menu-about">
             <img src="/images/framersmethod14.png" alt="The Framers' Method" class="menu-about-logo" />
             <p class="menu-about-blurb">Restoring political stability to the United States through decentralization and deliberation — reforming elections with the General Caucus and the Electors' Convention.</p>
-            <a href="/contact-us" onclick="closeMobileMenu()" class="menu-about-contact">Contact us &rarr;</a>
+            <a href="/contact-us" class="menu-about-contact">Contact us &rarr;</a>
         </div>
     </div>
 </div>

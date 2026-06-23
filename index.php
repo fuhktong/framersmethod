@@ -128,7 +128,7 @@ $page_description = $page_data[$current_page]['description'] ?? 'A new approach 
     <!-- CSS Files -->
     <link rel="stylesheet" href="/styles.css" />
     <link rel="stylesheet" href="/header/header.css" />
-    <link rel="stylesheet" href="/header/toggle.css" />
+    <link rel="stylesheet" href="/mobile-menu/mobile-menu.css" />
     <link rel="stylesheet" href="/footer/footer.css" />
     <link rel="stylesheet" href="/socialmediabar/socialmediabar.css" />
     
@@ -234,7 +234,7 @@ $page_description = $page_data[$current_page]['description'] ?? 'A new approach 
     
     <!-- JavaScript -->
     <script src="/scrolltotop/scrolltotop.js"></script>
-    <script src="/header/toggle.js"></script>
+    <script src="/mobile-menu/mobile-menu.js"></script>
     
     <?php if ($current_page === 'team'): ?>
     <!-- Team Modal Enhancement -->
