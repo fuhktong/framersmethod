@@ -52,7 +52,7 @@ $currentUser = getCurrentUser();
                         <th>Opens</th>
                         <th>Clicks</th>
                         <th>Created</th>
-                        <th>Actions</th>
+                        <th class="col-action"></th>
                     </tr>
                 </thead>
                 <tbody id="campaigns-tbody">
@@ -64,191 +64,15 @@ $currentUser = getCurrentUser();
         </div>
     </main>
 
-    <!-- Campaign Details Modal -->
-    <div id="campaign-modal" class="modal" style="display: none;">
-        <div class="modal-content modal-large">
-            <span class="close" onclick="hideCampaignModal()">&times;</span>
-            <div id="campaign-details">
-                <!-- Campaign details will be loaded here -->
-            </div>
-        </div>
-    </div>
-
+    <script src="campaign-actions.js"></script>
     <script>
         let campaigns = [];
         let currentPage = 1;
         let totalPages = 1;
 
-        function showCampaignModal(campaignId) {
-            // Load campaign details
-            document.getElementById('campaign-modal').style.display = 'block';
-            loadCampaignDetails(campaignId);
-        }
-
-        function hideCampaignModal() {
-            document.getElementById('campaign-modal').style.display = 'none';
-        }
-
-        async function loadCampaignDetails(campaignId) {
-            try {
-                const response = await fetch(`data-service.php?action=campaign&id=${campaignId}`);
-                const result = await response.json();
-                
-                if (result.success) {
-                    const campaign = result.data;
-                    
-                    document.getElementById('campaign-details').innerHTML = `
-                        <h3>${campaign.subject}</h3>
-                        <div class="campaign-info">
-                            <div class="campaign-meta">
-                                <p><strong>Status:</strong> <span class="status ${campaign.status}">${campaign.status}</span></p>
-                                <p><strong>From:</strong> ${campaign.from_name}</p>
-                                <p><strong>Content Type:</strong> ${campaign.content_type}</p>
-                                <p><strong>Created:</strong> ${new Date(campaign.created_at).toLocaleString()}</p>
-                                ${campaign.sent_at ? `<p><strong>Sent:</strong> ${new Date(campaign.sent_at).toLocaleString()}</p>` : ''}
-                                <p><strong>Recipients:</strong> ${campaign.total_recipients || 0}</p>
-                                <p><strong>Sent:</strong> ${campaign.total_sent || 0}</p>
-                                <p><strong>Opened:</strong> ${campaign.total_opened || 0}</p>
-                                <p><strong>Clicked:</strong> ${campaign.total_clicked || 0}</p>
-                            </div>
-                            
-                            <div class="campaign-content">
-                                <h4>Email Content:</h4>
-                                <div class="content-preview">
-                                    ${campaign.content_type === 'html' ? campaign.content : `<pre>${campaign.content}</pre>`}
-                                </div>
-                            </div>
-                            
-                            ${campaign.sends && campaign.sends.length > 0 ? `
-                                <div class="campaign-sends">
-                                    <h4>Recent Sends (${campaign.sends.length}):</h4>
-                                    <div class="sends-list">
-                                        ${campaign.sends.slice(0, 10).map(send => `
-                                            <div class="send-item">
-                                                <span>${send.email}</span>
-                                                <span class="status ${send.status}">${send.status}</span>
-                                                <span>${new Date(send.sent_at).toLocaleString()}</span>
-                                            </div>
-                                        `).join('')}
-                                        ${campaign.sends.length > 10 ? `<p>... and ${campaign.sends.length - 10} more</p>` : ''}
-                                    </div>
-                                </div>
-                            ` : ''}
-                        </div>
-                    `;
-                } else {
-                    document.getElementById('campaign-details').innerHTML = `
-                        <h3>Error</h3>
-                        <p>Failed to load campaign details: ${result.message}</p>
-                    `;
-                }
-            } catch (error) {
-                document.getElementById('campaign-details').innerHTML = `
-                    <h3>Error</h3>
-                    <p>Error loading campaign details: ${error.message}</p>
-                `;
-            }
-        }
-
-        function editCampaign(campaignId) {
-            window.location.href = `create-campaign.php?edit=${campaignId}`;
-        }
-
-        function duplicateCampaign(campaignId) {
-            if (confirm('Duplicate this campaign?')) {
-                window.location.href = `create-campaign.php?duplicate=${campaignId}`;
-            }
-        }
-
-        async function deleteCampaign(campaignId) {
-            if (confirm('Delete this campaign? This action cannot be undone.')) {
-                try {
-                    const response = await fetch(`campaign-api.php?id=${campaignId}`, {
-                        method: 'DELETE'
-                    });
-                    
-                    const result = await response.json();
-                    
-                    if (result.success) {
-                        alert('Campaign deleted successfully!');
-                        loadCampaigns(); // Refresh the list
-                    } else {
-                        alert('Error: ' + result.message);
-                    }
-                } catch (error) {
-                    alert('Error deleting campaign: ' + error.message);
-                }
-            }
-        }
-
-        async function sendCampaign(campaignId) {
-            if (confirm('Send this campaign to all active subscribers? This action cannot be undone.')) {
-                try {
-                    // Disable the send button to prevent double-clicking
-                    const sendButton = event.target;
-                    const originalText = sendButton.textContent;
-                    sendButton.textContent = 'Sending...';
-                    sendButton.disabled = true;
-                    
-                    const response = await fetch('campaign-api.php?action=send', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            campaign_id: campaignId
-                        })
-                    });
-                    
-                    const result = await response.json();
-                    
-                    if (result.success) {
-                        alert(`Campaign sending started!\n\nTotal Subscribers: ${result.data.total_subscribers}\nSent: ${result.data.sent_count}\nFailed: ${result.data.failed_count}\n\nStatus: ${result.data.status}`);
-                        loadCampaigns(); // Refresh the list to show updated status
-                    } else {
-                        alert('Error sending campaign: ' + result.message);
-                        // Re-enable button on error
-                        sendButton.textContent = originalText;
-                        sendButton.disabled = false;
-                    }
-                } catch (error) {
-                    alert('Error sending campaign: ' + error.message);
-                    // Re-enable button on error
-                    const sendButton = event.target;
-                    sendButton.textContent = 'Send';
-                    sendButton.disabled = false;
-                }
-            }
-        }
-
-
-        async function cancelScheduledCampaign(campaignId) {
-            if (confirm('Are you sure you want to cancel this scheduled campaign? It will be changed back to draft status.')) {
-                try {
-                    const response = await fetch(`campaign-api.php?id=${campaignId}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            status: 'draft',
-                            scheduled_at: null,
-                            timezone: null
-                        })
-                    });
-                    
-                    const result = await response.json();
-                    
-                    if (result.success) {
-                        alert('Scheduled campaign cancelled successfully!');
-                        loadCampaigns(); // Refresh the list
-                    } else {
-                        alert('Error: ' + result.message);
-                    }
-                } catch (error) {
-                    alert('Error cancelling scheduled campaign: ' + error.message);
-                }
-            }
+        // Refresh behaviour for the shared campaign-actions.js handlers
+        function afterCampaignAction(action) {
+            loadCampaigns();
         }
 
         // Load campaigns data
@@ -256,50 +80,28 @@ $currentUser = getCurrentUser();
             try {
                 const search = document.getElementById('search').value;
                 const status = document.getElementById('status-filter').value;
-                
+
                 const response = await fetch(`data-service.php?action=campaigns&page=${currentPage}&search=${encodeURIComponent(search)}&status=${status}`);
                 const result = await response.json();
-                
+
                 if (result.success) {
                     const data = result.data;
                     campaigns = data.campaigns;
                     totalPages = data.total_pages;
-                    
-                    // Update campaigns count
+
                     document.getElementById('campaigns-count').textContent = `All Campaigns (${data.total})`;
-                    
-                    // Update table
                     updateCampaignsTable(data.campaigns);
-                    
                 } else {
                     console.error('Failed to load campaigns:', result.message);
-                    document.getElementById('campaigns-tbody').innerHTML = 
+                    document.getElementById('campaigns-tbody').innerHTML =
                         '<tr><td colspan="8" class="no-data">Error loading campaigns</td></tr>';
                 }
             } catch (error) {
                 console.error('Error loading campaigns:', error);
-                document.getElementById('campaigns-tbody').innerHTML = 
+                document.getElementById('campaigns-tbody').innerHTML =
                     '<tr><td colspan="8" class="no-data">Error loading campaigns</td></tr>';
             }
         }
-
-        // Search functionality
-        document.getElementById('search').addEventListener('input', function() {
-            currentPage = 1; // Reset to first page
-            loadCampaigns();
-        });
-
-        // Status filter
-        document.getElementById('status-filter').addEventListener('change', function() {
-            currentPage = 1; // Reset to first page
-            loadCampaigns();
-        });
-
-        // Date filter
-        document.getElementById('date-filter').addEventListener('change', function() {
-            currentPage = 1; // Reset to first page
-            loadCampaigns();
-        });
 
         function updateCampaignsTable(campaignData) {
             const tbody = document.getElementById('campaigns-tbody');
@@ -308,29 +110,51 @@ $currentUser = getCurrentUser();
                 return;
             }
 
-            tbody.innerHTML = campaignData.map(campaign => `
+            tbody.innerHTML = campaignData.map(campaign => {
+                const opens = campaign.total_sent > 0 ? Math.round((campaign.total_opened / campaign.total_sent) * 100) : 0;
+                const clicks = campaign.total_sent > 0 ? Math.round((campaign.total_clicked / campaign.total_sent) * 100) : 0;
+
+                // Status-aware single inline action; everything else lives on the campaign page
+                let rowAction = '';
+                if (campaign.status === 'draft') {
+                    rowAction = `<button class="row-action row-action-send" onclick="sendCampaign(${campaign.id}, this)">Send</button>`;
+                } else if (campaign.status === 'scheduled') {
+                    rowAction = `<button class="row-action row-action-send" onclick="sendCampaign(${campaign.id}, this)">Send now</button>`;
+                } else if (campaign.status === 'sent' || campaign.status === 'partial') {
+                    rowAction = `<a class="row-action" href="campaign-report.php?id=${campaign.id}">Report</a>`;
+                }
+
+                return `
                 <tr>
-                    <td><strong>${campaign.subject}</strong></td>
+                    <td><a class="campaign-link" href="campaign.php?id=${campaign.id}">${campaign.subject}</a></td>
                     <td><span class="status ${campaign.status}">${campaign.status}</span></td>
                     <td>${campaign.total_recipients || 0}</td>
                     <td>${campaign.total_sent || 0}</td>
-                    <td>${campaign.total_opened || 0} (${campaign.total_sent > 0 ? Math.round((campaign.total_opened/campaign.total_sent)*100) : 0}%)</td>
-                    <td>${campaign.total_clicked || 0} (${campaign.total_sent > 0 ? Math.round((campaign.total_clicked/campaign.total_sent)*100) : 0}%)</td>
+                    <td>${campaign.total_opened || 0} (${opens}%)</td>
+                    <td>${campaign.total_clicked || 0} (${clicks}%)</td>
                     <td>${new Date(campaign.created_at).toLocaleDateString()}</td>
-                    <td>
-                        <div class="campaign-row-actions">
-                            <button onclick="showCampaignModal(${campaign.id})" class="btn btn-small">View</button>
-                            ${campaign.status === 'draft' ? `<button onclick="editCampaign(${campaign.id})" class="btn btn-small">Edit</button>` : ''}
-                            ${campaign.status === 'draft' ? `<button onclick="sendCampaign(${campaign.id})" class="btn btn-small btn-success">Send</button>` : ''}
-                            ${campaign.status === 'scheduled' ? `<button onclick="sendCampaign(${campaign.id})" class="btn btn-small btn-success">Send Now</button>` : ''}
-                            ${campaign.status === 'scheduled' ? `<button onclick="cancelScheduledCampaign(${campaign.id})" class="btn btn-small btn-warning">Cancel</button>` : ''}
-                            <button onclick="duplicateCampaign(${campaign.id})" class="btn btn-small btn-secondary">Duplicate</button>
-                            ${campaign.status !== 'sent' && campaign.status !== 'sending' ? `<button onclick="deleteCampaign(${campaign.id})" class="btn btn-small btn-danger">Delete</button>` : ''}
-                        </div>
-                    </td>
-                </tr>
-            `).join('');
+                    <td class="col-action">${rowAction}</td>
+                </tr>`;
+            }).join('');
         }
+
+        // Search functionality
+        document.getElementById('search').addEventListener('input', function() {
+            currentPage = 1;
+            loadCampaigns();
+        });
+
+        // Status filter
+        document.getElementById('status-filter').addEventListener('change', function() {
+            currentPage = 1;
+            loadCampaigns();
+        });
+
+        // Date filter
+        document.getElementById('date-filter').addEventListener('change', function() {
+            currentPage = 1;
+            loadCampaigns();
+        });
 
         // Load data when page loads
         document.addEventListener('DOMContentLoaded', loadCampaigns);

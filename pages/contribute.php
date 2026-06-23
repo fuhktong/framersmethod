@@ -1,6 +1,6 @@
 <section>
     <div class="contribute-logo">
-        <img src="/images/framersmethod.png" alt="The Framers' Method" />
+        <img src="/images/framersmethod14.png" alt="The Framers' Method" />
     </div>
     <div class="contribute-logo-text">
         <h2>Restore the American Republic!</h2>

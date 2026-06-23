@@ -27,8 +27,7 @@ try {
     } else {
         // Otherwise use search and status filters
         if (!empty($search)) {
-            $where[] = "(email LIKE ? OR name LIKE ?)";
-            $params[] = "%$search%";
+            $where[] = "email LIKE ?";
             $params[] = "%$search%";
         }
         
@@ -42,7 +41,7 @@ try {
     
     // Get all subscribers
     $sql = "
-        SELECT email, name, status, subscribed_at, updated_at
+        SELECT email, status, subscribed_at, updated_at
         FROM subscribers 
         $whereClause
         ORDER BY subscribed_at DESC
@@ -72,13 +71,12 @@ try {
     $output = fopen('php://output', 'w');
     
     // Write CSV header
-    fputcsv($output, ['Email', 'Name', 'Status', 'Subscribed Date', 'Last Updated']);
-    
+    fputcsv($output, ['Email', 'Status', 'Subscribed Date', 'Last Updated']);
+
     // Write data rows
     foreach ($subscribers as $subscriber) {
         fputcsv($output, [
             $subscriber['email'],
-            $subscriber['name'] ?: '',
             $subscriber['status'],
             date('Y-m-d H:i:s', strtotime($subscriber['subscribed_at'])),
             date('Y-m-d H:i:s', strtotime($subscriber['updated_at']))

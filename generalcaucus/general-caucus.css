@@ -1,0 +1,93 @@
+/* The General Caucus — a long-form content page in the editorial post style. */
+
+/* Full-bleed hero at the top, exactly like the post hero. It's a direct child
+   of <main>, broken out of main's 30px padding so it spans the full width. */
+.caucus-hero {
+  display: block;
+  width: calc(100% + 60px);
+  height: auto;
+  margin: -30px -30px 2.5rem;
+  background-color: #dcd8cb;
+}
+
+.caucus-article {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+}
+
+.caucus-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #dedad3;
+}
+
+.caucus-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.75rem;
+}
+
+.caucus-lede {
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: #555;
+  margin: 0;
+}
+
+.caucus-body {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #2a2a2a;
+}
+
+.caucus-body p {
+  margin: 0 0 1.25rem;
+}
+
+.caucus-body h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 2.5rem 0 0.75rem;
+}
+
+.caucus-body h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 1.75rem 0 0.5rem;
+}
+
+.caucus-body a {
+  color: #45698c;
+}
+
+.caucus-list {
+  margin: 0 0 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.caucus-list li {
+  margin-bottom: 0.5rem;
+}
+
+.caucus-figure {
+  margin: 2rem 0;
+}
+
+.caucus-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.caucus-figure figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: #888;
+  text-align: center;
+}

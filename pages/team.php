@@ -1,9 +1,6 @@
+<img class="team-hero" src="/images/framersmethodteam.png" alt="The Framers' Method Team" />
 <section>
-    <div class="team-logo">
-        <img src="/images/framersmethodteam.png" alt="The Framers' Method Team" />
-    </div>
-    <?php include __DIR__ . '/../socialmediabar/socialmediabar.php'; ?>
-    <section class="team-template" style="background-color: white;">
+    <section class="team-template">
         <div class="team-template-img">
             <img src="/images/dustintaylorphoto.png" alt="Dustin Taylor" />
             <h1>Dustin Taylor</h1>
@@ -32,7 +29,7 @@
             </p>
         </div>
     </section>
-    <section class="team-template" style="background-color: white;">
+    <section class="team-template" style="background-color: #f5f4f0;">
         <div class="team-template-img">
             <img src="/images/samlopezphoto.png" alt="Sam Lopez" />
             <h1>Sam Lopez</h1>

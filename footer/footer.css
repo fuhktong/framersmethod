@@ -1,152 +1,143 @@
 footer {
-  /* background-image: url("/images/fmbackground.png");
-  background-size: cover;
-  background-position: center; */
-  color: white;
-  padding: 20px;
+  background: #f5f4ef;
+  color: #1a1a1a;
+  border-top: 1px solid #1a1a1a;
+  --footer-pad-x: 2rem;
+  padding: 2.5rem var(--footer-pad-x) 1.5rem;
   width: 100%;
-  max-width: 1200px;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Brand (logo + social) on the left, link columns on the right.
+   The nav wraps below the brand when there isn't room beside it. */
+.footer-top {
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  gap: 2rem;
 }
 
-.footer-title {
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  color: white;
-  padding-left: 30px;
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
-.footer-title img {
+.footer-logo img {
+  display: block;
   height: 40px;
   width: auto;
 }
 
-.footer-container {
-  margin: 0;
+/* Full-width band for the social icons (matches the footer-bottom divider) */
+.footer-social-bar {
+  margin: 2.5rem calc(-1 * var(--footer-pad-x)) 0;
+  padding: 1.25rem var(--footer-pad-x);
+  border-top: 1px solid #1a1a1a;
+}
+
+/* Social icons: left-aligned row that wraps as space tightens. Negative margin
+   offsets each icon's padding so the first glyph lines up with the text edge. */
+.footer-social {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-left: -8px;
+}
+
+.footer-social a {
+  display: inline-flex;
+}
+
+.footer-social img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  padding: 8px;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.footer-social img:hover {
+  background-color: rgba(26, 26, 26, 0.08);
+  border-color: #1a1a1a;
+}
+
+/* Labeled link columns; they wrap (3 → 2 → 1) as space tightens */
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem 3rem;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.footer-heading {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #1a1a1a;
 }
 
 .footer-links {
   list-style: none;
   margin: 0;
-  padding-left: 30px;
-}
-
-.footer-links li {
+  padding: 0;
   display: flex;
-  margin-right: 20px;
-  text-shadow: 1px 1px 1px black;
-}
-
-.footer-links li:last-child {
-  margin-right: 0;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
 .footer-links a {
-  display: flex;
-  color: white;
-  text-shadow: var(--text-dropshadow);
+  color: #1a1a1a;
   text-decoration: none;
-  font-size: small;
-  font-weight: bold;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: color 0.2s ease;
 }
 
-.link2 {
-  padding: 0 2px;
-  border: 2px solid transparent;
+.footer-links a:hover {
+  color: #45698c;
 }
 
-.link2:hover {
-  background-color: #45698c;
-  border: 2px solid white;
-  border-radius: 5px;
+.footer-bottom {
+  /* Pull out to the footer edges so the divider is full-width, like the
+     header/footer borders; padding restores the text alignment. No top margin
+     so the gap below the icons equals the social-bar's padding-top. */
+  margin: 0 calc(-1 * var(--footer-pad-x));
+  padding: 1.25rem var(--footer-pad-x) 0;
+  border-top: 1px solid #1a1a1a;
 }
 
-.footer-social-media {
-  display: flex;
-  flex-direction: column;
-  margin-right: 60px;
+.footer-bottom p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #1a1a1a;
 }
 
-.social-row {
-  display: flex;
-  justify-content: center;
-}
-
-.footer-social-media img {
-  width: 30px;
-  height: auto;
-  padding: 10px;
-  border: 2px solid transparent;
-}
-
-.footer-social-media img:hover {
-  background-color: #45698c;
-  border: 2px solid white;
-  border-radius: 5px;
-}
-
-@media screen and (max-width: 768px) {
+@media (max-width: 480px) {
   footer {
-    text-align: center;
-    padding: 0;
-    margin: 0;
+    --footer-pad-x: 1.25rem;
+    padding: 2rem var(--footer-pad-x) 1.25rem;
   }
-}
 
-@media screen and (max-width: 768px) {
-  .footer-title {
-    padding: 30px 0 15px 0;
+  .footer-top {
+    gap: 1.75rem;
   }
-}
 
-@media screen and (max-width: 768px) {
-  h2 {
-    padding-top: 25px;
-    text-align: center;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .footer-container {
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .footer-links {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .footer-links li {
-    display: flex;
-    margin-right: 0;
-    padding: none;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .link2 {
-    display: flex;
-    justify-content: center;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .footer-social-media {
-    padding-top: 10px;
-    margin: 20px;
-    justify-content: center;
+  .footer-nav {
+    gap: 1.75rem 2.5rem;
   }
 }

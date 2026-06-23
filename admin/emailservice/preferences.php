@@ -119,7 +119,6 @@
             container.innerHTML = `
                 <h3>📋 Your Account</h3>
                 <p><strong>Email:</strong> ${subscriberData.email}</p>
-                ${subscriberData.name ? `<p><strong>Name:</strong> ${subscriberData.name}</p>` : ''}
                 <p><strong>Current Status:</strong> <span class="status ${subscriberData.status}">${subscriberData.status}</span></p>
                 <p><strong>Member Since:</strong> ${new Date(subscriberData.subscribed_at).toLocaleDateString()}</p>
             `;

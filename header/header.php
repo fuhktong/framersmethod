@@ -2,7 +2,7 @@
     <div class="header-main">
         <div class="logo">
             <a href="/">
-                <img src="/images/framersmethodnobackground.png" alt="The Framers' Method" />
+                <img src="/images/framersmethod14.png" alt="The Framers' Method" />
             </a>
         </div>
         <?php include 'toggle.php'; ?>

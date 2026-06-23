@@ -41,7 +41,6 @@ $currentUser = getCurrentUser();
                     <tr>
                         <th><input type="checkbox" id="select-all"></th>
                         <th>Email</th>
-                        <th>Name</th>
                         <th>Status</th>
                         <th>Lists</th>
                         <th>Subscribed Date</th>
@@ -50,7 +49,7 @@ $currentUser = getCurrentUser();
                 </thead>
                 <tbody id="subscribers-tbody">
                     <tr>
-                        <td colspan="7" class="no-data">No subscribers found. <a href="#" onclick="showUploadModal()">Upload your first subscribers</a></td>
+                        <td colspan="6" class="no-data">No subscribers found. <a href="#" onclick="showUploadModal()">Upload your first subscribers</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -74,10 +73,6 @@ $currentUser = getCurrentUser();
                 <div class="form-group">
                     <label for="edit-email">Email</label>
                     <input type="email" id="edit-email" required>
-                </div>
-                <div class="form-group">
-                    <label for="edit-name">Name (optional)</label>
-                    <input type="text" id="edit-name">
                 </div>
                 <div class="form-group">
                     <label for="edit-status">Status</label>
@@ -104,12 +99,12 @@ $currentUser = getCurrentUser();
             </div>
 
             <div id="csv-tab" class="tab-content active">
-                <p>Upload a CSV file with columns: email, name (optional)</p>
+                <p>Upload a CSV file with an email column</p>
                 <p><strong>Supported formats:</strong></p>
                 <ul>
-                    <li>With headers: email, name</li>
-                    <li>Without headers: first column = email, second column = name</li>
-                    <li>Alternative headers: "email address", "e-mail", "full name", "first name"</li>
+                    <li>With header: email</li>
+                    <li>Without header: first column = email</li>
+                    <li>Alternative headers: "email address", "e-mail"</li>
                 </ul>
                 <input type="file" id="csv-file" accept=".csv" class="file-input" onchange="previewCsv()">
                 <div class="upload-preview" id="upload-preview" style="display: none;">
@@ -124,10 +119,6 @@ $currentUser = getCurrentUser();
                     <div class="form-group">
                         <label for="manual-email">Email</label>
                         <input type="email" id="manual-email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="manual-name">Name (optional)</label>
-                        <input type="text" id="manual-name">
                     </div>
                     <button type="submit" class="btn btn-primary">Add Subscriber</button>
                 </form>
@@ -451,8 +442,7 @@ $currentUser = getCurrentUser();
         document.getElementById('manual-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             const email = document.getElementById('manual-email').value;
-            const name = document.getElementById('manual-name').value;
-            
+
             try {
                 const response = await fetch('subscriber-api.php', {
                     method: 'POST',
@@ -460,8 +450,7 @@ $currentUser = getCurrentUser();
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        email: email,
-                        name: name
+                        email: email
                     })
                 });
                 
@@ -528,7 +517,7 @@ $currentUser = getCurrentUser();
             updateBulkActions();
             
             if (subscribersData.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="7" class="no-data">No subscribers found. <a href="#" onclick="showUploadModal()">Upload your first subscribers</a></td></tr>';
+                tbody.innerHTML = '<tr><td colspan="6" class="no-data">No subscribers found. <a href="#" onclick="showUploadModal()">Upload your first subscribers</a></td></tr>';
                 document.getElementById('select-all').checked = false;
                 document.getElementById('select-all').indeterminate = false;
                 return;
@@ -538,7 +527,6 @@ $currentUser = getCurrentUser();
                 <tr>
                     <td><input type="checkbox" class="subscriber-checkbox" value="${subscriber.id}" onchange="toggleSubscriber(${subscriber.id})"></td>
                     <td><strong>${subscriber.email}</strong></td>
-                    <td>${subscriber.name || '-'}</td>
                     <td><span class="status ${subscriber.status}">${subscriber.status}</span></td>
                     <td><small>${(subscriber.lists || []).join(', ') || 'None'}</small></td>
                     <td>${new Date(subscriber.subscribed_at).toLocaleDateString()}</td>
@@ -606,7 +594,6 @@ $currentUser = getCurrentUser();
                     // Fill edit form
                     document.getElementById('edit-id').value = subscriber.id;
                     document.getElementById('edit-email').value = subscriber.email;
-                    document.getElementById('edit-name').value = subscriber.name || '';
                     document.getElementById('edit-status').value = subscriber.status;
                     
                     // Show modal
@@ -660,9 +647,8 @@ $currentUser = getCurrentUser();
             e.preventDefault();
             const id = document.getElementById('edit-id').value;
             const email = document.getElementById('edit-email').value;
-            const name = document.getElementById('edit-name').value;
             const status = document.getElementById('edit-status').value;
-            
+
             try {
                 const response = await fetch(`subscriber-api.php?id=${id}`, {
                     method: 'PUT',
@@ -671,7 +657,6 @@ $currentUser = getCurrentUser();
                     },
                     body: JSON.stringify({
                         email: email,
-                        name: name,
                         status: status
                     })
                 });

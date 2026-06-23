@@ -9,10 +9,10 @@
 CREATE TABLE IF NOT EXISTS subscribers (
     id                INT AUTO_INCREMENT PRIMARY KEY,
     email             VARCHAR(255) NOT NULL UNIQUE,
-    name              VARCHAR(255) DEFAULT NULL,
-    status            ENUM('active', 'unsubscribed', 'paused') DEFAULT 'active',
+    status            ENUM('pending', 'active', 'unsubscribed', 'paused') DEFAULT 'active',
     email_frequency   ENUM('daily', 'weekly', 'biweekly', 'monthly') DEFAULT 'daily',
     unsubscribe_token VARCHAR(64) NOT NULL UNIQUE,
+    confirm_token     VARCHAR(64) DEFAULT NULL,
     subscribed_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     resume_date       DATETIME NULL DEFAULT NULL,

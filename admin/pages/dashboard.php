@@ -15,7 +15,7 @@
 
         <div class="dashboard-grid">
             <div class="dashboard-card">
-                <h3>Blog Posts</h3>
+                <h3>Posts</h3>
                 <p>Write, edit, and publish articles to the site newsfeed.</p>
                 <a href="/admin/posts" class="admin-btn">Manage Posts</a>
             </div>

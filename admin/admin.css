@@ -234,18 +234,57 @@ body {
   font-size: 0.8rem;
 }
 
-.campaign-row-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  width: 90px;
+/* Campaigns list: clickable title + one status-aware inline action.
+   Per-campaign actions live on the campaign page (campaign.php). */
+.campaign-link {
+  font-weight: 600;
+  color: #1a1a1a;
+  text-decoration: none;
 }
 
-.campaign-row-actions .btn {
-  width: 100%;
-  text-align: center;
-  padding: 0.3rem 0.5rem;
-  font-size: 0.78rem;
+.campaign-link:hover {
+  text-decoration: underline;
+}
+
+.col-action {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.row-action {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.row-action:hover {
+  text-decoration: underline;
+}
+
+.row-action-send {
+  color: #2d7a4f;
+}
+
+.row-action[disabled] {
+  color: #999;
+  cursor: default;
+  text-decoration: none;
+}
+
+/* Campaign page action bar */
+.detail-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #eeece6;
 }
 
 /* ═══════════════════════════════════
@@ -301,6 +340,130 @@ body {
   color: #888;
 }
 
+/* Tag / category chip input */
+.tag-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.tag-chips:empty {
+  display: none;
+}
+
+.tag-input {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #d8d6cf;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  background: #faf9f7;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.tag-input:focus {
+  border-color: #888;
+  background: #fff;
+}
+
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.25rem 0.3rem 0.25rem 0.65rem;
+  border-radius: 20px;
+}
+
+.tag-chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+  font-size: 0.85rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.tag-chip-remove:hover {
+  background: #c0392b;
+}
+
+/* Featured image + insert-image controls */
+.label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.label-row label {
+  margin-bottom: 0;
+}
+
+.label-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.label-note {
+  font-weight: 500;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #999;
+  margin-left: 0.4rem;
+}
+
+.char-counter {
+  font-size: 0.75rem;
+  color: #999;
+  font-variant-numeric: tabular-nums;
+}
+
+.btn-inline {
+  padding: 0.3rem 0.75rem;
+  font-size: 0.78rem;
+}
+
+.featured-preview {
+  display: none;
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+  border: 1px solid #e2e0d9;
+  border-radius: 6px;
+  margin-bottom: 0.6rem;
+}
+
+.featured-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.featured-controls input[type="file"] {
+  font-family: inherit;
+  font-size: 0.85rem;
+}
+
 .form-group-inline {
   display: flex;
   align-items: center;
@@ -343,7 +506,7 @@ body {
 }
 
 /* ═══════════════════════════════════
-   BLOG ADMIN LAYOUT
+   POST ADMIN LAYOUT
 ═══════════════════════════════════ */
 
 .admin-main {

@@ -82,32 +82,31 @@ echo json_encode($response);
 // Add new subscriber
 function addSubscriber($pdo, $data) {
     $email = trim($data['email'] ?? '');
-    $name = trim($data['name'] ?? '');
-    
+
     if (empty($email)) {
         throw new Exception('Email is required');
     }
-    
+
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         throw new Exception('Invalid email address');
     }
-    
+
     // Check if email already exists
     $stmt = $pdo->prepare("SELECT id FROM subscribers WHERE email = ?");
     $stmt->execute([$email]);
     if ($stmt->rowCount() > 0) {
         throw new Exception('Email already exists');
     }
-    
+
     // Generate unsubscribe token
     $unsubscribe_token = hash('sha256', $email . time() . rand());
-    
+
     // Insert new subscriber
     $stmt = $pdo->prepare("
-        INSERT INTO subscribers (email, name, status, unsubscribe_token, subscribed_at) 
-        VALUES (?, ?, 'active', ?, NOW())
+        INSERT INTO subscribers (email, status, unsubscribe_token, subscribed_at)
+        VALUES (?, 'active', ?, NOW())
     ");
-    $stmt->execute([$email, $name ?: null, $unsubscribe_token]);
+    $stmt->execute([$email, $unsubscribe_token]);
     
     $id = $pdo->lastInsertId();
     
@@ -118,7 +117,6 @@ function addSubscriber($pdo, $data) {
 // Update subscriber
 function updateSubscriber($pdo, $id, $data) {
     $email = trim($data['email'] ?? '');
-    $name = trim($data['name'] ?? '');
     $status = $data['status'] ?? 'active';
     
     if (empty($email)) {
@@ -149,11 +147,11 @@ function updateSubscriber($pdo, $id, $data) {
     
     // Update subscriber
     $stmt = $pdo->prepare("
-        UPDATE subscribers 
-        SET email = ?, name = ?, status = ?, updated_at = NOW() 
+        UPDATE subscribers
+        SET email = ?, status = ?, updated_at = NOW()
         WHERE id = ?
     ");
-    $stmt->execute([$email, $name ?: null, $status, $id]);
+    $stmt->execute([$email, $status, $id]);
     
     // If status changed to unsubscribed, log it
     if ($status === 'unsubscribed') {
@@ -196,7 +194,7 @@ function deleteSubscriber($pdo, $id) {
 // Get single subscriber
 function getSubscriber($pdo, $id) {
     $stmt = $pdo->prepare("
-        SELECT id, email, name, status, subscribed_at, updated_at 
+        SELECT id, email, status, subscribed_at, updated_at
         FROM subscribers 
         WHERE id = ?
     ");

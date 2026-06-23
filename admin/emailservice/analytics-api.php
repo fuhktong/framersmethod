@@ -267,7 +267,6 @@ function getSubscriberEngagement($pdo) {
         SELECT 
             s.id,
             s.email,
-            s.name,
             COUNT(cs.id) as emails_received,
             COUNT(CASE WHEN cs.opened_at IS NOT NULL THEN 1 END) as emails_opened,
             COUNT(CASE WHEN cs.clicked_at IS NOT NULL THEN 1 END) as emails_clicked,

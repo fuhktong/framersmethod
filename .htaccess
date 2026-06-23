@@ -15,6 +15,12 @@ RewriteRule ^admin(/.*)?$ admin/index.php [L,QSA]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^data(/.*)?$ index.php [L,QSA]
 
+# /subscribe is also a real directory (holds the endpoint files). Route the bare
+# path to index.php; real files inside (subscribe.php, confirm.php, css/js) are
+# -f and so serve directly.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^subscribe(/.*)?$ index.php [L,QSA]
+
 # Route all other requests to index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

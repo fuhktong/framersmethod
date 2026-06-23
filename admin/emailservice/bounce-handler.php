@@ -200,7 +200,6 @@ function getBounces($pdo, $limit = 50, $offset = 0) {
     $stmt = $pdo->prepare("
         SELECT 
             eb.*,
-            s.name as subscriber_name,
             c.subject as campaign_subject
         FROM email_bounces eb
         LEFT JOIN subscribers s ON eb.subscriber_id = s.id

@@ -1,8 +1,6 @@
 header {
   width: 100%;
-  background-image: url("/images/fmbackground.png");
-  background-size: cover;
-  background-position: center;
+  background: #f5f4ef;
 }
 
 .header-main {
@@ -10,6 +8,8 @@ header {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
   height: 70px;
   padding: 0 2rem;
   box-sizing: border-box;
@@ -20,9 +20,9 @@ header {
 }
 
 .logo img {
-  width: 150px;
-  height: auto;
-  object-fit: contain;
+  display: block;
+  height: 50px;
+  width: auto;
 }
 
 .header-links {
@@ -30,24 +30,27 @@ header {
   justify-content: flex-end;
   align-items: center;
   gap: 2.5rem;
+  max-width: var(--content-max);
+  margin: 0 auto;
   padding: 0 2rem;
   height: 44px;
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
+  box-sizing: border-box;
+  border-top: 1px solid #1a1a1a;
+  border-bottom: 1px solid #1a1a1a;
 }
 
 .header-links a {
-  color: white;
+  color: #1a1a1a;
   text-decoration: none;
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.03em;
-  transition: opacity 0.2s ease;
+  transition: color 0.2s ease;
 }
 
-.header-links a:hover {
-  opacity: 1;
-  text-decoration: underline;
+.header-links a:hover,
+.header-links a.active {
+  color: #45698c;
 }
 
 @media (max-width: 600px) {

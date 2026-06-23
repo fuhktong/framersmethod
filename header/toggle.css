@@ -27,7 +27,7 @@ body.menu-open {
 .hamburger span {
   width: 100%;
   height: 3px;
-  background-color: white;
+  background-color: #1a1a1a;
   transition: all 0.3s ease;
   position: absolute;
   border-radius: 2px;
@@ -70,14 +70,12 @@ body.menu-open {
   bottom: 0;
   width: 33vw;
   min-width: 240px;
-  background-image: url("/images/fmbackground.png");
-  background-size: cover;
-  background-position: center;
+  background: #f5f4ef;
   padding: 50px 1.5rem 2rem;
   box-sizing: border-box;
   transform: translateX(100%);
   transition: transform 0.3s ease;
-  border-left: 2px solid white;
+  border-left: 1px solid #1a1a1a;
   overflow-y: auto;
   /* Stop the drawer's own scroll from chaining into the page when it hits its
      top/bottom edge — this is what bounces the background behind the menu. */
@@ -111,25 +109,24 @@ body.menu-open {
 
 .mobile-menu a {
   text-decoration: none;
-  color: white;
+  color: #1a1a1a;
   font-weight: bold;
   font-size: 15px;
   display: inline-block;
   text-align: right;
-  text-shadow: 1px 1px 1px black;
 }
 
 .mobile-menu a:hover {
-  text-decoration: underline;
+  color: #45698c;
 }
 
 .menu-social {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  justify-content: center;
   margin: 1.25rem 0 0;
   padding: 1.25rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(26, 26, 26, 0.15);
 }
 
 .menu-social a {
@@ -158,13 +155,13 @@ body.menu-open {
 }
 
 .menu-social img:hover {
-  background-color: #45698c;
-  border-color: white;
+  background-color: rgba(26, 26, 26, 0.08);
+  border-color: #1a1a1a;
 }
 
 .menu-about {
   padding: 1.25rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(26, 26, 26, 0.15);
 }
 
 .menu-about-logo {
@@ -174,7 +171,7 @@ body.menu-open {
 }
 
 .menu-about-blurb {
-  color: white;
+  color: #444;
   font-size: 11px;
   line-height: 1.65;
   margin: 1rem 0;
@@ -182,12 +179,11 @@ body.menu-open {
 
 .menu-about-contact {
   display: block;
-  color: white;
+  color: #1a1a1a;
   text-decoration: none;
   font-size: 12px;
   font-weight: bold;
   letter-spacing: 0.05em;
-  text-shadow: 1px 1px 1px black;
 }
 
 .menu-about-contact:hover {

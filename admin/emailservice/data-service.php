@@ -148,8 +148,7 @@ function getSubscribers($pdo, $page = 1, $limit = 50, $search = '', $status = 'a
     }
     
     if (!empty($search)) {
-        $where[] = "(s.email LIKE ? OR s.name LIKE ?)";
-        $params[] = "%$search%";
+        $where[] = "s.email LIKE ?";
         $params[] = "%$search%";
     }
     
@@ -168,7 +167,7 @@ function getSubscribers($pdo, $page = 1, $limit = 50, $search = '', $status = 'a
     
     // Get subscribers
     $sql = "
-        SELECT DISTINCT s.id, s.email, s.name, s.status, s.subscribed_at, s.updated_at
+        SELECT DISTINCT s.id, s.email, s.status, s.subscribed_at, s.updated_at
         FROM $fromClause 
         $whereClause
         ORDER BY s.subscribed_at DESC 
@@ -286,7 +285,7 @@ function getCampaignDetails($pdo, $id) {
     
     // Get send details
     $stmt = $pdo->prepare("
-        SELECT cs.*, s.email, s.name 
+        SELECT cs.*, s.email
         FROM campaign_sends cs
         JOIN subscribers s ON cs.subscriber_id = s.id
         WHERE cs.campaign_id = ?

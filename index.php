@@ -3,21 +3,30 @@
 $request_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $request_uri = rtrim($request_uri, '/');
 
+// /how-it-works has been merged into the General Caucus page
+if ($request_uri === '/how-it-works') {
+    header('Location: /general-caucus', true, 301);
+    exit;
+}
+
+// /hamilton-method has been merged into the Electors' Convention page
+if ($request_uri === '/hamilton-method') {
+    header('Location: /electors-convention', true, 301);
+    exit;
+}
+
 // Define routes
 $routes = [
     '' => 'home',
     '/' => 'home',
     '/general-caucus' => 'general-caucus',
-    '/how-it-works' => 'how-it-works',
-    '/national-elections' => 'national-elections',
-    '/democracy-vs-republic' => 'democracy-vs-republic',
-    '/hamilton-method' => 'hamilton-method',
     '/electors-convention' => 'electors-convention',
     '/book' => 'book',
     '/faq' => 'faq',
     '/contribute' => 'contribute',
     '/team' => 'team',
-    '/blog' => 'blog',
+    '/posts' => 'posts',
+    '/subscribe' => 'subscribe',
     '/contact-us' => 'contact',
     '/data' => 'data',
     '/data/appendix-a' => 'data-appendix-a',
@@ -40,12 +49,12 @@ $routes = [
 
 // Get current page (static routes first, then dynamic)
 $current_page = $routes[$request_uri] ?? null;
-$blog_slug = null;
+$post_slug = null;
 
 if ($current_page === null) {
-    if (preg_match('#^/blog/([a-z0-9-]+)$#', $request_uri, $blog_matches)) {
-        $current_page = 'blog-post';
-        $blog_slug = $blog_matches[1];
+    if (preg_match('#^/post/([a-z0-9-]+)$#', $request_uri, $post_matches)) {
+        $current_page = 'post';
+        $post_slug = $post_matches[1];
     } else {
         $current_page = 'home';
     }
@@ -54,18 +63,15 @@ if ($current_page === null) {
 // Set page title and meta data
 $page_data = [
     'home' => ['title' => 'The Framers Method', 'description' => 'A new approach to American democracy'],
-    'general-caucus' => ['title' => 'General Caucus - The Framers Method', 'description' => 'Learn about the General Caucus system'],
-    'how-it-works' => ['title' => 'How It Works - The Framers Method', 'description' => 'Understanding how the Framers Method works'],
-    'national-elections' => ['title' => 'National Elections - The Framers Method', 'description' => 'National elections in the Framers Method'],
-    'democracy-vs-republic' => ['title' => 'Democracy vs Republic - The Framers Method', 'description' => 'Understanding the difference between democracy and republic'],
-    'hamilton-method' => ['title' => 'Hamilton Method - The Framers Method', 'description' => 'Learn about the Hamilton Method'],
-    'electors-convention' => ['title' => 'Electors Convention - The Framers Method', 'description' => 'The Electors Convention system'],
+    'general-caucus' => ['title' => 'The General Caucus - The Framers Method', 'description' => 'How the General Caucus selects public officials through tiered, deliberative meetings'],
+    'electors-convention' => ['title' => "An Electors' Convention - The Framers Method", 'description' => 'How an Electors\' Convention and the Hamilton Method choose the president through deliberation'],
     'book' => ['title' => 'Book - The Framers Method', 'description' => 'Get the Framers Method book'],
     'faq' => ['title' => 'FAQ - The Framers Method', 'description' => 'Frequently asked questions'],
     'contribute' => ['title' => 'Contribute - The Framers Method', 'description' => 'How to contribute to the Framers Method'],
     'team' => ['title' => 'Team - The Framers Method', 'description' => 'Meet the Framers Method team'],
-    'blog' => ['title' => 'Blog — The Framers Method', 'description' => 'Articles and analysis on electoral reform'],
-    'blog-post' => ['title' => 'The Framers Method', 'description' => 'Articles on electoral reform'],
+    'posts' => ['title' => 'Posts — The Framers Method', 'description' => 'Articles and analysis on electoral reform'],
+    'subscribe' => ['title' => 'Subscribe — The Framers Method', 'description' => 'Subscribe for new essays on electoral reform'],
+    'post' => ['title' => 'The Framers Method', 'description' => 'Articles on electoral reform'],
     'contact' => ['title' => 'Contact - The Framers Method', 'description' => 'Contact the Framers Method team'],
     'data' => ['title' => 'Book Data - The Framers Method', 'description' => 'Appendices and data from On the Framers\' Electoral College'],
     'data-appendix-a' => ['title' => 'Appendix A - The Framers Method', 'description' => 'Collected Notes from Convention Debates Concerning Methods to Choose the President'],
@@ -129,19 +135,16 @@ $page_description = $page_data[$current_page]['description'] ?? 'A new approach 
     <?php
     // Include page-specific CSS
     $css_files = [
-        'home' => ['/pages/home.css'],
-        'general-caucus' => ['/pages/general-caucus.css'],
-        'how-it-works' => ['/pages/how-it-works.css'],
-        'national-elections' => ['/pages/national-elections.css'],
-        'democracy-vs-republic' => ['/pages/democracy-vs-republic.css'],
-        'hamilton-method' => ['/pages/hamilton-method.css'],
-        'electors-convention' => ['/pages/electors-convention.css'],
+        'home' => ['/pages/post.css'],
+        'general-caucus' => ['/generalcaucus/general-caucus.css'],
+        'electors-convention' => ['/electorsconvention/electors-convention.css'],
         'book' => ['/pages/book.css'],
         'faq' => ['/pages/faq.css'],
         'contribute' => ['/pages/contribute.css'],
         'team' => ['/pages/team.css'],
-        'blog' => ['/pages/blog.css'],
-        'blog-post' => ['/pages/blog.css'],
+        'posts' => ['/pages/post.css'],
+        'post' => ['/pages/post.css', '/subscribe/subscribe.css'],
+        'subscribe' => ['/subscribe/subscribe.css'],
         'contact' => ['/contact/contact.css', '/contact/contactform.css'],
         'data' => ['/data/data.css'],
         'data-appendix-a' => ['/data/data.css'],
@@ -211,6 +214,10 @@ $page_description = $page_data[$current_page]['description'] ?? 'A new approach 
                 include 'data/appendix-o.php';
             } elseif ($current_page === 'data-appendix-p') {
                 include 'data/appendix-p.php';
+            } elseif ($current_page === 'general-caucus') {
+                include 'generalcaucus/general-caucus.php';
+            } elseif ($current_page === 'electors-convention') {
+                include 'electorsconvention/electors-convention.php';
             } else {
                 $page_file = "pages/{$current_page}.php";
                 if (file_exists($page_file)) {
@@ -232,6 +239,10 @@ $page_description = $page_data[$current_page]['description'] ?? 'A new approach 
     <?php if ($current_page === 'team'): ?>
     <!-- Team Modal Enhancement -->
     <script src="/login/team-modal.js"></script>
+    <?php endif; ?>
+
+    <?php if ($current_page === 'post' || $current_page === 'subscribe'): ?>
+    <script src="/subscribe/subscribe.js"></script>
     <?php endif; ?>
 </body>
 </html>

@@ -1,0 +1,284 @@
+.subscribe-page {
+  max-width: 680px;
+  margin: 3rem auto 4rem;
+  padding: 0 1.5rem;
+}
+
+/* ---- Standalone /subscribe page ---- */
+.subscribe-hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.subscribe-hero-title {
+  margin: 0 0 0.75rem;
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #1a1a1a;
+}
+
+.subscribe-hero-lede {
+  max-width: 34rem;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.55;
+  color: #555;
+}
+
+.subscribe-card {
+  background: #e9e5da;
+  border: 1px solid #dcd8cb;
+  border-radius: 8px;
+  padding: 1.75rem;
+  margin-bottom: 3.5rem;
+}
+
+.subscribe-card-head {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.subscribe-card-logo {
+  display: block;
+  flex-shrink: 0;
+  height: 80px;
+  width: auto;
+}
+
+.subscribe-benefits {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.subscribe-benefits li {
+  position: relative;
+  padding-left: 1.6rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  color: #1a1a1a;
+}
+
+.subscribe-benefits li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  color: #45698c;
+  font-weight: 700;
+}
+
+.subscribe-fineprint {
+  margin: 0 0 0 10px;
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.subscribe-recent-title {
+  margin: 0 0 1.25rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.subscribe-recent-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.subscribe-recent-item {
+  border-top: 1px solid #dedad3;
+}
+
+.subscribe-recent-item:last-child {
+  border-bottom: 1px solid #dedad3;
+}
+
+.subscribe-recent-link {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.1rem 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.subscribe-recent-thumb {
+  flex-shrink: 0;
+  width: 160px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 4px;
+  background-color: #dcd8cb;
+}
+
+.subscribe-recent-text {
+  min-width: 0;
+}
+
+.subscribe-recent-date {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-size: 0.75rem;
+  color: #999;
+}
+
+.subscribe-recent-headline {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #1a1a1a;
+  transition: color 0.2s ease;
+}
+
+.subscribe-recent-link:hover .subscribe-recent-headline {
+  color: #45698c;
+}
+
+.subscribe-recent-excerpt {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+.subscribe-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem 1.5rem;
+  /* A shade darker than the page (#f5f4ef) so it lifts off the background */
+  background-color: #dcd8cb;
+  border: 1px solid #d6d2c6;
+  border-radius: 8px;
+  padding: 1.5rem 1.75rem;
+  margin: 2.5rem 0;
+}
+
+/* Higher specificity + resets so the post body's generic `img` rule
+   (.post-article-body img) can't blow this up. */
+.subscribe-banner .subscribe-banner-image {
+  flex-shrink: 0;
+  height: 100px;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
+}
+
+.subscribe-banner-text {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.subscribe-banner-title {
+  margin: 0 0 0.25rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #1a1a1a;
+}
+
+.subscribe-banner-sub {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #555;
+}
+
+.subscribe-form {
+  flex: 1 1 300px;
+  min-width: 0;
+}
+
+.subscribe-fields {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.subscribe-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid #cfc9ba;
+  border-radius: 5px;
+  background: #fff;
+  color: #1a1a1a;
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.subscribe-input:focus {
+  border-color: #45698c;
+}
+
+.subscribe-button {
+  flex-shrink: 0;
+  padding: 0.65rem 1.3rem;
+  border: none;
+  border-radius: 5px;
+  background: #45698c;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.subscribe-button:hover {
+  background: #3a5778;
+}
+
+.subscribe-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* Honeypot — hidden from people, tempting to bots */
+.subscribe-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.subscribe-message {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  min-height: 1.1em;
+}
+
+.subscribe-message.is-success {
+  color: #2d7a4f;
+}
+
+.subscribe-message.is-error {
+  color: #c0392b;
+}
+
+/* Stack the text and form on narrow screens */
+@media (max-width: 560px) {
+  .subscribe-banner-text,
+  .subscribe-form {
+    flex-basis: 100%;
+  }
+
+  .subscribe-card-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}

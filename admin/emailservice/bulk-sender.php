@@ -313,7 +313,6 @@ function prepareEmailContent($campaign, $subscriber) {
     
     // Replace placeholders
     $replacements = [
-        '{subscriber_name}' => $subscriber['name'] ?: 'Valued Subscriber',
         '{subscriber_email}' => $subscriber['email'],
         '{campaign_subject}' => $campaign['subject']
     ];

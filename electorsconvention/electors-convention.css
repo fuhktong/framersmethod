@@ -1,0 +1,93 @@
+/* An Electors' Convention — a long-form content page in the editorial post style. */
+
+/* Full-bleed hero at the top, exactly like the post hero. It's a direct child
+   of <main>, broken out of main's 30px padding so it spans the full width. */
+.electors-hero {
+  display: block;
+  width: calc(100% + 60px);
+  height: auto;
+  margin: -30px -30px 2.5rem;
+  background-color: #dcd8cb;
+}
+
+.electors-article {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+}
+
+.electors-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #dedad3;
+}
+
+.electors-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.75rem;
+}
+
+.electors-lede {
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: #555;
+  margin: 0;
+}
+
+.electors-body {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #2a2a2a;
+}
+
+.electors-body p {
+  margin: 0 0 1.25rem;
+}
+
+.electors-body h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 2.5rem 0 0.75rem;
+}
+
+.electors-body h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 1.75rem 0 0.5rem;
+}
+
+.electors-body a {
+  color: #45698c;
+}
+
+.electors-list {
+  margin: 0 0 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.electors-list li {
+  margin-bottom: 0.5rem;
+}
+
+.electors-figure {
+  margin: 2rem 0;
+}
+
+.electors-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.electors-figure figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: #888;
+  text-align: center;
+}

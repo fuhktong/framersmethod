@@ -40,7 +40,6 @@ $currentUser = getCurrentUser();
                     <textarea id="content" name="content" required rows="15" placeholder="Enter your email content here...
 
 You can use these placeholders:
-{subscriber_name} - Will be replaced with the subscriber's name
 {subscriber_email} - Will be replaced with the subscriber's email"></textarea>
                 </div>
 
@@ -108,7 +107,6 @@ You can use these placeholders:
             
             // Replace placeholders for preview
             let previewContent = content
-                .replace(/{subscriber_name}/g, 'Valued Subscriber')
                 .replace(/{subscriber_email}/g, 'subscriber@example.com');
             
             if (contentType === 'html') {

@@ -18,6 +18,15 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
+/**
+ * Trim whitespace including non-breaking spaces and zero-width characters
+ * that plain trim() does not strip (common in CSVs copy-pasted from web pages).
+ */
+function cleanCsvValue($value) {
+    $value = str_replace(["\xC2\xA0", "\xE2\x80\x8B"], '', (string)$value);
+    return trim($value);
+}
+
 try {
     $pdo = getDatabaseConnection();
     
@@ -80,8 +89,7 @@ try {
         try {
             // Parse row data
             $email = '';
-            $name = '';
-            
+
             if ($headers) {
                 // Use headers to map columns
                 $emailIndex = array_search('email', $headers);
@@ -91,21 +99,11 @@ try {
                 if ($emailIndex === false) {
                     $emailIndex = array_search('e-mail', $headers);
                 }
-                
-                $nameIndex = array_search('name', $headers);
-                if ($nameIndex === false) {
-                    $nameIndex = array_search('full name', $headers);
-                }
-                if ($nameIndex === false) {
-                    $nameIndex = array_search('first name', $headers);
-                }
-                
-                $email = isset($row[$emailIndex]) ? trim($row[$emailIndex]) : '';
-                $name = isset($row[$nameIndex]) ? trim($row[$nameIndex]) : '';
+
+                $email = isset($row[$emailIndex]) ? cleanCsvValue($row[$emailIndex]) : '';
             } else {
-                // Assume first column is email, second is name
-                $email = isset($row[0]) ? trim($row[0]) : '';
-                $name = isset($row[1]) ? trim($row[1]) : '';
+                // Assume first column is email
+                $email = isset($row[0]) ? cleanCsvValue($row[0]) : '';
             }
             
             // Validate email
@@ -135,10 +133,10 @@ try {
             
             // Insert subscriber
             $stmt = $pdo->prepare("
-                INSERT INTO subscribers (email, name, status, unsubscribe_token, subscribed_at) 
-                VALUES (?, ?, 'active', ?, NOW())
+                INSERT INTO subscribers (email, status, unsubscribe_token, subscribed_at)
+                VALUES (?, 'active', ?, NOW())
             ");
-            $stmt->execute([$email, $name ?: null, $unsubscribe_token]);
+            $stmt->execute([$email, $unsubscribe_token]);
             
             $results['added']++;
             

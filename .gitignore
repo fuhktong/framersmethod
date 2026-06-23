@@ -1,6 +1,9 @@
 # Environment variables - NEVER commit passwords!
 .env
 
+# Local deploy script (contains FTP password)
+deploycode.txt
+
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies

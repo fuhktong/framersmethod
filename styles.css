@@ -1,6 +1,9 @@
 :root {
-  font-family: Avenir Next, Futura;
+  font-family:
+    Avenir Next,
+    Futura;
   color: #1a1a1a;
+  --content-max: 1440px;
 }
 
 html,
@@ -14,5 +17,8 @@ body {
 }
 
 main {
-  padding: 0 30px;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 30px;
+  box-sizing: border-box;
 }

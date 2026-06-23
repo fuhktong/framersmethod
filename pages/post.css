@@ -1,0 +1,257 @@
+/* POST FEED */
+
+.posts-header {
+  max-width: 1100px;
+  margin: 2.5rem auto 2rem;
+  padding: 0 2rem;
+  border-bottom: 1px solid #dedad3;
+  padding-bottom: 1rem;
+}
+
+.posts-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.posts-empty {
+  text-align: center;
+  color: #888;
+  padding: 4rem 2rem;
+  font-size: 1rem;
+}
+
+/* One post per row. Full-width image with the text card overlapping its
+   lower-left, in the style of worksinprogress.co. */
+.posts-grid {
+  margin: 0;
+  padding: 0;
+}
+
+.post-card {
+  position: relative;
+  display: block;
+  margin-bottom: 3.5rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.post-card-image {
+  display: block;
+  /* Backing for images with transparency, so they show some contrast */
+  background-color: #dcd8cb;
+}
+
+.post-card-image img {
+  display: block;
+  width: 100%;
+  /* Exact 16:9, scaling with the viewport — height is derived from width.
+     A 1920x1080 (or any 16:9) upload fills this with no crop. */
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* Compact caption: title, date, tags on one row */
+.post-card-body {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  background: #faf7f0;
+  border: 1px solid #e4ded2;
+  padding: 0.7rem 1.1rem;
+}
+
+/* When a featured image is present, pin the caption to its bottom-left corner */
+.post-card-image + .post-card-body {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  max-width: 75%;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.post-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  margin: 0;
+  /* Override the global mobile `h2` rule in footer.css so the space above the
+     title comes only from the card body's padding (kept balanced top/bottom). */
+  padding: 0;
+  text-align: left;
+}
+
+.post-card-date {
+  font-size: 0.78rem;
+  color: #999;
+}
+
+.post-card-tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.6rem;
+}
+
+.post-card-category {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #45698c;
+}
+
+.post-card-excerpt {
+  flex-basis: 100%;
+  margin: 0.15rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #555;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (max-width: 700px) {
+  /* Caption spans the full width of the card */
+  .post-card-image + .post-card-body {
+    left: 0;
+    right: 0;
+    max-width: none;
+  }
+}
+
+/* SINGLE POST */
+
+.post-article {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 0 4rem;
+}
+
+/* Full-bleed hero image. It's a direct child of <main>, broken out of main's
+   30px padding so it spans the full content width — matching the header.
+   (The -30px / +60px values track main's 30px padding.) */
+.post-article-image {
+  display: block;
+  width: calc(100% + 60px);
+  height: auto;
+  margin: -30px -30px 2.5rem;
+  /* Backing for images with transparency, so they show some contrast */
+  background-color: #dcd8cb;
+}
+
+.post-article-header {
+  padding: 0 2rem 1.5rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid #dedad3;
+}
+
+.post-article-title {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+}
+
+.post-article-date {
+  font-size: 0.82rem;
+  color: #999;
+  margin: 0;
+}
+
+.post-article-header .post-card-tags {
+  margin-top: 1.1rem;
+}
+
+.post-article-body {
+  padding: 0 2rem;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #2a2a2a;
+}
+
+.post-article-body p {
+  margin: 0 0 1.25rem;
+}
+
+.post-article-body h1,
+.post-article-body h2,
+.post-article-body h3,
+.post-article-body h4 {
+  line-height: 1.3;
+  margin: 2rem 0 0.75rem;
+}
+
+.post-article-body h2 { font-size: 1.5rem; }
+.post-article-body h3 { font-size: 1.2rem; }
+.post-article-body h4 { font-size: 1.05rem; }
+
+.post-article-body a {
+  color: #45698c;
+}
+
+.post-article-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin: 1.5rem 0;
+}
+
+.post-article-body ul,
+.post-article-body ol {
+  margin: 0 0 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.post-article-body li {
+  margin-bottom: 0.4rem;
+}
+
+.post-article-body blockquote {
+  margin: 1.5rem 0;
+  padding: 0.5rem 0 0.5rem 1.25rem;
+  border-left: 3px solid #dedad3;
+  color: #555;
+  font-style: italic;
+}
+
+.post-article-body pre {
+  background: #f0ede6;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 0.9rem;
+}
+
+.post-article-body code {
+  background: #f0ede6;
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.post-article-body pre code {
+  background: none;
+  padding: 0;
+}
+
+.post-article-body hr {
+  border: none;
+  border-top: 1px solid #dedad3;
+  margin: 2rem 0;
+}
+
+.post-not-found {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.post-not-found a {
+  color: #1a1a1a;
+}

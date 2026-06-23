@@ -10,25 +10,48 @@
 
 .data-h1 {
   text-align: center;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .data-subtitle {
   text-align: center;
   font-size: 1.1rem;
-  color: #ccc;
+  color: #555;
   margin: 0;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-.dividerwhite {
-  display: flex;
-  width: 100%;
-  max-width: 1200px;
-  height: 3px;
-  margin: 20px auto;
-  background-color: white;
-  border-radius: 5px;
+/* Data index page — editorial post style, matching electors-convention/general-caucus */
+
+.data-article {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 4rem 2rem 4rem;
+}
+
+.data-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #dedad3;
+}
+
+.data-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.75rem;
+}
+
+.data-lede {
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: #555;
+  margin: 0;
+}
+
+.data-body {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #2a2a2a;
 }
 
 /* Data index links */
@@ -37,7 +60,9 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-top: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .data-link {
@@ -46,15 +71,15 @@
   align-items: center;
   gap: 20px;
   padding: 20px 25px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #f9f9f9;
   border-radius: 8px;
   text-decoration: none;
-  color: white;
+  color: #2a2a2a;
   transition: background-color 0.2s ease;
 }
 
 .data-link:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: #f0efe9;
   text-decoration: none;
 }
 
@@ -62,13 +87,11 @@
   font-size: 1.3rem;
   font-weight: bold;
   white-space: nowrap;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .data-link-description {
   font-size: 1rem;
-  color: #ccc;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  color: #666;
 }
 
 /* Appendix content */

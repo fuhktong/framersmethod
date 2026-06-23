@@ -1,15 +1,15 @@
-.home-logo {
+.contact-logo {
   width: 100%;
   height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   padding-top: 100px;
-  margin: 30px auto;
   max-width: 1200px;
+  margin: 0 auto;
 }
 
-.home-logo img {
+.contact-logo img {
   max-height: 80%;
   max-width: 80%;
   height: auto;

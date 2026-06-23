@@ -59,8 +59,8 @@ function getSubscriberInfo($pdo, $token) {
     }
     
     $stmt = $pdo->prepare("
-        SELECT id, email, name, status, subscribed_at, updated_at
-        FROM subscribers 
+        SELECT id, email, status, subscribed_at, updated_at
+        FROM subscribers
         WHERE unsubscribe_token = ?
     ");
     $stmt->execute([$token]);
@@ -91,7 +91,7 @@ function processUnsubscribeAction($pdo, $data) {
     }
     
     // Get subscriber
-    $stmt = $pdo->prepare("SELECT id, email, name, status FROM subscribers WHERE unsubscribe_token = ?");
+    $stmt = $pdo->prepare("SELECT id, email, status FROM subscribers WHERE unsubscribe_token = ?");
     $stmt->execute([$token]);
     $subscriber = $stmt->fetch();
     

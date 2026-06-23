@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../database/db.php';
 
 $posts = db()->query(
-    'SELECT id, title, category, status, published_at, created_at FROM posts ORDER BY created_at DESC'
+    'SELECT id, title, category, status, published_at, created_at FROM posts ORDER BY COALESCE(published_at, created_at) DESC'
 )->fetchAll();
 ?>
 <!DOCTYPE html>
@@ -41,7 +41,7 @@ $posts = db()->query(
                     <td><?php echo htmlspecialchars($post['title']); ?></td>
                     <td><?php echo htmlspecialchars($post['category'] ?? '—'); ?></td>
                     <td><span class="status-badge status-<?php echo $post['status']; ?>"><?php echo $post['status']; ?></span></td>
-                    <td><?php echo date('M j, Y', strtotime($post['created_at'])); ?></td>
+                    <td><?php echo date('M j, Y', strtotime($post['published_at'] ?? $post['created_at'])); ?></td>
                     <td class="admin-table-actions">
                         <a href="/admin/posts/edit/<?php echo $post['id']; ?>">Edit</a>
                         <form method="POST" action="/admin/posts/delete" onsubmit="return confirm('Delete this post?')">

@@ -470,7 +470,6 @@ function sendCampaign($pdo, $data) {
                 $email_subject = $campaign['subject'];
                 
                 // Replace placeholders
-                $email_content = str_replace('{subscriber_name}', $subscriber['name'] ?: 'Valued Subscriber', $email_content);
                 $email_content = str_replace('{subscriber_email}', $subscriber['email'], $email_content);
                 
                 // Add tracking pixel and wrap links for tracking
