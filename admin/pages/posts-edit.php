@@ -115,6 +115,7 @@ $publish_value = $_SERVER['REQUEST_METHOD'] === 'POST'
                     <label for="body">Body <span class="label-note">Markdown</span></label>
                     <div class="label-actions">
                         <button type="button" id="insert-subscribe" class="admin-btn-secondary btn-inline">Subscribe banner</button>
+                        <button type="button" id="insert-book" class="admin-btn-secondary btn-inline">Book banner</button>
                         <button type="button" id="insert-image" class="admin-btn-secondary btn-inline">Insert image</button>
                         <input type="file" id="insert-image-file" accept="image/*" hidden />
                     </div>

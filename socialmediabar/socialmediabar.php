@@ -18,7 +18,7 @@
     <a href="https://substack.com/@framersmethod" target="_blank" rel="noreferrer">
         <img src="/images/blacklogosubstack.png" alt="The Framers' Method - Substack" />
     </a>
-    <a href="https://a.co/d/0dimzJAr" target="_blank" rel="noreferrer">
+    <a href="https://www.amazon.com/dp/B0GPFH9GDG" target="_blank" rel="noreferrer">
         <img src="/images/blacklogoamazon.png" alt="On The Framers' Method Book - Amazon" />
     </a>
 </section>
@@ -53,7 +53,7 @@ function updateSocialMediaBar() {
                 <a href="https://substack.com/@framersmethod" target="_blank" rel="noreferrer">
                     <img src="/images/blacklogosubstack.png" alt="The Framers' Method - Substack" />
                 </a>
-                <a href="https://a.co/d/0dimzJAr" target="_blank" rel="noreferrer">
+                <a href="https://www.amazon.com/dp/B0GPFH9GDG" target="_blank" rel="noreferrer">
                     <img src="/images/blacklogoamazon.png" alt="On The Framers' Method Book - Amazon" />
                 </a>
             </div>
@@ -78,7 +78,7 @@ function updateSocialMediaBar() {
         <a href="https://substack.com/@framersmethod" target="_blank" rel="noreferrer">
             <img src="/images/blacklogosubstack.png" alt="The Framers' Method - Substack" />
         </a>
-        <a href="https://a.co/d/0dimzJAr" target="_blank" rel="noreferrer">
+        <a href="https://www.amazon.com/dp/B0GPFH9GDG" target="_blank" rel="noreferrer">
             <img src="/images/blacklogoamazon.png" alt="On The Framers' Method Book - Amazon" />
         </a>
         `;

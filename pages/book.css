@@ -100,3 +100,81 @@
     margin: 2rem auto 0;
   }
 }
+
+/* Inline book banner — same shape as .subscribe-banner (subscribe.css), used
+   for the [book] shortcode in post bodies. */
+.book-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem 1.5rem;
+  background-color: #dcd8cb;
+  border: 1px solid #d6d2c6;
+  border-radius: 8px;
+  padding: 1.5rem 1.75rem;
+  margin: 2.5rem 0;
+}
+
+/* Higher specificity + resets so the post body's generic `img` rule
+   (.post-article-body img) can't blow this up. */
+.book-banner .book-banner-image {
+  flex-shrink: 0;
+  height: 100px;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
+  filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.35));
+}
+
+.book-banner-text {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.book-banner-title {
+  margin: 0 0 0.25rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #1a1a1a;
+}
+
+.book-banner-sub {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #555;
+}
+
+.book-banner-cta {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: #45698c;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  height: 44px;
+  padding: 0 1.5rem;
+  text-decoration: none;
+  text-shadow: 1px 1px 1px #000;
+  white-space: nowrap;
+}
+
+.book-banner-cta:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 480px) {
+  .book-banner-text,
+  .book-banner-cta {
+    flex-basis: 100%;
+  }
+
+  .book-banner-cta {
+    white-space: normal;
+  }
+}

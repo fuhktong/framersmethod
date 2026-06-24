@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../database/db.php';
 require_once __DIR__ . '/markdown.php';
 require_once __DIR__ . '/../subscribe/subscribe-banner.php';
+require_once __DIR__ . '/book-banner.php';
 
 $stmt = db()->prepare(
     'SELECT * FROM posts WHERE slug = ? AND status = "published"'
@@ -32,9 +33,10 @@ if (!$post) {
     </div>
     <div class="post-article-body">
         <?php
-        // Render Markdown, then swap the [subscribe] shortcode for the banner.
+        // Render Markdown, then swap the [subscribe] and [book] shortcodes for their banners.
         $body_html = render_markdown($post['body']);
-        echo str_replace('<p>[subscribe]</p>', subscribe_banner(), $body_html);
+        $body_html = str_replace('<p>[subscribe]</p>', subscribe_banner(), $body_html);
+        echo str_replace('<p>[book]</p>', book_banner(), $body_html);
         ?>
     </div>
 </article>

@@ -79,6 +79,21 @@
         });
     }
 
+    // ---- Insert [book] shortcode into the body ----
+    const bodyForBook = document.getElementById('body');
+    const insertBook = document.getElementById('insert-book');
+    if (bodyForBook && insertBook) {
+        insertBook.addEventListener('click', function () {
+            const snippet = '\n\n[book]\n\n';
+            const start = bodyForBook.selectionStart;
+            const end = bodyForBook.selectionEnd;
+            bodyForBook.value = bodyForBook.value.slice(0, start) + snippet + bodyForBook.value.slice(end);
+            bodyForBook.focus();
+            const caret = start + snippet.length;
+            bodyForBook.setSelectionRange(caret, caret);
+        });
+    }
+
     // ---- Insert image into the body ----
     const bodyEl = document.getElementById('body');
     const insertBtn = document.getElementById('insert-image');

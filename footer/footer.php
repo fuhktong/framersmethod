@@ -53,7 +53,7 @@
             <a href="https://substack.com/@framersmethod" target="_blank" rel="noreferrer">
                 <img src="/images/blacklogosubstack.png" alt="Substack" />
             </a>
-            <a href="https://a.co/d/0dimzJAr" target="_blank" rel="noreferrer">
+            <a href="https://www.amazon.com/dp/B0GPFH9GDG" target="_blank" rel="noreferrer">
                 <img src="/images/blacklogoamazon.png" alt="Amazon" />
             </a>
         </nav>
