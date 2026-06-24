@@ -1,0 +1,110 @@
+/* Inline book banner — same shape as .subscribe-banner
+   (subscribe/subscribe-banner.css), used for the [book] shortcode in post
+   bodies. Kept in its own file since it's only needed wherever the shortcode
+   can appear, not on the standalone /book page (pages/book.css). */
+
+.book-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem 1.5rem;
+  background-color: #dcd8cb;
+  border: 1px solid #d6d2c6;
+  border-radius: 8px;
+  padding: 1.5rem 1.75rem;
+  margin: 2.5rem 0;
+}
+
+/* Higher specificity + resets so the post body's generic `img` rule
+   (.post-article-body img) can't blow this up. Sized by width (not height,
+   unlike .subscribe-banner-image) since a book cover is portrait-oriented —
+   this is the focal point of the banner, so it's sized larger and given the
+   same drop-shadow treatment as the cover art on the standalone /book page. */
+.book-banner .book-banner-image {
+  flex-shrink: 0;
+  width: 120px;
+  height: auto;
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
+  filter: drop-shadow(3px 3px 8px rgba(0, 0, 0, 0.35));
+}
+
+.book-banner-text {
+  flex: 1 1 200px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+/* Scoped with the parent class so this beats .post-article-body h3's
+   font-size (pages/post.css) on specificity. Sized up and the sub below
+   sized down so the title reads as the most prominent line in the banner. */
+.book-banner .book-banner-title {
+  margin: 0;
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: left;
+  color: #1a1a1a;
+}
+
+/* Scoped with the parent class so this beats .post-article-body p's
+   margin-bottom (pages/post.css) on specificity — without it, that rule
+   adds 1.25rem under the blurb, throwing off the gap to the button below. */
+.book-banner .book-banner-sub {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.45;
+  text-align: left;
+  color: #555;
+}
+
+/* Scoped with the parent class so this beats .post-article-body a's color
+   (pages/post.css) on specificity — without it, that rule overrides this
+   button's text to the same blue as its own background, making the label
+   invisible. align-self centers it under the title/sub, which are
+   left-aligned rather than centered themselves. */
+.book-banner .book-banner-cta {
+  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: #45698c;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  height: 44px;
+  padding: 0 1.5rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.book-banner .book-banner-cta:hover {
+  text-decoration: underline;
+}
+
+/* Stack and center everything on narrow screens. */
+@media (max-width: 560px) {
+  .book-banner {
+    justify-content: center;
+  }
+
+  .book-banner-text {
+    flex-basis: 100%;
+    align-items: center;
+  }
+
+  .book-banner .book-banner-title,
+  .book-banner .book-banner-sub {
+    text-align: center;
+  }
+
+  .book-banner .book-banner-cta {
+    align-self: center;
+    white-space: normal;
+  }
+}

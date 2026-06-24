@@ -12,10 +12,10 @@ function book_banner(): string
         <div class="book-banner-text">
             <h3 class="book-banner-title">On the Framers&rsquo; Electoral College</h3>
             <p class="book-banner-sub">How the Hamilton Method and an Electors&rsquo; Convention can defeat populism and tyranny.</p>
+            <a class="book-banner-cta" href="https://www.amazon.com/dp/B0GPFH9GDG" target="_blank" rel="noreferrer">
+                Purchase on Amazon
+            </a>
         </div>
-        <a class="book-banner-cta" href="https://www.amazon.com/dp/B0GPFH9GDG" target="_blank" rel="noreferrer">
-            Purchase on Amazon
-        </a>
     </aside>
     <?php
     return ob_get_clean();

@@ -1,0 +1,56 @@
+/* Inline subscribe banner — the [subscribe] shortcode in post bodies. Form
+   field styling (.subscribe-form, .subscribe-input, .subscribe-button, etc.)
+   is shared with the standalone /subscribe page and lives in subscribe.css;
+   this file only covers the banner's own container/layout. */
+
+.subscribe-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem 1.5rem;
+  /* A shade darker than the page (#f5f4ef) so it lifts off the background */
+  background-color: #dcd8cb;
+  border: 1px solid #d6d2c6;
+  border-radius: 8px;
+  padding: 1.5rem 1.75rem;
+  margin: 2.5rem 0;
+}
+
+/* Higher specificity + resets so the post body's generic `img` rule
+   (.post-article-body img) can't blow this up. */
+.subscribe-banner .subscribe-banner-image {
+  flex-shrink: 0;
+  height: 100px;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
+}
+
+.subscribe-banner-text {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.subscribe-banner-title {
+  margin: 0 0 0.25rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #1a1a1a;
+}
+
+.subscribe-banner-sub {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #555;
+}
+
+/* Stack the text and form on narrow screens */
+@media (max-width: 560px) {
+  .subscribe-banner-text,
+  .subscribe-banner .subscribe-form {
+    flex-basis: 100%;
+  }
+}
