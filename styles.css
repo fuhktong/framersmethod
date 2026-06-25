@@ -19,6 +19,6 @@ body {
 main {
   max-width: var(--content-max);
   margin: 0 auto;
-  padding: 30px;
+  padding: 0 30px 30px 30px;
   box-sizing: border-box;
 }

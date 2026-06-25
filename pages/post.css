@@ -138,9 +138,9 @@
    (The -30px / +60px values track main's 30px padding.) */
 .post-article-image {
   display: block;
-  width: calc(100% + 60px);
+  width: 100%;
   height: auto;
-  margin: -30px -30px 2.5rem;
+  margin: 0 0 2.5rem;
   /* Backing for images with transparency, so they show some contrast */
   background-color: #dcd8cb;
 }
