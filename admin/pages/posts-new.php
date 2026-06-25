@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="form-group">
                 <label for="published_at">Publish date</label>
-                <input type="datetime-local" id="published_at" name="published_at" value="<?php echo htmlspecialchars($v['published_at']); ?>" />
+                <input type="date" id="published_at" name="published_at" value="<?php echo htmlspecialchars($v['published_at']); ?>" />
                 <span class="form-hint">Leave blank to use the current date when publishing. Set this to backdate older posts.</span>
             </div>
             <div class="form-group form-group-inline">

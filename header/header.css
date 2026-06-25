@@ -18,7 +18,7 @@
   max-width: var(--content-max);
   margin: 0 auto;
   height: 70px;
-  padding: 0 2rem;
+  padding: 0 30px;
   box-sizing: border-box;
 }
 
@@ -32,14 +32,20 @@
   width: auto;
 }
 
+/* Border sits at the outer edge of a box, while padding only insets the
+   content inside that edge — so padding alone can't move the border lines
+   themselves. Sizing the box down by 60px (width + max-width) and centering
+   it with margin: auto insets the box itself by 30px on each side, putting
+   the border flush with main's content edge instead of the true viewport
+   edge. */
 .header-links {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: 2.5rem;
-  max-width: var(--content-max);
+  width: calc(100% - 60px);
+  max-width: calc(var(--content-max) - 60px);
   margin: 0 auto;
-  padding: 0 2rem;
   height: 44px;
   box-sizing: border-box;
   border-top: 1px solid #1a1a1a;
@@ -65,7 +71,7 @@
     flex-direction: column;
     align-items: flex-end;
     height: auto;
-    padding: 0.75rem 2rem;
+    padding: 0.75rem 0;
     gap: 0.6rem;
   }
 }

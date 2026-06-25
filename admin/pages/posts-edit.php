@@ -49,10 +49,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Pre-fill the publish-date field (datetime-local format)
+// Pre-fill the publish-date field (date format)
 $publish_value = $_SERVER['REQUEST_METHOD'] === 'POST'
     ? trim($_POST['published_at'] ?? '')
-    : (!empty($post['published_at']) ? date('Y-m-d\TH:i', strtotime($post['published_at'])) : '');
+    : (!empty($post['published_at']) ? date('Y-m-d', strtotime($post['published_at'])) : '');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -125,7 +125,7 @@ $publish_value = $_SERVER['REQUEST_METHOD'] === 'POST'
             </div>
             <div class="form-group">
                 <label for="published_at">Publish date</label>
-                <input type="datetime-local" id="published_at" name="published_at" value="<?php echo htmlspecialchars($publish_value); ?>" />
+                <input type="date" id="published_at" name="published_at" value="<?php echo htmlspecialchars($publish_value); ?>" />
                 <span class="form-hint">Change this to backdate the post. Leave blank to use the current date when publishing.</span>
             </div>
             <div class="form-group form-group-inline">

@@ -15,7 +15,6 @@
             <li><a href="/book">BOOK</a></li>
             <li><a href="/data">DATA</a></li>
             <li><a href="/faq">FAQ</a></li>
-            <li><a href="/contribute">CONTRIBUTE</a></li>
         </ul>
         <div class="menu-social">
             <a href="https://bsky.app/profile/framersmethod.bsky.social" target="_blank" rel="noreferrer">

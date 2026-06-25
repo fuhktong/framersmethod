@@ -25,7 +25,6 @@
             <div class="footer-col">
                 <h3 class="footer-heading">Get Involved</h3>
                 <ul class="footer-links">
-                    <li><a href="/contribute">CONTRIBUTE</a></li>
                     <li><a href="/contact-us">CONTACT</a></li>
                     <li><a href="/team">TEAM</a></li>
                 </ul>
